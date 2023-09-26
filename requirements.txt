@@ -1,5 +1,0 @@
-mediapipe
-numpy
-opencv_contrib_python
-PyQt5
-pyqtgraph
