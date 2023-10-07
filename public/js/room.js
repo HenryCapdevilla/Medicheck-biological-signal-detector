@@ -152,7 +152,7 @@ mymuteicon.style.visibility = 'hidden';
 let myvideooff = document.querySelector("#myvideooff");
 myvideooff.style.visibility = 'hidden';
 
-const configuration = { iceServers: [{ urls: "stun:stun.stunprotocol.org" }] }
+const configuration = { iceServers: [{ urls: "stun:stun2.1.google.com:19302" }] }
 
 const mediaConstraints = { video: true, audio: true };
 
