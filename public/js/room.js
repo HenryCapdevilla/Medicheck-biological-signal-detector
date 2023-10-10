@@ -477,7 +477,7 @@ socket.on('join room', async (conc, cnames, micinfo, videoinfo) => {
     }
 })
 
-
+//Eliminación del participante por ID (sid)
 socket.on('remove peer', sid => {
     if (document.getElementById(sid)) {
         document.getElementById(sid).remove();
@@ -485,7 +485,9 @@ socket.on('remove peer', sid => {
 
     delete connections[sid];
 })
+//
 
+//Chat start
 sendButton.addEventListener('click', () => {
     const msg = messageField.value;
     messageField.value = '';
@@ -511,7 +513,9 @@ socket.on('message', (msg, sendername, time) => {
     </div>
 </div>`
 });
+//Chat end
 
+//Selector del video videobutt
 videoButt.addEventListener('click', () => {
 
     if (videoAllowed) {
