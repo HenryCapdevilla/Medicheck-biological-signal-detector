@@ -25,6 +25,16 @@
   margin-right: 40px;
 }
 
+.img{	
+  witdh: 100%;
+  height: 20vh;
+}
+
+.logo_{
+  witdh: 50px;
+  height: 50px;
+}
+
 .unselectable {
   -moz-user-select: -moz-none;
   -khtml-user-select: none;
@@ -34,7 +44,11 @@
 }
 
 img {
-  max-width: 100%;
+  width: 88%;
+  height: 35vh;
+  padding-right:20%;
+  padding-left: 20%;
+  border: 10px;
 }
 
 body {
@@ -52,7 +66,7 @@ navbar .logo {
 .main {
   display: flex;
   padding: 0 12%;
-  margin-top: 20vh;
+  margin-top: 4vh;
   width: 100%;
 }
 .main .create-join {
@@ -60,12 +74,12 @@ navbar .logo {
   margin-right: 50px;
 }
 .main .create-join .text .head {
-  font-size: 36px;
+  font-size: 4vh;
   font-weight: bold;
   color: #393e46;
 }
 .main .create-join .text .subtext {
-  font-size: 24px;
+  font-size: 2vh;
   color: #6f6f6f;
   margin-top: 10px;
 }
