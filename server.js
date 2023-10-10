@@ -10,8 +10,8 @@ const options = {
     key: fs.readFileSync('./key.pem'), // Ruta a tu clave privada
     cert: fs.readFileSync('./cert.pem'), // Ruta a tu certificado SSL público
 };
+//const server = http.createServer(app);
 const server = https.createServer(options, app);
-
 const io = socketio(server);
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -115,4 +115,4 @@ io.on('connect', socket => {
 })
 
 
-server.listen(PORT, '0.0.0.0', () => console.log(`Server is up and running on port ${PORT}`));
+server.listen(PORT, "0.0.0.0", () => console.log(`Server is up and running on port ${PORT}`));

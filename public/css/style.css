@@ -25,16 +25,6 @@
   margin-right: 40px;
 }
 
-.img{	
-  witdh: 100%;
-  height: 20vh;
-}
-
-.logo_{
-  witdh: 50px;
-  height: 50px;
-}
-
 .unselectable {
   -moz-user-select: -moz-none;
   -khtml-user-select: none;
@@ -43,16 +33,9 @@
   user-select: none;
 }
 
-img {
-  width: 88%;
-  height: 35vh;
-  padding-right:20%;
-  padding-left: 20%;
-  border: 10px;
-}
-
-body {
+html, body {
   background-color: #ffffff;
+  overflow-x: hidden;
 }
 
 navbar .logo {
@@ -65,123 +48,49 @@ navbar .logo {
 
 .main {
   display: flex;
-  padding: 0 12%;
-  margin-top: 4vh;
+  padding: 0 5%;
   width: 100%;
 }
 .main .create-join {
   width: 85%;
   margin-right: 50px;
 }
-.main .create-join .text .head {
+.head {
   font-size: 4vh;
   font-weight: bold;
   color: #393e46;
+  text-align: center;
 }
 .main .create-join .text .subtext {
   font-size: 2vh;
   color: #6f6f6f;
   margin-top: 10px;
 }
-.main .create-join .createroom-butt {
-  width: 100%;
-  margin-top: 60px;
-  font-size: 24px;
-  font-weight: bold;
-  background-color: #4ecca3;
-  color: white;
-  text-align: center;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 10px;
-  border: 2px solid #4ecca3;
-  transition: 0.3s;
-}
-.main .create-join .createroom-butt:hover {
-  background-color: white;
-  border: 2px solid #4ecca3;
-  color: #4ecca3;
-  cursor: pointer;
-}
-.main .create-join .createroom-butt:focus {
-  outline: none;
-}
-.main .create-join .createroom-clicked {
-  width: 100%;
-  margin-top: 60px;
-  font-size: 24px;
-  font-weight: bold;
-  text-align: center;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 10px;
-  background-color: white;
-  border: 2px solid #4ecca3;
-  color: #4ecca3;
-}
-.main .create-join .createroom-clicked:focus {
-  outline: none;
-}
-.main .create-join .roomcode {
-  width: 100%;
-  margin-top: 30px;
-  font-size: 24px;
-  color: #393e46;
-  text-align: center;
-  padding: 10px 0;
-  border: none;
-  border-bottom: 3px solid #232931;
-  border-top: 2px solid white;
-  font-weight: bold;
-}
-.main .create-join .roomcode:focus {
-  background-color: white;
-  border: 0;
-  border-bottom: 3px solid #232931;
-  border-top: 2px solid white;
-  outline: none;
-  border-radius: 0;
-}
-.main .create-join .roomcode-error {
-  border-bottom: 3px solid #d31c1c;
-}
-.main .create-join .joinroom {
-  margin-top: 20px;
-  width: 100%;
-  text-align: right;
-  font-size: 24px;
-  font-weight: bold;
-  color: #232931;
-}
-.main .create-join .joinroom:hover {
-  cursor: pointer;
-  text-decoration: underline;
-}
+
 .main .video-cont {
   width: 100%;
   text-align: center;
 }
 .main .video-cont .video-self {
-  height: 400px;
+  margin-top: 5%;
+  height: 60vh;
   width: 100%;
   background-color: #393e46;
   border-radius: 10px;
   object-fit: cover;
 }
 .main .video-cont .settings {
-  margin: 0 auto;
   display: flex;
   margin-top: 10px;
-  width: 100px;
 }
 .main .video-cont .settings .device {
-  background-color: #4ecca3;
-  border-radius: 100px;
-  padding: 10px;
-  width: 40px;
-  height: 40px;
+  background-color: #003cff;
+  border-radius: 10px;
+  width: 45%;
+  height: 4vh;
   margin-right: 10px;
   color: white;
+  margin-left: 5%;
 }
 .main .video-cont .settings .device:hover {
   background-color: #393e46;
@@ -189,29 +98,30 @@ navbar .logo {
 }
 .main .video-cont .settings .nodevice {
   background-color: #b12c2c;
-  border-radius: 100px;
-  padding: 10px;
-  width: 40px;
-  height: 40px;
+  border-radius: 10px;
+  width: 45%;
+  height: 4vh;
   margin-right: 10px;
   color: white;
+  margin-left: 5%;
 }
 .main .video-cont .settings .nodevice:hover {
   background-color: #393e46;
   cursor: pointer;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 2000px) {
   .main {
     flex-direction: column;
   }
   .main .create-join {
     width: 100%;
     margin-right: 0;
+    display: flex;
   }
   .main .video-cont {
-    margin-top: 100px;
     margin-bottom: 100px;
+    width: 50%;
   }
 }
 .overlay {
@@ -272,6 +182,135 @@ navbar .logo {
 .overlay .box .continue-name:focus {
   outline: 0;
 }
+
+/* Index HTML principal*/
+.Container_index{
+  display:block;
+  height: 10vh;
+}
+
+.Banner{
+  display: flex;
+  align-items: center;
+  align-content: center;
+  width: 100%;
+  height: 10vh;
+}
+
+.img{	
+  width: 100%;
+  height: 100%;
+  border-radius: 10%;
+}
+
+.Banner_img{
+  display: flex;
+  align-items: center;
+  align-content: center;
+  width: 100%;
+  height: 50vh;
+  padding-right: 5%;
+}
+
+.logo_{
+  width: 50px;
+  height: 50px;
+}
+
+/*Contenedor de botones*/
+.Block_btns{
+  padding-top: 15%;
+  display: flex;
+  height: 20vh;
+}
+
+/*Button*/
+.main .create-join .joinroom {
+  width: 10%;
+  display:flex;
+  align-items: center;
+  align-content: center;
+  text-align: right;
+  font-size: 15px;
+  font-weight: bold;
+  color: #9a9fa5;
+  padding-right: 5%;
+}
+.main .create-join .joinroom:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/*Button crear room*/
+
+.main .create-join .createroom-butt {
+  width: 25%;
+  font-size: 15px;
+  font-weight: bold;
+  background-color: #003cff;
+  color: white;
+  text-align: center;
+  border: none;
+  border-radius: 10px;
+  border: 2px solid #003cff;
+  transition: 0.3s;
+  margin-right: 5%;
+}
+.main .create-join .createroom-butt:hover {
+  background-color: white;
+  border: 2px solid #4ecca3;
+  color: #4ecca3;
+  cursor: pointer;
+}
+.main .create-join .createroom-butt:focus {
+  outline: none;
+}
+.main .create-join .createroom-clicked {
+  width: 100%;
+  margin-top: 60px;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px 20px;
+  border-radius: 10px;
+  background-color: white;
+  border: 2px solid #4ecca3;
+  color: #4ecca3;
+}
+.main .create-join .createroom-clicked:focus {
+  outline: none;
+}
+
+/*Ingresar código de sala*/
+.main .create-join .roomcode {
+  width: 40%;
+  font-size: 12px;
+  color: #666666;
+  display:flex;
+  text-align: center;
+  padding: 10px 0;
+  border: 2px solid #7e7d7d;
+  border-radius: 10px;
+  font-weight: bold;
+  margin-right: 5%;
+  padding-left: 30px; /* Espacio a la izquierda para el icono */
+  background-image: url('../Icons/teclado.png'); /* Ruta de la imagen del icono */
+  background-size: 30px; /* Tamaño del icono */
+  background-position: 1.2em center; /* Posición del icono */
+  background-repeat: no-repeat; /* No repetir la imagen de fondo */
+}
+.main .create-join .roomcode:focus {
+  background-color: white;
+  color: #666666;
+  border: 2px solid #7e7d7d;
+  border-radius: 10px;
+  outline: none;
+}
+.main .create-join .roomcode-error {
+  border-bottom: 3px solid #d31c1c;
+}
+
+/* Index HTML principal*/
 
 .container-room {
   margin: 0;

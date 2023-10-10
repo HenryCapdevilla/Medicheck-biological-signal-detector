@@ -525,9 +525,43 @@ socket.on('join room', async (conc, cnames, micinfo, videoinfo) => {
                     vidCont.appendChild(videoOff);
 
                     videoContainer.appendChild(vidCont);
-
+                    
+                    let frameInterval;
+                    let frames = [];
+        
+                    connections[sid].ontrack = function (event) {
+                        if (!document.getElementById(sid)) {
+                            const videoStream = event.streams[0];
+                            const videoTrack = videoStream.getVideoTracks()[0];
+                            const imageCapture = new ImageCapture(videoTrack);
+        
+                            frameInterval = requestAnimationFrame(captureAndProcessFrame);
+        
+                            function captureAndProcessFrame() {
+                                imageCapture.grabFrame()
+                                .then(frame => {
+                                    // Convierte el Blob a una URL de datos (base64)
+                                    const reader = new FileReader();
+                                    reader.onload = function () {
+                                        const frameDataURL = reader.result;
+                                        // Almacena el frame en el arreglo 'frames'
+                                        frames.push(frameDataURL);
+        
+                                        // Visualiza el último dato que entra en el frame
+                                        console.log('Último frame:', frameDataURL);
+                                    };
+                                    reader.readAsDataURL(frame);
+        
+                                    // Llama a 'captureAndProcessFrame' nuevamente para el próximo frame
+                                    frameInterval = requestAnimationFrame(captureAndProcessFrame);
+                                })
+                                .catch(error => {
+                                    console.error('Error al capturar el frame:', error);
+                                });
+                            }
+                        }
+                    };
                 }
-
             };
 
             connections[sid].onremovetrack = function (event) {
@@ -567,6 +601,7 @@ socket.on('join room', async (conc, cnames, micinfo, videoinfo) => {
             .catch(handleGetUserMediaError);
     }
 })
+
 
 socket.on('remove peer', sid => {
     if (document.getElementById(sid)) {

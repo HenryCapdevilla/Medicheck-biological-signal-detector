@@ -8,24 +8,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/style.css">
     <script src="https://kit.fontawesome.com/6510466b6c.js" crossorigin="anonymous"></script>
-
 </head>
 
 <body>
-    <navbar>
-	<img class="logo_" src="./logomedicheck.png" alt="Logo Medicheck">MedicheckIoT</img>
-    </navbar>
-    <div class="bannern">
-	<img class="img "src="https://blogs.iadb.org/integracion-comercio/wp-content/uploads/sites/14/2020/05/Telemedicina1200px.jpg" alt="Imagen de ejemplo">
-    </div>	
+    <link type="image/png" sizes="16x16" rel="icon" href=".../icons8-teclado-16.png">
+    <div class="Container_index">
+        <div class="Banner">
+            <img class="logo_" src="./logomedicheck.png" alt="Logo Medicheck"/>
+        </div>
+    </div>
+    <div class="head">Cuidando tu salud, desde cualquier lugar</div>	
     <div class="main">			
             <div class="create-join">		
-                <div class="text"><div class="head">Crea tu propia sala en un solo click</div>
-                <div class="subtext">No necesitas registrarte. Ingresa a tu nueva sala.</div>
+                <div class="text" style="width: 50%;">
+                <div class="Banner_img">
+                    <img class="img "src="https://blogs.iadb.org/integracion-comercio/wp-content/uploads/sites/14/2020/05/Telemedicina1200px.jpg" alt="Imagen de ejemplo">
                 </div>
-                <button id="createroom" class="createroom-butt unselectable">Crea una sala</button><br>
-                <input type="text" name="room" spellcheck="false" placeholder="Enter Room Code" id="roomcode" class="roomcode"><br>
-                <div class="joinroom unselectable" id="joinroom">Ingresar una sala</div>
+                <div class="Block_btns">
+                    <button id="createroom" class="createroom-butt unselectable">Reunión nueva</button>
+                    <input type="text" name="room" spellcheck="false" placeholder="Ingresa un código" id="roomcode" class="roomcode"><br>
+                    <div class="joinroom unselectable" id="joinroom">Unirse</div>
+                </div>
             </div>
             <div class="video-cont">
                 <video class="video-self" autoplay muted playsinline></video>
