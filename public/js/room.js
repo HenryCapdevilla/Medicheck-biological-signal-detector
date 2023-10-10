@@ -13,40 +13,6 @@ const videoButt = document.querySelector('.novideo');
 const audioButt = document.querySelector('.audio');
 const cutCall = document.querySelector('.cutcall');
 const screenShareButt = document.querySelector('.screenshare');
-const whiteboardButt = document.querySelector('.board-icon')
-
-//whiteboard js start
-const whiteboardCont = document.querySelector('.whiteboard-cont');
-const canvas = document.querySelector("#whiteboard");
-const ctx = canvas.getContext('2d');
-
-let boardVisisble = false;
-
-whiteboardCont.style.visibility = 'hidden';
-
-let isDrawing = 0;
-let x = 0;
-let y = 0;
-let color = "black";
-let drawsize = 3;
-let colorRemote = "black";
-let drawsizeRemote = 3;
-
-function fitToContainer(canvas) {
-    canvas.style.width = '100%';
-    canvas.style.height = '100%';
-    canvas.width = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
-}
-
-fitToContainer(canvas);
-
-//might remove this
-function reportWindowSize() {
-    fitToContainer(canvas);
-}
-
-window.onresize = reportWindowSize;
 
 let videoAllowed = 1;
 let audioAllowed = 1;
