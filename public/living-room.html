@@ -7,10 +7,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="css/style.css">
         <script src="https://kit.fontawesome.com/6510466b6c.js" crossorigin="anonymous"></script>
-        <script>
-            const params = new URLSearchParams(location.search);
-            if (!params.get("room")) location.href = "/";
-        </script>
     </head>
 
     <body>
@@ -28,6 +24,7 @@
                 </div>
             </div>
         </div>
+        <script src="/socket.io/socket.io.js"></script>
         <script src="js/video-self.js"></script>
     </body>
 </html>

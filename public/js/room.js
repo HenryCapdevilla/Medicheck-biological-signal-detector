@@ -1,17 +1,17 @@
 const socket = io();
 const myvideo = document.querySelector("#vd1");
 const roomid = params.get("room");
-let username;
+let username = params.get("username");
 const chatRoom = document.querySelector('.chat-cont');
 const sendButton = document.querySelector('.chat-send');
 const messageField = document.querySelector('.chat-input');
 const videoContainer = document.querySelector('#vcont');
 const overlayContainer = document.querySelector('#overlay')
-const continueButt = document.querySelector('.continue-name');
 const nameField = document.querySelector('#name-field');
 const videoButt = document.querySelector('.novideo');
 const audioButt = document.querySelector('.audio');
 const cutCall = document.querySelector('.cutcall');
+const screenShareButt = document.querySelector('.screenshare');
 
 let videoAllowed = 1;
 let audioAllowed = 1;
@@ -29,8 +29,6 @@ myvideooff.style.visibility = 'hidden';
 
 const configuration = { iceServers: [{ urls: "stun:stun2.1.google.com:19302" }] }
 
-const mediaConstraints = { video: true, audio: true };
-
 let connections = {};
 let cName = {};
 let audioTrackSent = {};
@@ -40,6 +38,7 @@ let mystream, myscreenshare;
 
 
 document.querySelector('.roomcode').innerHTML = `${roomid}`
+document.querySelector("#myname").innerHTML = `${username} (You)`;
 
 function CopyClassText() {
 
@@ -70,23 +69,8 @@ function CopyClassText() {
     }, 5000);
 }
 
-continueButt.addEventListener('click', () => {
-    if (nameField.value == '') return;
-    username = nameField.value;
-    overlayContainer.style.visibility = 'hidden';
-    document.querySelector("#myname").innerHTML = `${username} (You)`;
-    socket.emit("join room", roomid, username);
-
-})
-
-nameField.addEventListener("keyup", function (event) {
-    if (event.keyCode === 13) {
-        event.preventDefault();
-        continueButt.click();
-    }
-});
-
 socket.on('user count', count => {
+    console.log(count)
     if (count > 1) {
         videoContainer.className = 'video-cont';
     }
@@ -139,7 +123,10 @@ function startCall() {
 
         })
         .catch(handleGetUserMediaError);
-
+        navigator.mediaDevices.getUserMedia(mediaConstraints)
+        .then(localstream => {
+            videoCont.srcObject = localstream;
+        })
 
 }
 

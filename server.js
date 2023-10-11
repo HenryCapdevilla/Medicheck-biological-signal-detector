@@ -26,7 +26,7 @@ let roomBoard = {};
 io.on('connect', socket => {
 
     socket.on("join room", (roomid, username) => {
-
+        console.log(`Se recibio el nombre ${username} con un roomid ${roomid}`)
         socket.join(roomid);
         socketroom[socket.id] = roomid;
         socketname[socket.id] = username;
@@ -38,7 +38,7 @@ io.on('connect', socket => {
             socket.to(roomid).emit('message', `${username} joined the room.`, 'Bot', moment().format(
                 "h:mm a"
             ));
-            io.to(socket.id).emit('join room', rooms[roomid].filter(pid => pid != socket.id), socketname, micSocket, videoSocket);
+            io.to(socket.id).emit('join room', rooms[roomid].filter(pid => pid != socket.id), socketname[socket.id], micSocket, videoSocket);
         }
         else {
             rooms[roomid] = [socket.id];
@@ -46,7 +46,6 @@ io.on('connect', socket => {
         }
 
         io.to(roomid).emit('user count', rooms[roomid].length);
-
     });
 
     socket.on('action', msg => {
@@ -107,10 +106,6 @@ io.on('connect', socket => {
         rooms[socketroom[socket.id]].splice(index, 1);
         io.to(socketroom[socket.id]).emit('user count', rooms[socketroom[socket.id]].length);
         delete socketroom[socket.id];
-        console.log('--------------------');
-        console.log(rooms[socketroom[socket.id]]);
-
-        //toDo: push socket.id out of rooms
     });
 })
 

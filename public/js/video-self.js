@@ -1,3 +1,5 @@
+// Crear una instancia de Socket.io y conectarse al servidor
+const socket = io();
 const videoCont = document.querySelector('.video-self');
 const mic = document.querySelector('#mic');
 const cam = document.querySelector('#webcam');
@@ -67,16 +69,15 @@ mic.addEventListener('click', () => {
 const currentURL = window.location.href;
 
 // Extraer el valor del parámetro 'room' de la URL
-const roomCode = new URL(currentURL).searchParams.get('room');
+const roomid = new URL(currentURL).searchParams.get('room');
+const nameInput = document.querySelector('#name-field');
 
 btn_continue.addEventListener('click', (e) => {
-    //location.href = `/.html?room=${code}`;
-    if (roomCode) {
-        // Si se encuentra el parámetro 'room' en la URL, lo tienes en la variable 'roomCode'
-        console.log('Código de sala:', roomCode);
-        location.href = `/room.html?room=${roomCode}`;
+    const username = nameInput.value;
+    if (roomid) {
+        socket.emit('join room', roomid, username);
+        location.href = `/room.html?room=${roomid}&username=${username}`;
     } else {
-        // Si no se encuentra el parámetro 'room' en la URL
         console.log('No se encontró un código de sala en la URL.');
     }
 })
