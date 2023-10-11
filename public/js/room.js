@@ -127,7 +127,7 @@ function startCall() {
         .catch(handleGetUserMediaError);
         navigator.mediaDevices.getUserMedia(mediaConstraints)
         .then(localstream => {
-            videoCont.srcObject = localstream;
+            vidCont.srcObject = localstream;
         })
 
 }
