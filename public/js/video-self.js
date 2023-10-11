@@ -75,7 +75,6 @@ const nameInput = document.querySelector('#name-field');
 btn_continue.addEventListener('click', (e) => {
     const username = nameInput.value;
     if (roomid) {
-        navigator.mediaDevices.getUserMedia({ video: false, audio: false })
         socket.emit('join room', roomid, username);
         location.href = `/room.html?room=${roomid}&username=${username}`;
     } else {
