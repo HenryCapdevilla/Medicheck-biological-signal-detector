@@ -12,7 +12,6 @@ const nameField = document.querySelector('#name-field');
 const videoButt = document.querySelector('.novideo');
 const audioButt = document.querySelector('.audio');
 const cutCall = document.querySelector('.cutcall');
-const screenShareButt = document.querySelector('.screenshare');
 
 let videoAllowed = 1;
 let audioAllowed = 1;
@@ -279,6 +278,8 @@ function handleVideoAnswer(answer, sid) {
 
 //Thanks to (https://github.com/miroslavpejic85) for ScreenShare Code
 
+
+//Compartir pantalla
 screenShareButt.addEventListener('click', () => {
     screenShareToggle();
 });
@@ -327,7 +328,7 @@ function screenShareToggle() {
             console.error(e);
         });
 }
-
+//Compartir pantalla
 socket.on('video-offer', handleVideoOffer);
 
 socket.on('new icecandidate', handleNewIceCandidate);

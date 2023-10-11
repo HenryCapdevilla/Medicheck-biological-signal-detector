@@ -67,23 +67,24 @@ navbar .logo {
   margin-top: 10px;
 }
 
-.main .video-cont {
+.video-cont {
   width: 100%;
   text-align: center;
 }
-.main .video-cont .video-self {
+
+.overlay .video-cont .video-self {
   margin-top: 5%;
-  height: 60vh;
+  height: 58vh;
   width: 100%;
   background-color: #393e46;
   border-radius: 10px;
   object-fit: cover;
 }
-.main .video-cont .settings {
+.overlay .video-cont .settings {
   display: flex;
   margin-top: 10px;
 }
-.main .video-cont .settings .device {
+.overlay .video-cont .settings .device {
   background-color: #003cff;
   border-radius: 10px;
   width: 45%;
@@ -92,11 +93,11 @@ navbar .logo {
   color: white;
   margin-left: 5%;
 }
-.main .video-cont .settings .device:hover {
+.overlay .video-cont .settings .device:hover {
   background-color: #393e46;
   cursor: pointer;
 }
-.main .video-cont .settings .nodevice {
+.overlay .video-cont .settings .nodevice {
   background-color: #b12c2c;
   border-radius: 10px;
   width: 45%;
@@ -105,7 +106,7 @@ navbar .logo {
   color: white;
   margin-left: 5%;
 }
-.main .video-cont .settings .nodevice:hover {
+.overlay .video-cont .settings .nodevice:hover {
   background-color: #393e46;
   cursor: pointer;
 }
@@ -119,13 +120,19 @@ navbar .logo {
     margin-right: 0;
     display: flex;
   }
-  .main .video-cont {
-    margin-bottom: 100px;
-    width: 50%;
-  }
 }
+
+.overlay .video-cont {
+  width: 58%;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  height: 50%;
+  padding-right: 10%;
+}
+
 .overlay {
-  position: fixed;
+  position: absolute;
   z-index: 100;
   top: 0;
   left: 0;
@@ -133,17 +140,19 @@ navbar .logo {
   right: 0;
   height: 100%;
   width: 100%;
-  background-color: #393e46;
+  background-color: #4170bb;
 }
+
 .overlay .box {
   width: 25%;
-  margin: 0 auto;
-  height: 200px;
+  margin-left: 12%;
+  height: 30vh;
   background-color: #ffffff;
-  margin-top: 100px;
   border-radius: 10px;
   text-align: center;
+  margin-top: 12%;
 }
+
 .overlay .box .head-name {
   padding-top: 20px;
   text-align: center;
@@ -153,11 +162,11 @@ navbar .logo {
 .overlay .box .name-field {
   margin: 0px auto;
   margin-top: 20px;
-  border: 0;
   font-weight: bold;
   padding: 10px;
   width: 90%;
-  border-bottom: 3px solid #4ecca3;
+  border: 3px solid #4170bb;
+  border-radius: 10px;
   color: #393e46;
   height: 40px;
 }
@@ -170,7 +179,7 @@ navbar .logo {
   margin-top: 30px;
   color: #ffffff;
   font-weight: bold;
-  background-color: #4ecca3;
+  background-color: #4170bb;
   padding: 12px 20px;
   border-radius: 10px;
   transition: opacity 0.5s;
@@ -258,24 +267,27 @@ navbar .logo {
 }
 .main .create-join .createroom-butt:hover {
   background-color: white;
-  border: 2px solid #4ecca3;
-  color: #4ecca3;
+  border: 2px solid #003cff;
+  color: #003cff;
   cursor: pointer;
 }
 .main .create-join .createroom-butt:focus {
   outline: none;
 }
 .main .create-join .createroom-clicked {
-  width: 100%;
+  width: 25%;
   margin-top: 60px;
-  font-size: 24px;
+  font-size: 15px;
   font-weight: bold;
   text-align: center;
   padding: 10px 20px;
   border-radius: 10px;
   background-color: white;
-  border: 2px solid #4ecca3;
-  color: #4ecca3;
+  border: 2px solid #003cff;
+  color: #003cff;
+  color: white;
+  transition: 0.3s;
+  margin-right: 5%;
 }
 .main .create-join .createroom-clicked:focus {
   outline: none;
