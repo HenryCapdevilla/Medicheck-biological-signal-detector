@@ -11,7 +11,6 @@ const audioButt = document.querySelector('.audio');
 const cutCall = document.querySelector('.cutcall');
 const screenShareButt = document.querySelector('.screenshare');
 const continueButt = document.querySelector('.novideo');
-const videoFrames = [];
 
 let videoAllowed = 1;
 let audioAllowed = 1;
@@ -170,8 +169,6 @@ function handleVideoOffer(offer, sid, cname, micinf, vidinf) {
             videoOff.innerHTML = 'Video Off'
             vidCont.classList.add('video-box');//Añade un cuadro para mostrar la imagen
             newvideo.classList.add('video-frame'); //Añade los frames obtenidos de la cámara del otro user
-            videoFrames.push(newvideo.classList.contains('video-frame'));
-            console.log(videoFrames);
             newvideo.autoplay = true;
             newvideo.playsinline = true;
             newvideo.id = `video${sid}`;
@@ -183,21 +180,45 @@ function handleVideoOffer(offer, sid, cname, micinf, vidinf) {
                 muteIcon.style.visibility = 'visible';
 
             if (videoInfo[sid] == 'on')
-                videoOff.style.visibility = 'hidden';
-            else
-                videoOff.style.visibility = 'visible';
+                    videoOff.style.visibility = 'hidden';
+                else
+                    videoOff.style.visibility = 'visible';
 
-            vidCont.appendChild(newvideo);
-            vidCont.appendChild(name);
-            vidCont.appendChild(muteIcon);
-            vidCont.appendChild(videoOff);
+                vidCont.appendChild(newvideo);
+                vidCont.appendChild(name);
+                vidCont.appendChild(muteIcon);
+                vidCont.appendChild(videoOff);
 
-            videoContainer.appendChild(vidCont);
+                videoContainer.appendChild(vidCont);
 
-        }
+                // Captura y almacena los frames del video
+                const videoStream = event.streams[0];
+                const videoTrack = videoStream.getVideoTracks()[0];
+                const imageCapture = new ImageCapture(videoTrack);
+
+                const frames = []; // Arreglo para almacenar los frames
+
+                function captureAndProcessFrame() {
+                    imageCapture.grabFrame()
+                        .then(frame => {
+                            const reader = new FileReader();
+                            reader.onload = function () {
+                                const frameDataURL = reader.result;
+                                frames.push(frameDataURL); // Almacena el frame en el arreglo 'frames'
+                            };
+                            reader.readAsDataURL(frame);
+                        })
+                        .catch(error => {
+                            console.error('Error al capturar el frame:', error);
+                        });
+                }
+            
+                captureAndProcessFrame(); // Inicia la captura de fram
+            
+                }
 
 
-    };
+    };  
 
     connections[sid].onremovetrack = function (event) {
         if (document.getElementById(sid)) {
