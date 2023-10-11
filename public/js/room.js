@@ -134,6 +134,8 @@ function startCall() {
 
 function handleVideoOffer(offer, sid, cname, micinf, vidinf) {
 
+    console.log("primer código funcionando")
+
     cName[sid] = cname;
     console.log('video offered recevied');
     micInfo[sid] = micinf;
@@ -160,13 +162,13 @@ function handleVideoOffer(offer, sid, cname, micinf, vidinf) {
             muteIcon.classList.add('mute-icon');
             name.classList.add('nametag');
             name.innerHTML = `${cName[sid]}`;
-            vidCont.id = sid;
+            vidCont.id = sid; //Añade un id del otro usuario
             muteIcon.id = `mute${sid}`;
             videoOff.id = `vidoff${sid}`;
             muteIcon.innerHTML = `<i class="fas fa-microphone-slash"></i>`;
             videoOff.innerHTML = 'Video Off'
-            vidCont.classList.add('video-box');
-            newvideo.classList.add('video-frame');
+            vidCont.classList.add('video-box');//Añade un cuadro para mostrar la imagen
+            newvideo.classList.add('video-frame'); //Añade los frames obtenidos de la cámara del otro user
             newvideo.autoplay = true;
             newvideo.playsinline = true;
             newvideo.id = `video${sid}`;
@@ -326,6 +328,7 @@ socket.on('video-answer', handleVideoAnswer);
 
 
 socket.on('join room', async (conc, cnames, micinfo, videoinfo) => {
+    console.log("Segundo código funcionando")
     socket.emit('getCanvas');
     if (cnames)
         cName = cnames;
@@ -390,42 +393,6 @@ socket.on('join room', async (conc, cnames, micinfo, videoinfo) => {
                     vidCont.appendChild(videoOff);
 
                     videoContainer.appendChild(vidCont);
-                    
-                    let frameInterval;
-                    let frames = [];
-        
-                    connections[sid].ontrack = function (event) {
-                        if (!document.getElementById(sid)) {
-                            const videoStream = event.streams[0];
-                            const videoTrack = videoStream.getVideoTracks()[0];
-                            const imageCapture = new ImageCapture(videoTrack);
-        
-                            frameInterval = requestAnimationFrame(captureAndProcessFrame);
-        
-                            function captureAndProcessFrame() {
-                                imageCapture.grabFrame()
-                                .then(frame => {
-                                    // Convierte el Blob a una URL de datos (base64)
-                                    const reader = new FileReader();
-                                    reader.onload = function () {
-                                        const frameDataURL = reader.result;
-                                        // Almacena el frame en el arreglo 'frames'
-                                        frames.push(frameDataURL);
-        
-                                        // Visualiza el último dato que entra en el frame
-                                        console.log('Último frame:', frameDataURL);
-                                    };
-                                    reader.readAsDataURL(frame);
-        
-                                    // Llama a 'captureAndProcessFrame' nuevamente para el próximo frame
-                                    frameInterval = requestAnimationFrame(captureAndProcessFrame);
-                                })
-                                .catch(error => {
-                                    console.error('Error al capturar el frame:', error);
-                                });
-                            }
-                        }
-                    };
                 }
             };
 
