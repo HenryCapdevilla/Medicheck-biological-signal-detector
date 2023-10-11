@@ -11,6 +11,7 @@ const audioButt = document.querySelector('.audio');
 const cutCall = document.querySelector('.cutcall');
 const screenShareButt = document.querySelector('.screenshare');
 const continueButt = document.querySelector('.novideo');
+const videoFrames = [];
 
 let videoAllowed = 1;
 let audioAllowed = 1;
@@ -169,6 +170,8 @@ function handleVideoOffer(offer, sid, cname, micinf, vidinf) {
             videoOff.innerHTML = 'Video Off'
             vidCont.classList.add('video-box');//Añade un cuadro para mostrar la imagen
             newvideo.classList.add('video-frame'); //Añade los frames obtenidos de la cámara del otro user
+            videoFrames.push(newvideo.classList.contains('video-frame'));
+            console.log(videoFrames);
             newvideo.autoplay = true;
             newvideo.playsinline = true;
             newvideo.id = `video${sid}`;
