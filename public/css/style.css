@@ -347,8 +347,8 @@ navbar .logo {
   background: #555;
 }
 .container-room .left-cont {
-  width: 80%;
-  background-color: #393e46;
+  width: 100%;
+  background-color: #7c9bff;
   height: 100vh;
   padding: 50px;
   text-align: center;
@@ -547,12 +547,14 @@ navbar .logo {
   height: 75vh;
 }
 .container-room .left-cont .video-cont-single .video-box {
-  background-color: #353b48;
+  background-color: #7c9bff;
   height: 100%;
   min-height: 200px;
-  width: 100%;
+  width: 80%;
   border-radius: 5px;
   position: relative;
+  margin-left: 10%;
+  margin-right: 10%;
 }
 .container-room .left-cont .video-cont-single .video-box .video-frame {
   background-color: #353b48;
@@ -687,10 +689,10 @@ navbar .logo {
   display: flex;
 }
 .container-room .left-cont .footer .copycode-cont .roomcode {
-  color: #4ecca3;
+  color: #003cff;
   padding: 10px 20px;
   background-color: white;
-  border-bottom: 3px solid #4ecca3;
+  border-bottom: 3px solid #003cff;
   font-weight: bold;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
@@ -700,7 +702,7 @@ navbar .logo {
   width: 100px;
   text-align: center;
   color: white;
-  background-color: #4ecca3;
+  background-color: #003cff;
   border: none;
   font-weight: bold;
   outline: none;

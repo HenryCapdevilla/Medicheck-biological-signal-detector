@@ -1,17 +1,16 @@
 const socket = io();
 const myvideo = document.querySelector("#vd1");
 const roomid = params.get("room");
-let username = params.get("username");
+const username = params.get("username");
 const chatRoom = document.querySelector('.chat-cont');
 const sendButton = document.querySelector('.chat-send');
 const messageField = document.querySelector('.chat-input');
 const videoContainer = document.querySelector('#vcont');
-const overlayContainer = document.querySelector('#overlay')
-const nameField = document.querySelector('#name-field');
 const videoButt = document.querySelector('.novideo');
 const audioButt = document.querySelector('.audio');
 const cutCall = document.querySelector('.cutcall');
 const screenShareButt = document.querySelector('.screenshare');
+const continueButt = document.querySelector('.novideo');
 
 let videoAllowed = 1;
 let audioAllowed = 1;
@@ -29,6 +28,8 @@ myvideooff.style.visibility = 'hidden';
 
 const configuration = { iceServers: [{ urls: "stun:stun2.1.google.com:19302" }] }
 
+const mediaConstraints = { video: true, audio: true };
+
 let connections = {};
 let cName = {};
 let audioTrackSent = {};
@@ -39,6 +40,7 @@ let mystream, myscreenshare;
 
 document.querySelector('.roomcode').innerHTML = `${roomid}`
 document.querySelector("#myname").innerHTML = `${username} (You)`;
+socket.emit("join room", roomid, username);
 
 function CopyClassText() {
 
@@ -105,7 +107,7 @@ function reportError(e) {
 
 
 function startCall() {
-
+    console.log("Se inicio la llamada local")
     navigator.mediaDevices.getUserMedia(mediaConstraints)
         .then(localStream => {
             myvideo.srcObject = localStream;
@@ -474,34 +476,6 @@ socket.on('remove peer', sid => {
     delete connections[sid];
 })
 //
-
-//Chat start
-sendButton.addEventListener('click', () => {
-    const msg = messageField.value;
-    messageField.value = '';
-    socket.emit('message', msg, username, roomid);
-})
-
-messageField.addEventListener("keyup", function (event) {
-    if (event.keyCode === 13) {
-        event.preventDefault();
-        sendButton.click();
-    }
-});
-
-socket.on('message', (msg, sendername, time) => {
-    chatRoom.scrollTop = chatRoom.scrollHeight;
-    chatRoom.innerHTML += `<div class="message">
-    <div class="info">
-        <div class="username">${sendername}</div>
-        <div class="time">${time}</div>
-    </div>
-    <div class="content">
-        ${msg}
-    </div>
-</div>`
-});
-//Chat end
 
 //Selector del video videobutt
 videoButt.addEventListener('click', () => {

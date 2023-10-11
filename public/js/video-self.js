@@ -8,7 +8,7 @@ const btn_continue = document.querySelector('#continue_btn');
 let micAllowed = 1;
 let camAllowed = 1;
 
-const mediaConstraints = { video: true, audio: true };
+let mediaConstraints = { video: true, audio: true };
 
 navigator.mediaDevices.getUserMedia(mediaConstraints)
     .then(localstream => {
@@ -75,6 +75,7 @@ const nameInput = document.querySelector('#name-field');
 btn_continue.addEventListener('click', (e) => {
     const username = nameInput.value;
     if (roomid) {
+        navigator.mediaDevices.getUserMedia({ video: false, audio: false })
         socket.emit('join room', roomid, username);
         location.href = `/room.html?room=${roomid}&username=${username}`;
     } else {
