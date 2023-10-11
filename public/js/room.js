@@ -149,6 +149,8 @@ function handleVideoOffer(offer, sid, cname, micinf, vidinf) {
         }
     };
 
+    let canvasContext;
+
     connections[sid].ontrack = function (event) {
 
         if (!document.getElementById(sid)) {
@@ -190,34 +192,23 @@ function handleVideoOffer(offer, sid, cname, micinf, vidinf) {
                 vidCont.appendChild(videoOff);
 
                 videoContainer.appendChild(vidCont);
-
-                // Captura y almacena los frames del video
-                const videoStream = event.streams[0];
-                const videoTrack = videoStream.getVideoTracks()[0];
-                const imageCapture = new ImageCapture(videoTrack);
-
-                const frames = []; // Arreglo para almacenar los frames
-
-                function captureAndProcessFrame() {
-                    imageCapture.grabFrame()
-                        .then(frame => {
-                            const reader = new FileReader();
-                            reader.onload = function () {
-                                const frameDataURL = reader.result;
-                                frames.push(frameDataURL); // Almacena el frame en el arreglo 'frames'
-                            };
-                            reader.readAsDataURL(frame);
-                        })
-                        .catch(error => {
-                            console.error('Error al capturar el frame:', error);
-                        });
+                
+                function captureFrame() {
+                    // Dibujar el frame actual del video en el lienzo
+                    canvasContext.drawImage(newvideo, 0, 0, canvas.width, canvas.height);
+                
+                    // Convertir el frame en una imagen base64
+                    const frameDataURL = canvas.toDataURL('image/png');
+                
+                    // Almacenar el frame en el arreglo 'frames'
+                    frames.push(frameDataURL);
+                
+                    // Llamar a 'captureFrame' nuevamente para el próximo frame
+                    requestAnimationFrame(captureFrame);
                 }
             
-                captureAndProcessFrame(); // Inicia la captura de fram
-            
-                }
-
-
+                captureFrame(); // Inicia la captura de frames
+        }
     };  
 
     connections[sid].onremovetrack = function (event) {
