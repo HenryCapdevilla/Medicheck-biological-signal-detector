@@ -93,7 +93,7 @@ io.on('connect', socket => {
     });
 
     socket.on('store canvas', url => {
-        roomBoard[socketroom[socket.id]] = url;
+        roomBoard[socketroom[socket.id]] = url;s
     })
 
     socket.on('disconnect', () => {
