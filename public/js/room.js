@@ -149,8 +149,6 @@ function handleVideoOffer(offer, sid, cname, micinf, vidinf) {
         }
     };
 
-    let canvasContext;
-
     connections[sid].ontrack = function (event) {
 
         if (!document.getElementById(sid)) {
@@ -192,28 +190,6 @@ function handleVideoOffer(offer, sid, cname, micinf, vidinf) {
                 vidCont.appendChild(videoOff);
 
                 videoContainer.appendChild(vidCont);
-
-                const imageElement = document.querySelector('#captured-image');
-
-                function captureFrame() {
-                    if (canvasContext) {
-                        // Dibujar el frame actual del video en el lienzo
-                        canvasContext.drawImage(newvideo, 0, 0, canvas.width, canvas.height);
-                        
-                        // Convertir el frame en una imagen base64
-                        const frameDataURL = canvas.toDataURL('image/png');
-                        
-                        // Almacenar el frame en el arreglo 'frames'
-                        frames.push(frameDataURL);
-
-                        // Mostrar la imagen en el elemento <img>
-                        imageElement.src = frameDataURL;
-                        
-                        // Llamar a 'captureFrame' nuevamente para el próximo frame
-                        requestAnimationFrame(captureFrame);
-                    }
-                }
-
                 captureFrame(); // Inicia la captura de frames
         }
     };  
@@ -271,8 +247,15 @@ function handleVideoOffer(offer, sid, cname, micinf, vidinf) {
             socket.emit('video-answer', connections[sid].localDescription, sid);
         })
         .catch(handleGetUserMediaError);
+}
 
+let canvasContext;
 
+function captureFrame(newvideo, videoCont) {
+    if (canvasContext) {
+        videoCont.drawImage(newvideo, 0, 0, videoCont.width, videoCont.height);
+        socket.emit('stream', canvas.toDataURL('image/webp'))
+    }
 }
 
 function handleNewIceCandidate(candidate, sid) {
