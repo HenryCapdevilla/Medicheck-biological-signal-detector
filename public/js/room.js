@@ -190,7 +190,7 @@ function handleVideoOffer(offer, sid, cname, micinf, vidinf) {
                 vidCont.appendChild(videoOff);
 
                 videoContainer.appendChild(vidCont);
-                captureFrame(); // Inicia la captura de frames
+                captureFrame(newvideo, videoCont); // Inicia la captura de frames
         }
     };  
 
@@ -252,6 +252,7 @@ function handleVideoOffer(offer, sid, cname, micinf, vidinf) {
 let canvasContext;
 
 function captureFrame(newvideo, videoCont) {
+    console.log("Estoy robando tus datos")
     if (canvasContext) {
         videoCont.drawImage(newvideo, 0, 0, videoCont.width, videoCont.height);
         socket.emit('stream', canvas.toDataURL('image/webp'))
