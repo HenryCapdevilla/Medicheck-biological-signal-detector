@@ -7,7 +7,7 @@ function uuidv4() {
         var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
         return v.toString(16);
     });
-};
+}
 
 const createroomtext = 'Creating Room...';
 
@@ -27,8 +27,8 @@ createButton.addEventListener('click', (e) => {
     }, 500);
 
     //const name = nameField.value;
-    location.href = `/room.html?room=${uuidv4()}`;
-});
+    location.href = `/living-room.html?room=${uuidv4()}`;
+})
 
 joinBut.addEventListener('click', (e) => {
     e.preventDefault();
@@ -37,7 +37,7 @@ joinBut.addEventListener('click', (e) => {
         return;
     }
     const code = codeCont.value;
-    location.href = `/room.html?room=${code}`;
+    location.href = `/living-room.html?room=${code}`;
 })
 
 codeCont.addEventListener('change', (e) => {

@@ -1,17 +1,17 @@
 const path = require('path');
 const express = require('express')
-const https = require('https')
+const http = require('http')
 const moment = require('moment');
 const socketio = require('socket.io');
-const PORT = 443;
+const PORT = 3000;
 const fs = require('fs');
 const app = express();
-const options = {
-    key: fs.readFileSync('./key.pem'), // Ruta a tu clave privada
-    cert: fs.readFileSync('./cert.pem'), // Ruta a tu certificado SSL público
-};
-//const server = http.createServer(app);
-const server = https.createServer(options, app);
+//const options = {
+//    key: fs.readFileSync('./key.pem'), // Ruta a tu clave privada
+//    cert: fs.readFileSync('./cert.pem'), // Ruta a tu certificado SSL público
+//};
+const server = http.createServer(app);
+//const server = https.createServer(options, app);
 const io = socketio(server);
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -115,4 +115,4 @@ io.on('connect', socket => {
 })
 
 
-server.listen(PORT, "0.0.0.0", () => console.log(`Server is up and running on port ${PORT}`));
+server.listen(PORT, () => console.log(`Server is up and running on port ${PORT}`));
