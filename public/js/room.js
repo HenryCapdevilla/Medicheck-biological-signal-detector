@@ -12,6 +12,33 @@ const cutCall = document.querySelector('.cutcall');
 const screenShareButt = document.querySelector('.screenshare');
 const continueButt = document.querySelector('.novideo');
 
+const sockett = new WebSocket('wss://localhost:8765');
+// Manejar eventos de la conexión WebSocket
+sockett.onopen = function(event) {
+  console.log("Conexión WebSocket abierta");
+
+  // Enviar un mensaje al servidor después de que la conexión esté abierta
+  sockett.send("Hola, servidor, este es un mensaje desde el cliente.");
+};
+
+sockett.onmessage = function(event) {
+  const mensaje = event.data;
+  console.log("Mensaje recibido: " + mensaje);
+  // Puedes procesar los mensajes recibidos aquí
+};
+
+sockett.onclose = function(event) {
+  if (event.wasClean) {
+    console.log("Conexión WebSocket cerrada limpiamente, código: " + event.code);
+  } else {
+    console.error("Conexión WebSocket cerrada de manera inesperada");
+  }
+};
+
+sockett.onerror = function(error) {
+  console.error("Error en la conexión WebSocket: " + error);
+};
+
 let videoAllowed = 1;
 let audioAllowed = 1;
 
@@ -359,7 +386,9 @@ socket.on('join room', async (conc, cnames, micinfo, videoinfo) => {
             };
 
             connections[sid].ontrack = function (event) {
-
+                
+                var extid = `video${sid}`;
+                console.log(extid)
                 if (!document.getElementById(sid)) {
                     console.log('track event fired')
                     let vidCont = document.createElement('div');
@@ -562,3 +591,30 @@ socket.on('action', (msg, sid) => {
 cutCall.addEventListener('click', () => {
     location.href = '/';
 })
+
+const videoElement = document.getElementById(extid); // Change that
+const canvas = document.createElement('canvas');
+const context = canvas.getContext('2d');
+const capturedFrames = [];
+
+videoElement.addEventListener('play', function () {
+  canvas.width = videoElement.videoWidth;
+  canvas.height = videoElement.videoHeight;
+
+  function captureFrame() {
+    if (!videoElement.paused && !videoElement.ended) {
+      context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+      const frameDataUrl = canvas.toDataURL('image/jpeg'); // Capture the frame as an image in base64 format
+
+      // Push the frame data to the capturedFrames array
+      capturedFrames.push(frameDataUrl);
+
+      // Log the capturedFrames array in the console
+      console.log(capturedFrames);
+      
+    }
+    requestAnimationFrame(captureFrame);
+  }
+
+  captureFrame();
+});

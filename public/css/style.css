@@ -6,7 +6,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Internacional','Helvetica','Arial';
 }
 
 .mr-1 {
@@ -33,10 +33,78 @@
   user-select: none;
 }
 
-html, body {
-  background-color: #ffffff;
+/*Código de prueba de background animado*/
+body {
+  margin: auto;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  overflow: auto;
   overflow-x: hidden;
+  background: linear-gradient(315deg, rgb(161, 255, 255) 1%, rgb(60, 132, 206) 38%, rgb(48, 238, 226) 68%, rgb(60, 132, 206) 98%);
+  animation: gradient 15s ease infinite;
+  background-size: 400% 400%;
+  background-attachment: fixed;
 }
+
+@keyframes gradient {
+  0% {
+      background-position: 0% 0%;
+  }
+  50% {
+      background-position: 100% 100%;
+  }
+  100% {
+      background-position: 0% 0%;
+  }
+}
+
+.wave {
+  background: rgb(255 255 255 / 25%);
+  border-radius: 1000% 1000% 0 0;
+  position: fixed;
+  width: 200%;
+  height: 12em;
+  animation: wave 10s -3s linear infinite;
+  transform: translate3d(0, 0, 0);
+  opacity: 0.8;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.wave:nth-of-type(2) {
+  bottom: -1.25em;
+  animation: wave 18s linear reverse infinite;
+  opacity: 0.8;
+}
+
+.wave:nth-of-type(3) {
+  bottom: -2.5em;
+  animation: wave 20s -1s reverse infinite;
+  opacity: 0.9;
+}
+
+@keyframes wave {
+  2% {
+      transform: translateX(1);
+  }
+
+  25% {
+      transform: translateX(-25%);
+  }
+
+  50% {
+      transform: translateX(-50%);
+  }
+
+  75% {
+      transform: translateX(-25%);
+  }
+
+  100% {
+      transform: translateX(1);
+  }
+}
+
 
 navbar .logo {
   font-size: 28px;
@@ -46,6 +114,7 @@ navbar .logo {
   margin-top: 32px;
 }
 
+/* Index.html */
 .main {
   display: flex;
   padding: 0 5%;
@@ -54,18 +123,38 @@ navbar .logo {
 .main .create-join {
   width: 85%;
   margin-right: 50px;
+  font-family: 'Internacional','Helvetica','Arial';
 }
-.head {
+
+.text_right .title{
+  margin-top: 10%;
+  color: #ffffff;
   font-size: 4vh;
   font-weight: bold;
-  color: #393e46;
-  text-align: center;
 }
+
+.Resaltado{
+  color: #0026ff;
+  font-size: 32px;
+  line-height: 120%;
+}
+
+.text_right .body_text{
+  margin-top: 4%;
+  color: #ffffff;
+  font-size: 3vh;
+  font-weight: normal;
+  text-align: justify;
+  margin-right: 5%;
+}
+
 .main .create-join .text .subtext {
   font-size: 2vh;
   color: #6f6f6f;
   margin-top: 10px;
 }
+
+/* Index.html */
 
 .video-cont {
   width: 100%;
@@ -80,6 +169,7 @@ navbar .logo {
   border-radius: 10px;
   object-fit: cover;
 }
+
 .overlay .video-cont .settings {
   display: flex;
   margin-top: 10px;
@@ -196,6 +286,8 @@ navbar .logo {
 .Container_index{
   display:block;
   height: 10vh;
+  background-color: #ffffff;
+  margin-bottom: 2%;
 }
 
 .Banner{
@@ -203,7 +295,7 @@ navbar .logo {
   align-items: center;
   align-content: center;
   width: 100%;
-  height: 10vh;
+  height: 100%;
 }
 
 .img{	
@@ -222,10 +314,18 @@ navbar .logo {
 }
 
 .logo_{
-  width: 50px;
-  height: 50px;
+  width: 10vw;
+  height: 20vh;
+  margin-left: 2%;
 }
 
+.menu_{
+  padding-left: 5%;
+  text-align: justify;
+  font-size: 15px;
+  font-weight: bold;
+  color: #9a9fa5;
+}
 /*Contenedor de botones*/
 .Block_btns{
   padding-top: 15%;
@@ -347,8 +447,8 @@ navbar .logo {
   background: #555;
 }
 .container-room .left-cont {
-  width: 100%;
-  background-color: #7c9bff;
+  width: 80%;
+  background-color: #393e46;
   height: 100vh;
   padding: 50px;
   text-align: center;
@@ -547,14 +647,12 @@ navbar .logo {
   height: 75vh;
 }
 .container-room .left-cont .video-cont-single .video-box {
-  background-color: #7c9bff;
+  background-color: #353b48;
   height: 100%;
   min-height: 200px;
-  width: 80%;
+  width: 100%;
   border-radius: 5px;
   position: relative;
-  margin-left: 10%;
-  margin-right: 10%;
 }
 .container-room .left-cont .video-cont-single .video-box .video-frame {
   background-color: #353b48;
@@ -689,10 +787,10 @@ navbar .logo {
   display: flex;
 }
 .container-room .left-cont .footer .copycode-cont .roomcode {
-  color: #003cff;
+  color: #4ecca3;
   padding: 10px 20px;
   background-color: white;
-  border-bottom: 3px solid #003cff;
+  border-bottom: 3px solid #4ecca3;
   font-weight: bold;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
@@ -702,7 +800,7 @@ navbar .logo {
   width: 100px;
   text-align: center;
   color: white;
-  background-color: #003cff;
+  background-color: #4ecca3;
   border: none;
   font-weight: bold;
   outline: none;
@@ -870,5 +968,3 @@ navbar .logo {
   visibility: visible;
   opacity: 0.8;
 }
-
-/*# sourceMappingURL=style.css.map */
