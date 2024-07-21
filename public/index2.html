@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<head>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Medicheck</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="display-cover">
+        <video autoplay></video>
+        <img class="d-none">
+        <video id="recordedVideo" controls class="d-none"></video>
+    </div>
+    <div class="controls">
+        <button id="play">
+            <img class="icon_img" src="https://img.icons8.com/ios-glyphs/30/video-call.png" alt="video-call"/>
+        </button>
+        <button id="pause" class="d-none">
+            <img class="icon_img" src="https://img.icons8.com/ios-filled/50/no-video--v1.png" alt="no-video--v1"/>
+        </button>
+        <button id="stopMicrophone">
+            <img class="icon_img" src="https://img.icons8.com/external-kiranshastry-solid-kiranshastry/64/external-microphone-interface-kiranshastry-solid-kiranshastry-1.png" alt="external-microphone-interface-kiranshastry-solid-kiranshastry-1"/>
+        </button>
+        <button id="startRecording">
+            <img class="icon_img" src="https://img.icons8.com/flat-round/64/record.png" alt="record"/> 
+        </button>
+        <button id="stopRecording" class="d-none">
+            <img class="icon_img" src="https://img.icons8.com/ios-filled/50/FF0000/stop-circled.png" alt="stop-circled"/>
+        </button>
+    </div>
+    <p id="gValues"></p>
+    <div class="container">
+        <canvas id="heartRateChart"></canvas>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/Menu.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>

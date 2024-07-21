@@ -1,0 +1,10 @@
+mediapipe
+numpy
+opencv_contrib_python
+Flask
+python-multipart
+libgl1-mesa-glx
+libglib2.0-0
+opencv-python-headless
+opencv-python
+flask-cors

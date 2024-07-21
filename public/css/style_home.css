@@ -1,0 +1,88 @@
+body{
+    background-color: azure;
+}
+
+.Banner{
+    display: inline-flex;
+    width: 100%;
+    margin-top: 1%;
+}
+.Logo{
+    position: absolute;
+    left: 88vw;
+    border-style: dotted;
+    border-color: blue;
+    top: auto;
+}
+
+.Menu{
+    border-style: dotted;
+    border-color: red;
+    margin-left: 2%;
+}
+
+html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizelegibility;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.text {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+}
+
+svg {
+    width: 100%;
+    height: inherit;
+}
+
+svg text {
+    text-anchor: middle; /* svg center text */
+}
+
+#alpha {
+    fill: #999999; /* Resultado de darken(white, 60%) */
+    /* animation: alpha 10s ease infinite; */
+}
+
+#title {
+    letter-spacing: -2px;
+    font-size: 6em;
+    font-weight: 800;
+}
+
+#subtitle {
+    letter-spacing: 8px;
+    font-size: 1.2em;
+    font-weight: 300;
+    text-transform: uppercase;
+}
+
+#base {
+    fill: rgb(0, 0, 0); /* Valor de $color-base */
+    mask: url(#mask); /* aplicar máscara */
+}
+
+section.intro {
+    background: url(https://centromedicoabc.com/storage/2023/03/medico-internista.jpg) no-repeat top center;
+    background-size: cover;
+    position: relative;
+    width: 100%;
+    min-height: 100%;
+}
+
+/*@keyframes alpha {
+  50% { fill: #000; }
+}*/
