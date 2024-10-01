@@ -1,0 +1,43 @@
+h1 {
+    color: aliceblue;
+}
+
+.video-self {
+    align-content: center;
+    justify-content: center;
+    display: flex;
+    width: 80vw;
+    margin-left: 10vw;
+    margin-right: 10vw;
+    height: 70vh;
+    border-color: aliceblue;
+    color: #ffffff;
+    filter: drop-shadow(10px 12px 15px rgba(255, 255, 255, 0.5));
+}
+
+.user-Content {
+    width: 100vw;
+    height: 50vh;
+    text-align: center;
+    display: flex;
+    position: relative;
+    margin-left: 5vw;
+    margin-right: 5vw;
+}
+
+.Display-buttons{
+    width: 100vw;
+    display: flex;
+    height: 10vh;
+    justify-content: center;
+    gap: 20px;
+}
+
+.Background-Display-Buttons{
+    background-color: rgb(56, 56, 56);
+    width: 20vw;
+    height: 5vw;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+}

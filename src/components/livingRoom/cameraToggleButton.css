@@ -1,0 +1,22 @@
+
+.Button-videocall-camera{
+    position: relative;
+    display: inline-block;
+    padding: 15px 20px;
+    color: #03e9f4;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: 0.5s;
+    letter-spacing: 4px;
+    overflow: hidden;
+    background: none;
+    border-radius: 50%;
+}
+
+.Button-videocall-camera:hover{
+    background: #03e9f4;
+    color: #ffffff;
+    -webkit-box-reflect:below 1px linear-gradient(transparent, #0005);
+    border: 2px solid #ffffff; /* Crear el borde blanco */
+    font-weight: bold;
+}

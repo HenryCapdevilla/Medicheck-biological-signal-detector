@@ -1,0 +1,20 @@
+.header-txt {
+    padding-top: 12%;
+    width: 60%;
+    padding-left: 50px;
+    display: inline-block;
+    align-content: center;
+}
+
+#title {
+    color: aliceblue;
+    position: initial;
+    font-size: 65px;
+    font-family: "Bebas Neue", cursive;
+}
+
+#slogan {
+    font-size: 20px;
+    color: #ffffff;
+    margin-bottom: 25px;
+}
