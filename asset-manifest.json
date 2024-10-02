@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/static/css/main.404177ab.css",
-    "main.js": "/static/js/main.b19b77d9.js",
-    "static/js/453.e402f34a.chunk.js": "/static/js/453.e402f34a.chunk.js",
-    "static/media/Fondo.png": "/static/media/Fondo.b1038707cfea8cfb7ad9.png",
-    "static/media/fa-solid-900.ttf": "/static/media/fa-solid-900.07ed6d5fa32c1d54af0f.ttf",
-    "static/media/fa-brands-400.ttf": "/static/media/fa-brands-400.0ff70dcbf135d859ebf3.ttf",
-    "static/media/fa-solid-900.woff2": "/static/media/fa-solid-900.93f719f4d62bfa3e748c.woff2",
-    "static/media/fa-brands-400.woff2": "/static/media/fa-brands-400.bb8d5a145e22822103fb.woff2",
-    "static/media/fa-regular-400.ttf": "/static/media/fa-regular-400.17a6e1aebccdbaa39e78.ttf",
-    "static/media/fa-regular-400.woff2": "/static/media/fa-regular-400.bc3722686635b5f86132.woff2",
-    "static/media/fa-v4compatibility.ttf": "/static/media/fa-v4compatibility.0f6cb412603527bda691.ttf",
-    "static/media/fa-v4compatibility.woff2": "/static/media/fa-v4compatibility.6cfec8414be20e2c3426.woff2",
-    "index.html": "/index.html",
-    "main.404177ab.css.map": "/static/css/main.404177ab.css.map",
-    "main.b19b77d9.js.map": "/static/js/main.b19b77d9.js.map",
-    "453.e402f34a.chunk.js.map": "/static/js/453.e402f34a.chunk.js.map"
+    "main.css": "/Medicheck-biological-signal-detector/static/css/main.de9b9933.css",
+    "main.js": "/Medicheck-biological-signal-detector/static/js/main.e67e8cab.js",
+    "static/js/453.e402f34a.chunk.js": "/Medicheck-biological-signal-detector/static/js/453.e402f34a.chunk.js",
+    "static/media/Fondo.png": "/Medicheck-biological-signal-detector/static/media/Fondo.b1038707cfea8cfb7ad9.png",
+    "static/media/fa-solid-900.ttf": "/Medicheck-biological-signal-detector/static/media/fa-solid-900.07ed6d5fa32c1d54af0f.ttf",
+    "static/media/fa-brands-400.ttf": "/Medicheck-biological-signal-detector/static/media/fa-brands-400.0ff70dcbf135d859ebf3.ttf",
+    "static/media/fa-solid-900.woff2": "/Medicheck-biological-signal-detector/static/media/fa-solid-900.93f719f4d62bfa3e748c.woff2",
+    "static/media/fa-brands-400.woff2": "/Medicheck-biological-signal-detector/static/media/fa-brands-400.bb8d5a145e22822103fb.woff2",
+    "static/media/fa-regular-400.ttf": "/Medicheck-biological-signal-detector/static/media/fa-regular-400.17a6e1aebccdbaa39e78.ttf",
+    "static/media/fa-regular-400.woff2": "/Medicheck-biological-signal-detector/static/media/fa-regular-400.bc3722686635b5f86132.woff2",
+    "static/media/fa-v4compatibility.ttf": "/Medicheck-biological-signal-detector/static/media/fa-v4compatibility.0f6cb412603527bda691.ttf",
+    "static/media/fa-v4compatibility.woff2": "/Medicheck-biological-signal-detector/static/media/fa-v4compatibility.6cfec8414be20e2c3426.woff2",
+    "index.html": "/Medicheck-biological-signal-detector/index.html",
+    "main.de9b9933.css.map": "/Medicheck-biological-signal-detector/static/css/main.de9b9933.css.map",
+    "main.e67e8cab.js.map": "/Medicheck-biological-signal-detector/static/js/main.e67e8cab.js.map",
+    "453.e402f34a.chunk.js.map": "/Medicheck-biological-signal-detector/static/js/453.e402f34a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.404177ab.css",
-    "static/js/main.b19b77d9.js"
+    "static/css/main.de9b9933.css",
+    "static/js/main.e67e8cab.js"
   ]
 }
