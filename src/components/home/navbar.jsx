@@ -20,8 +20,8 @@ function Navbar() {
         <li><Link to="#">Información</Link></li>
         <li><Link to="#">Contactos</Link></li>
         <li><Link to="/videollamada">Conectate ahora</Link></li>
-        <SocialMediaLogo src="https://github.com/HenryCapdevilla/Medicheck-biological-signal-detector/blob/629e492b01d9d7ffdd7f7ce63f61b942352c80e7/public/images/Linkedin.svg"/>
-        <SocialMediaLogo src="https://github.com/HenryCapdevilla/Medicheck-biological-signal-detector/blob/629e492b01d9d7ffdd7f7ce63f61b942352c80e7/public/images/Github.svg"/>
+        <SocialMediaLogo src="medicheck\public\images\Linkedin.svg"/>
+        <SocialMediaLogo src="medicheck\public\images\Github.svg"/>
       </ul>
       {isAuthenticated ? <>
         <Profile/>
