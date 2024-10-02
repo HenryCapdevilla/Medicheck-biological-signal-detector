@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Medicheck-biological-signal-detector/static/css/main.de9b9933.css",
-    "main.js": "/Medicheck-biological-signal-detector/static/js/main.edda1907.js",
+    "main.js": "/Medicheck-biological-signal-detector/static/js/main.ad915876.js",
     "static/js/453.e402f34a.chunk.js": "/Medicheck-biological-signal-detector/static/js/453.e402f34a.chunk.js",
     "static/media/Fondo.png": "/Medicheck-biological-signal-detector/static/media/Fondo.b1038707cfea8cfb7ad9.png",
     "static/media/fa-solid-900.ttf": "/Medicheck-biological-signal-detector/static/media/fa-solid-900.07ed6d5fa32c1d54af0f.ttf",
@@ -14,11 +14,11 @@
     "static/media/fa-v4compatibility.woff2": "/Medicheck-biological-signal-detector/static/media/fa-v4compatibility.6cfec8414be20e2c3426.woff2",
     "index.html": "/Medicheck-biological-signal-detector/index.html",
     "main.de9b9933.css.map": "/Medicheck-biological-signal-detector/static/css/main.de9b9933.css.map",
-    "main.edda1907.js.map": "/Medicheck-biological-signal-detector/static/js/main.edda1907.js.map",
+    "main.ad915876.js.map": "/Medicheck-biological-signal-detector/static/js/main.ad915876.js.map",
     "453.e402f34a.chunk.js.map": "/Medicheck-biological-signal-detector/static/js/453.e402f34a.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.de9b9933.css",
-    "static/js/main.edda1907.js"
+    "static/js/main.ad915876.js"
   ]
 }
