@@ -1,7 +1,7 @@
 {
   "name": "medicheck",
   "version": "0.1.0",
-  "homepage": "https://henrycapdevilla.github.io/Medicheck-biological-signal-detector/",
+  "homepage": "http://henrycapdevilla.github.io/Medicheck-biological-signal-detector/",
   "private": true,
   "dependencies": {
     "@auth0/auth0-react": "^2.2.4",
