@@ -1,11 +1,23 @@
 .navbar{
     float: left;
     height: 12vh;
-    width: 60vw;
+    width: 80vw;
     display: flex;
     position: relative;
     align-items: center;
-    justify-content: end;
+    justify-content: center;
+}
+
+.circle {
+    width: 100%; /* Ancho del círculo */
+    height: 20vh; /* Alto del círculo (cambiado a 100px para mantener la forma de círculo) */
+    background: linear-gradient(90deg,#006622, #02f50f, #006622);
+    background-blend-mode: multiply;
+    box-shadow: 0 0 50px #03e9f4, 0 0 100px #03f43f, 0 0 40px #03e9f4, 0 0 150px #33f403;
+    position: absolute; /* Cambiado a absolute para poder posicionarlo en el contenedor */
+    top: 0px; /* Centra verticalmente */
+    left: 0px; /* Centra horizontalmente */
+    z-index: -1; /* Coloca el círculo detrás de otros elementos */
 }
 
 .navbar a {
@@ -31,4 +43,69 @@
     width: 10vw;
     align-items: center;
     justify-content: center;
+} 
+
+@media (max-width: 1052px) {
+    .navbar{
+        float: left;
+        height: 12vh;
+        width: 80vw;
+        display: flex;
+        position: relative;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .navbar a {
+        font-size: 25px;
+        padding: 10px;
+        color: #ffffff;
+        font-weight: bold;
+    }
+    
+    .Menu {
+        height: 12vh;
+        display: flex;
+    }
+    
+    .icon-menu {
+        color: white;
+        width: 30px;
+        height: 25px;
+    }
+    
+    .Logo-menu {
+        display: flex;
+        width: 10vw;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+  /* Estilos para pantallas pequeñas */
+@media (max-width: 860px) {
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+        background-color: #333;
+        position: absolute;
+        top: 12vh;
+        right: 0;
+        width: 100%;
+        height: 100vh;
+        justify-content: start;
+        display: none; /* Oculto inicialmente */
+    }
+
+    .navbar.active {
+      display: flex; /* Mostrar menú al hacer clic en el ícono */
+    }
+
+    .navbar li {
+        margin: 20px 0;
+    }
+
+    .icon-menu {
+      display: block; /* Mostrar ícono en pantallas pequeñas */
+    }
 }

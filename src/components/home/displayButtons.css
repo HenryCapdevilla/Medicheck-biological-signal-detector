@@ -2,3 +2,65 @@
     display: flex;
     gap: 8px; 
 }
+
+/* Estilos generales del input */
+.input-container {
+    width: 50%; /* Para que el contenedor ocupe todo el ancho disponible */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-field {
+    width: 60%; /* Define un ancho inicial para pantallas grandes */
+    padding: 15px; /* Padding interno */
+    background: rgb(39, 39, 39); /* Fondo oscuro */
+    color: white; /* Texto en color blanco */
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    outline: none; /* Eliminar el borde de enfoque por defecto */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Sombras para darle más estilo */
+    transition: all 0.3s ease;
+    text-justify: auto;
+}
+
+/* Estilos cuando se hace foco en el input */
+.input-field:focus {
+    box-shadow: 0 0 10px rgba(3, 233, 244, 0.8); /* Brillo cian cuando está enfocado */
+}
+
+@media (max-width: 3000px) {
+    .input-field {
+        width: 75%; /* Aumenta el ancho del input */
+        height: 100%;
+        padding: 13px; /* Ajusta el padding */
+        font-size: 2rem; /* Reduce el tamaño de la fuente */
+    }
+}
+
+@media (max-width: 1800px) {
+    .input-field {
+        width: 70%; /* Aumenta el ancho del input */
+        height: 100%;
+        padding: 13px; /* Ajusta el padding */
+        font-size: 1rem; /* Reduce el tamaño de la fuente */
+    }
+}
+/* Media query para pantallas menores a 1052px */
+@media (max-width: 1052px) {
+    .input-field {
+        width: 75%; /* Aumenta el ancho del input */
+        padding: 13px; /* Ajusta el padding */
+        font-size: 0.9rem; /* Reduce el tamaño de la fuente */
+    }
+}
+
+/* Media query para pantallas menores a 860px */
+@media (max-width: 860px) {
+    .input-field {
+        width: 85%; /* Ocupa casi todo el ancho del contenedor */
+        padding: 10px; /* Reduce más el padding */
+        font-size: 0.8rem; /* Ajusta el tamaño de la fuente para pantallas más pequeñas */
+    }
+}

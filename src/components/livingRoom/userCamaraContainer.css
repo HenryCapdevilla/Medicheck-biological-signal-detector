@@ -1,42 +1,106 @@
-h1 {
-    color: aliceblue;
+.video-container {
+    width: 60vw;
+    padding: 1vw;
+    height: 480px;
 }
 
-.video-self {
-    align-content: center;
-    justify-content: center;
+.body-livingroom{
     display: flex;
-    width: 80vw;
-    margin-left: 10vw;
-    margin-right: 10vw;
-    height: 70vh;
-    border-color: aliceblue;
-    color: #ffffff;
-    filter: drop-shadow(10px 12px 15px rgba(255, 255, 255, 0.5));
 }
-
-.user-Content {
-    width: 100vw;
-    height: 50vh;
+.User-Content {
+    width: 90vw;
+    height: 80vh;
     text-align: center;
-    display: flex;
-    position: relative;
     margin-left: 5vw;
     margin-right: 5vw;
 }
 
-.Display-buttons{
-    width: 100vw;
-    display: flex;
-    height: 10vh;
+.camera-off-text{
+    color: white;
+    font-size: 30px;
+    text-align: center;
+}
+
+.user-input-videocall{
+    width: 30%;
+    align-content: center;
     justify-content: center;
-    gap: 20px;
+    padding-left: 50px;
+}
+
+.join-call-button{
+    width: 100%;
+    margin-bottom: 10%;
+}
+
+.text-general{
+    color: white;
+    font-size: 30px;
+    text-align: center;
+    font-family: "Roboto", cursive;
+    font-weight: 300; /* O 100 si lo quieres más delgado */
+    font-style: normal; /* Asegúrate de que no esté en cursiva */
+    margin-bottom: 10%;
+}
+
+.footer-disclamer{
+    font-family: "Roboto", cursive;
+    font-weight: 300; /* O 100 si lo quieres más delgado */
+    font-style: normal; /* Asegúrate de que no esté en cursiva */
+}
+
+@media (min-width: 1052px){
+    .video-container {
+        width: 700px;
+        padding: 20px;
+        height: 480px;
+    }
+
+    .video-container .video-self {
+        width: 100%;
+        border-color: rgb(32,33,36);
+        color: rgb(32,33,36);
+        border-radius: 8px;
+        min-width: 448px;
+        position: relative;
+        background-color: rgb(32,33,36);
+        object-fit: cover;   /* Asegura que el video cubra todo el área sin distorsión */
+        aspect-ratio: 16/9;  /* Mantiene una relación de aspecto de 16:9 (puedes ajustarlo según tu preferencia) */
+        transform: scaleX(-1);
+    }
+
+    .Display-buttons{
+        width: 500px;
+        height: 70px;
+        position: absolute;
+        color: white;
+        font-size: 30px;
+        text-align: center;
+        z-index: 10;
+        top: 60%;
+        transform: translate(16%, 0%);
+    }
+
+    .video-container .camera-off-text {
+        position: absolute;
+        color: white;
+        font-size: 30px;
+        text-align: center;
+        z-index: 10;
+        top: 40%;
+        transform: translate(65%, 0%);
+    }
+
+    .footer-disclamer{
+        color: white;
+        font-size: 15px;
+        text-align: center;
+        z-index: 10;
+        padding-top: 2%;
+    }
 }
 
 .Background-Display-Buttons{
-    background-color: rgb(56, 56, 56);
-    width: 20vw;
-    height: 5vw;
     border-radius: 20px;
     display: flex;
     justify-content: center;

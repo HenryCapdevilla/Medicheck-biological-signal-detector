@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import CameraToggleButton from './cameraToggleButton';
 import MicrophoneToggleButton from './microphoneToggleButton';
-import './userCamaraContainer.css'
+import './userCamaraContainer.css';
+import JoinToggleButton from './joinToggleButton';
+
 const ButtonCamera = () => {
     const [isCameraActive, setIsCameraActive] = useState(false);
     const [isMicActive, setIsMicActive] = useState(false);
@@ -52,22 +54,31 @@ const ButtonCamera = () => {
 
     return (
         <div className="User-Content">
-            <video ref={videoRef} className="video-self" autoPlay muted playsInline></video>
-            <div className="Display-buttons">
-                <div className='Background-Display-Buttons'>
-                    <CameraToggleButton
-                        isCameraActive={isCameraActive}
-                        toggleCamera={toggleCamera}
-                    />
-                    <MicrophoneToggleButton
-                        isMicActive={isMicActive}
-                        toggleMicrophone={toggleMicrophone}
-                    />
+            <div className='body-livingroom'>
+                <div className='video-container'>
+                    {!isCameraActive && <h1 className="camera-off-text">La cámara está desactivada</h1>}
+                    <video ref={videoRef} className="video-self" autoPlay muted playsInline></video>
+                    <div className="Display-buttons">
+                    <div className='Background-Display-Buttons'>
+                        <CameraToggleButton
+                            isCameraActive={isCameraActive}
+                            toggleCamera={toggleCamera}
+                        />
+                        <MicrophoneToggleButton
+                            isMicActive={isMicActive}
+                            toggleMicrophone={toggleMicrophone}
+                        />
+                    </div>
+                    </div>
+                </div>
+                <div className='user-input-videocall'>
+                        <h1 className="text-general">Ya puedes ingresar a la reunión</h1>
+                        <JoinToggleButton></JoinToggleButton>
                 </div>
             </div>
+                <h1 className="footer-disclamer">Esta reunión está encriptada en la nube.</h1>
         </div>
     );
 };
 
 export default ButtonCamera;
-

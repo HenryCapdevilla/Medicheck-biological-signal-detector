@@ -1,7 +1,35 @@
-.ContainerBanner{
+/* Estilos generales */
+.ContainerBanner {
     display: flex;
     position: relative;
-    align-content: center;
-    justify-content: center;
     width: 100%;
+    padding: 20px; /* Añade un poco de padding para el espacio en pantallas pequeñas */
+    padding-left: 140px;
+}
+
+/* Media query para pantallas menores a 1052px */
+@media (max-width: 1052px) {
+    .ContainerBanner {
+        flex-direction: column; /* Cambia el layout a columnas en lugar de fila */
+        align-items: center;
+    }
+}
+
+/* Media query para pantallas menores a 860px */
+@media (max-width: 860px) {
+    .ContainerBanner {
+        padding: 10px; /* Reduce el padding para ajustar el contenido */
+    }
+
+    .ContainerBanner img {
+        width: 90%; /* Ajusta el tamaño de la imagen */
+    }
+
+    .ContainerBanner h1 {
+        font-size: 24px; /* Reduce el tamaño de los títulos */
+    }
+
+    .ContainerBanner p {
+        font-size: 16px; /* Ajusta el tamaño del texto */
+    }
 }

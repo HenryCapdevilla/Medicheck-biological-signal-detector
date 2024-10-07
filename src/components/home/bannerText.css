@@ -1,20 +1,80 @@
-.header-txt {
-    padding-top: 12%;
-    width: 60%;
-    padding-left: 50px;
-    display: inline-block;
-    align-content: center;
+@media (max-width: 3000px) {
+    .header-txt {
+        padding-top: 20vh;
+        width: 80%; /* Aumenta el ancho para pantallas medianas */
+        padding-left: 250px; /* Reduce el padding */
+        align-content: center;
+        justify-content: center;
+    }
+
+    #title {
+        font-size: 120px; /* Reduce el tamaño de fuente del título */
+    }
+
+    #slogan {
+        font-size: 35px; /* Reduce el tamaño de fuente del slogan */
+        margin-bottom: 20px; /* Reduce el margen inferior */
+    }
 }
 
-#title {
-    color: aliceblue;
-    position: initial;
-    font-size: 65px;
-    font-family: "Bebas Neue", cursive;
+@media (max-width: 1800px) {
+    .header-txt {
+        width: 60%;
+        display: inline-block;
+        align-content: center;
+        justify-content: center;
+        padding-left: 15px;
+        height: 80vh;
+    }
+    
+    #title {
+        color: aliceblue;
+        position: initial;
+        font-size: 65px;
+        font-family: "Bebas Neue", cursive;
+    }
+    
+    #slogan {
+        font-size: 20px;
+        color: #ffffff;
+        margin-bottom: 25px;
+    }
+}
+/* Media query para pantallas menores a 1052px */
+@media (max-width: 1052px) {
+    .header-txt {
+        padding-top: 50px;
+        width: 80%; /* Aumenta el ancho para pantallas medianas */
+        padding-left: 10px; /* Reduce el padding */
+        align-content: center;
+        justify-content: center;
+    }
+
+    #title {
+        font-size: 60px; /* Reduce el tamaño de fuente del título */
+    }
+
+    #slogan {
+        font-size: 22px; /* Reduce el tamaño de fuente del slogan */
+        margin-bottom: 20px; /* Reduce el margen inferior */
+    }
 }
 
-#slogan {
-    font-size: 20px;
-    color: #ffffff;
-    margin-bottom: 25px;
+/* Media query para pantallas menores a 860px */
+@media (max-width: 860px) {
+    .header-txt {
+        width: 80%; /* El texto ocupa todo el ancho disponible */
+        padding-left: 5px; /* Aún menos padding para pantallas pequeñas */
+    }
+
+    #title {
+        font-size: 60px; /* Reduce aún más el tamaño del título */
+        text-justify: center;
+    }
+
+    #slogan {
+        font-size: 20px; /* Reduce aún más el tamaño del slogan */
+        margin-bottom: 15px; /* Ajusta el margen inferior */
+        text-justify: distribute;
+    }
 }

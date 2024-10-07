@@ -1,0 +1,27 @@
+.join-call-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #4CAF50; /* Color verde */
+    color: white;
+    border: none;
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 12px 24px; /* Tamaño del botón */
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+}
+
+.join-call-button:hover {
+    background-color: #45a049; /* Color más oscuro al pasar el mouse */
+}
+
+.join-call-button:active {
+    transform: scale(0.98); /* Animación de clic */
+    background-color: #388E3C;
+}
+
+.join-call-button:focus {
+    outline: none;
+}

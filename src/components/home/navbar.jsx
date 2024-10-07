@@ -1,5 +1,5 @@
-import React from 'react';
-import './navbar.css'
+import React, { useState } from 'react';
+import './navbar.css';
 import { Link } from 'react-router-dom';
 import Login from './login';
 import SocialMediaLogo from './socialMediaLogo';
@@ -10,23 +10,30 @@ import Profile from './profile';
 
 function Navbar() {
   const { isAuthenticated } = useAuth0();
+  const [isMenuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpen(!isMenuOpen);
+  };
+
   return (
     <div className="Menu">
       <div className='Logo-menu'>
-        <FontAwesomeIcon icon={faBars} className="icon-menu"/>
+        <FontAwesomeIcon 
+          icon={faBars} 
+          className="icon-menu"
+          onClick={toggleMenu} 
+        />
       </div>
-      <ul className="navbar">
+      <ul className={`navbar ${isMenuOpen ? 'active' : ''}`}>
         <li><Link to="/">Inicio</Link></li>
         <li><Link to="#">Información</Link></li>
         <li><Link to="#">Contactos</Link></li>
-        <li><Link to="/videollamada">Conectate ahora</Link></li>
-        <SocialMediaLogo src="medicheck\public\images\Linkedin.svg"/>
-        <SocialMediaLogo src="medicheck\public\images\Github.svg"/>
+        <li><Link to="/videollamada">Conéctate</Link></li>
+        <SocialMediaLogo src="./images/Github.svg"/>
+        <SocialMediaLogo src="./images/Linkedin.svg"/>
+        {isAuthenticated ? <Profile/> : <Login/>}
       </ul>
-      {isAuthenticated ? <>
-        <Profile/>
-        </>
-        : <Login/>}
     </div>
   );
 }

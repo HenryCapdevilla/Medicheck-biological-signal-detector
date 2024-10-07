@@ -8,8 +8,9 @@
     transition: 0.5s;
     letter-spacing: 4px;
     overflow: hidden;
-    background: none;
+    background: rgb(39, 39, 39);
     border: none;
+    width: 25%;
 }
 
 .Button-call:hover{
@@ -217,11 +218,58 @@ a span{
 .input-field {
     background: rgb(39, 39, 39);
     cursor: pointer;
-    padding: 16px 32px;
+    padding: 8px 16px;
     color: rgb(255, 255, 255);
     font-size: 1rem;
     font-weight: bold;
     position: relative;
     border-radius: 12px;
     border: none;
+}
+
+@media (max-width: 3000px) {
+    .Button-call {
+        padding: 20px 25px; /* Ajusta el padding */
+        font-size: 2rem; /* Reduce ligeramente el tamaño de la fuente */
+    }
+
+    .Button-call:hover {
+        box-shadow: 0 0 5px #03e9f4, 0 0 20px #03e9f4, 0 0 40px #03e9f4, 0 0 150px #03e9f4;
+    }
+}
+
+@media (max-width: 1800px) {
+    .Button-call {
+        padding: 20px 25px; /* Ajusta el padding */
+        font-size: 0.8rem; /* Reduce ligeramente el tamaño de la fuente */
+    }
+
+    .Button-call:hover {
+        box-shadow: 0 0 5px #03e9f4, 0 0 20px #03e9f4, 0 0 40px #03e9f4, 0 0 150px #03e9f4;
+    }
+}    
+
+/* Media query para pantallas menores a 1052px */
+@media (max-width: 1052px) {
+    .Button-call {
+        padding: 20px 25px; /* Ajusta el padding */
+        font-size: 0.9rem; /* Reduce ligeramente el tamaño de la fuente */
+    }
+
+    .Button-call:hover {
+        box-shadow: 0 0 5px #03e9f4, 0 0 20px #03e9f4, 0 0 40px #03e9f4, 0 0 150px #03e9f4;
+    }
+}
+
+/* Media query para pantallas menores a 860px */
+@media (max-width: 860px) {
+    .Button-call {
+        padding: 15px 20px; /* Reduce más el padding */
+        font-size: 0.8rem; /* Reduce aún más el tamaño de la fuente */
+        letter-spacing: 2px; /* Reduce el espacio entre letras */
+    }
+
+    .Button-call:hover {
+        box-shadow: 0 0 3px #03e9f4, 0 0 15px #03e9f4, 0 0 30px #03e9f4, 0 0 100px #03e9f4;
+    }
 }

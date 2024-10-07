@@ -5,7 +5,7 @@ import './microphoneToggleButton.css'
 const MicrophoneToggleButton = ({ isMicActive, toggleMicrophone }) => {
     return (
         <button onClick={toggleMicrophone} className='Button-videocall-microphone'>
-            {isMicActive ? <FaMicrophone size={24} color="red" /> : <FaMicrophoneSlash size={24} color="white"/>}
+            {isMicActive ? <FaMicrophoneSlash size={24} color="red" /> : <FaMicrophone size={24} color="white"/>}
         </button>
     );
 };
