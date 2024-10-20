@@ -46,7 +46,7 @@ const DisplayButtons = () => {
         if (redirectToRoom && roomID) {
             // Agregar un pequeño retraso de 1 segundo antes de redirigir
             const timer = setTimeout(() => {
-                navigate(`/videollamada/${roomID}`); // Redirigir usando useNavigate
+                navigate(`/livingroom/${roomID}`); // Redirigir usando useNavigate
             }, 1000); // 1000 milisegundos = 1 segundo
 
             return () => clearTimeout(timer); // Limpiar el temporizador si el componente se desmonta

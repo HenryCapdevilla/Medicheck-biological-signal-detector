@@ -1,0 +1,161 @@
+.video-container {
+    width: 95%;
+    height: 95%;
+    margin-left: 2%;
+    display: flex;
+    position: relative; /* Necesario para posicionar elementos hijos absolutamente */
+}
+
+.video-container .video-Self {
+    width: 100%;
+    height: 100%;
+    background: rgb(99, 99, 99);
+    border-radius: 1%;
+    position: relative; /* Para centrar el texto dentro de este contenedor */
+}
+
+/* Texto centrado en el contenedor cuando la cámara está desactivada */
+.Camera-off-text {
+    color: white;
+    font-size: 30px;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: absolute; /* Usamos posición absoluta para centrar el texto */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centramos el elemento usando transform */
+    width: 100%; /* Opcional: asegura que el texto ocupe todo el ancho del contenedor */
+    height: auto;
+}
+
+/* Ajustamos el tamaño de fuente para pantallas pequeñas */
+@media (max-width: 768px) {
+    .Camera-off-text {
+        font-size: 20px; /* Ajusta el tamaño de fuente en pantallas más pequeñas */
+    }
+}
+
+/* Si la clase signal-active está presente, puedes ajustar el comportamiento */
+.Camera-off-text.signal-active {
+    /* Puedes agregar estilos personalizados cuando esta clase esté activa */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Mantiene la centralización cuando está activo */
+}
+
+/* Estilo específico cuando signal-active está activo */
+.display-buttons.signal-active {
+    bottom: 10%; /* Modifica la posición desde el borde inferior */
+    left: 31%; /* Sigue centrado horizontalmente */
+    transform: translateX(-50%); /* Mantén la centralización */
+    width: 26%; /* Ajusta el ancho de los botones */
+    height: 70px;
+    display: flex;
+    justify-content: space-evenly; /* Distribuye uniformemente los botones */
+    z-index: 10;
+}
+
+.RemoteUser{
+    background-color: aqua;
+    width: 25%;
+    height: 25%;
+    z-index: 8;
+    top: -50%;
+    right: -56%;
+    transform: translate(50%,50%);
+    display: flex;
+    position: relative;
+}
+
+.display-buttons {
+    position: absolute;
+    bottom: 12%; /* Ajusta la distancia desde el borde inferior */
+    left: 50%; /* Centra horizontalmente respecto al contenedor */
+    transform: translateX(-54%); /* Centra en relación al 50% del ancho del contenedor */
+    width: 26%; /* Ajusta el ancho de los botones */
+    height: 70px;
+    display: flex;
+    justify-content: space-evenly; /* Distribuye uniformemente los botones */
+    z-index: 10;
+}
+
+/* Ajuste en pantallas más pequeñas */
+@media (max-width: 768px) {
+    .display-buttons {
+        width: 200px; /* Reduce el ancho de los botones en pantallas más pequeñas */
+        bottom: 10%; /* Aumenta la distancia desde el borde inferior */
+    }
+
+    .display-buttons.signal-active {
+        width: 180px; /* Aún más pequeño cuando signal-active está activo */
+        bottom: 15%; /* Ajusta la posición desde el borde inferior */
+    }
+}
+
+
+/* videocallContent.css */
+
+.VideoCall-wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.Signal-data {
+    flex: 0.39 1 0;
+    align-self: flex-end;
+    border: 2px solid #ccc;
+    background-color: #1a1a1a;
+    border-radius: 10px;
+    transition: all 0.5s ease;
+    height: 50vh;
+    color: #ffffff;
+    margin-right: 20px;
+    position: relative;
+    display: flex; /* Añade flexbox al contenedor principal */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    text-align: center; /* Opcional: alinea el texto en el centro */
+}
+.measurements {
+    display: flex;
+    flex-direction: column; /* Los elementos se apilan verticalmente */
+    justify-content: center; /* Centra verticalmente el contenido */
+    align-items: initial; /* Centra horizontalmente el contenido */
+}
+.measurements p {
+    font-size: 25px;
+    margin: 10px 0;
+    display: flex;
+    align-items: center; /* Alinea los íconos con el texto */
+}
+.measurements .icon-heart {
+    margin-right: 10px;
+    color: red;
+}
+.measurements .icon-lungs {
+    margin-right: 10px;
+    color: blue;
+}
+.VideoCall-content {
+    flex: 1;
+    margin-right: 20px; /* Añadimos margen entre VideoCall y Signal */
+}
+
+/* Estilos del botón de señal */
+.signal-button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.signal-icon {
+    width: 24px;
+    height: 24px;
+}

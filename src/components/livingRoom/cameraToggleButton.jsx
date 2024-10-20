@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaVideo, FaVideoSlash } from 'react-icons/fa'; // Importa los íconos de cámara
-import './cameraToggleButton.css'
+import './cameraToggleButton.css';
 
 const CameraToggleButton = ({ isCameraActive, toggleCamera }) => {
     return (
@@ -11,4 +11,3 @@ const CameraToggleButton = ({ isCameraActive, toggleCamera }) => {
 };
 
 export default CameraToggleButton;
-

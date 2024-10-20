@@ -1,45 +1,14 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useContext, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { VideoContext } from '../../context/videoProvider';
 import CameraToggleButton from './cameraToggleButton';
 import MicrophoneToggleButton from './microphoneToggleButton';
 import './userCamaraContainer.css';
-import JoinToggleButton from './joinToggleButton';
 
 const ButtonCamera = () => {
-    const [isCameraActive, setIsCameraActive] = useState(false);
-    const [isMicActive, setIsMicActive] = useState(false);
-    const videoRef = useRef(null);
-
-    const startStream = async (camAllowed, micAllowed) => {
-        try {
-            const mediaConstraints = {
-                video: camAllowed ? true : false,
-                audio: micAllowed ? true : false
-            };
-            const stream = await navigator.mediaDevices.getUserMedia(mediaConstraints);
-            if (videoRef.current) {
-                videoRef.current.srcObject = stream;
-            }
-        } catch (error) {
-            console.error('Error al acceder a la cámara o el micrófono:', error);
-        }
-    };
-
-    const stopStream = () => {
-        if (videoRef.current && videoRef.current.srcObject) {
-            let stream = videoRef.current.srcObject;
-            let tracks = stream.getTracks();
-            tracks.forEach(track => track.stop());
-            videoRef.current.srcObject = null;
-        }
-    };
-
-    const toggleCamera = () => {
-        setIsCameraActive(!isCameraActive);
-    };
-
-    const toggleMicrophone = () => {
-        setIsMicActive(!isMicActive);
-    };
+    const { roomID } = useParams(); 
+    const navigate = useNavigate(); 
+    const { isCameraActive, isMicActive, toggleCamera, toggleMicrophone, videoRef, startStream, stopStream } = useContext(VideoContext);
 
     useEffect(() => {
         if (isCameraActive || isMicActive) {
@@ -48,9 +17,12 @@ const ButtonCamera = () => {
             stopStream();
         }
 
-        // Cleanup: Detén el stream cuando el componente se desmonte
         return () => stopStream();
-    }, [isCameraActive, isMicActive]);
+    }, [isCameraActive, isMicActive, startStream, stopStream]);
+
+    const joinCall = () => {
+        navigate(`/videocall/${roomID}`);
+    };
 
     return (
         <div className="User-Content">
@@ -59,24 +31,25 @@ const ButtonCamera = () => {
                     {!isCameraActive && <h1 className="camera-off-text">La cámara está desactivada</h1>}
                     <video ref={videoRef} className="video-self" autoPlay muted playsInline></video>
                     <div className="Display-buttons">
-                    <div className='Background-Display-Buttons'>
-                        <CameraToggleButton
-                            isCameraActive={isCameraActive}
-                            toggleCamera={toggleCamera}
-                        />
-                        <MicrophoneToggleButton
-                            isMicActive={isMicActive}
-                            toggleMicrophone={toggleMicrophone}
-                        />
-                    </div>
+                        <div className='Background-Display-Buttons'>
+                            <CameraToggleButton
+                                isCameraActive={isCameraActive}
+                                toggleCamera={toggleCamera}
+                            />
+                            <MicrophoneToggleButton
+                                isMicActive={isMicActive}
+                                toggleMicrophone={toggleMicrophone}
+                            />
+                        </div>
                     </div>
                 </div>
                 <div className='user-input-videocall'>
-                        <h1 className="text-general">Ya puedes ingresar a la reunión</h1>
-                        <JoinToggleButton></JoinToggleButton>
+                    <h1 className="text-general">Ya puedes ingresar a la reunión</h1>
+                    <button onClick={joinCall} className="join-call-button">Unirse a la Videollamada</button>
+                    <h1 className="text-general">ROOM ID: {roomID} </h1>
                 </div>
             </div>
-                <h1 className="footer-disclamer">Esta reunión está encriptada en la nube.</h1>
+            <h1 className="footer-disclamer">Esta reunión está encriptada en la nube.</h1>
         </div>
     );
 };

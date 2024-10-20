@@ -1,0 +1,21 @@
+.Button-videocall-record{
+    position: relative;
+    display: inline-block;
+    padding: 15px 20px;
+    color: #ffffff;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: 0.5s;
+    letter-spacing: 4px;
+    overflow: hidden;
+    background: none;
+    border-radius: 50%;
+}
+
+.Button-videocall-record:hover{
+    background: #b9b9b99f;
+    color: #ffffff;
+    -webkit-box-reflect:below 1px linear-gradient(transparent, #0005);
+    border: 2px solid #ffffff; /* Crear el borde blanco */
+    font-weight: bold;
+}

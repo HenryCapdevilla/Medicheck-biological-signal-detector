@@ -34,7 +34,7 @@ const CrearNuevoBoton = (props) => {
             <span></span>
             <span></span>
             {props.redirect && props.id ? (
-                <Link to={`/videollamada/${props.id}`}>
+                <Link to={`/livingroom/${props.id}`}>
                     {icon && <FontAwesomeIcon icon={icon} />} {/* Renderiza el icono si existe */}
                     {props.title}
                 </Link>
