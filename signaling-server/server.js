@@ -1,82 +1,91 @@
-const WebSocket = require('ws');
-const server = new WebSocket.Server({ port: 8080 });
-const rooms = {};  // Aquí se almacenarán los usuarios de cada sala
-const waitingRooms = {};  // Usuarios que están en la sala de espera
+const express = require('express');
+const http = require('http'); // Cambia https por http si no tienes SSL configurado
+const { Server } = require('socket.io');
+const cors = require('cors');
+const moment = require('moment');
 
-server.on('connection', (ws) => {
-    ws.on('message', (message) => {
-    const data = JSON.parse(message);
+const app = express();
+const server = http.createServer(app); // Si no tienes un certificado SSL, usa http
 
-    // eslint-disable-next-line default-case
-    switch (data.type) {
-        case 'createRoom': {
-            const roomId = data.roomId;
-            if (!rooms[roomId]) {
-            rooms[roomId] = { participants: [], inCall: [] };
-            waitingRooms[roomId] = [];
-            }
-            waitingRooms[roomId].push(ws);
-            break;
-        }
-        case 'joinRoom': {
-            const roomId = data.roomId;
-            if (waitingRooms[roomId]) {
-                waitingRooms[roomId].push(ws);
-            } else {
-            ws.send(JSON.stringify({ type: 'error', message: 'Room not found' }));
-            }
-            break;
-        }
-        case 'enterCall': {
-            const roomId = data.roomId;
-            if (waitingRooms[roomId]) {
-                rooms[roomId].inCall.push(ws);  // Mover a la sala de videollamada
-                waitingRooms[roomId] = waitingRooms[roomId].filter(client => client !== ws);
-                if (rooms[roomId].inCall.length >= 2) {
-                    // Notificar que la videollamada puede comenzar
-                    rooms[roomId].inCall.forEach(client => {
-                    client.send(JSON.stringify({ type: 'readyForCall', roomId }));
-                    });
-                }
-            }
-            break;
-        }
-        case 'offer': {
-            const { roomId, offer } = data;
-            rooms[roomId].inCall.forEach(client => {
-            if (client !== ws && client.readyState === WebSocket.OPEN) {
-                client.send(JSON.stringify({ type: 'offer', offer }));
-            }
-            });
-            break;
-        }
-        case 'answer': {
-            const { roomId, answer } = data;
-            rooms[roomId].inCall.forEach(client => {
-            if (client !== ws && client.readyState === WebSocket.OPEN) {
-                client.send(JSON.stringify({ type: 'answer', answer }));
-            }
-            });
-            break;
-        }
-        case 'candidate': {
-            const { roomId, candidate } = data;
-            rooms[roomId].inCall.forEach(client => {
-            if (client !== ws && client.readyState === WebSocket.OPEN) {
-                client.send(JSON.stringify({ type: 'candidate', candidate }));
-            }
-            });
-            break;
-        }
+// Configurar CORS en Express
+app.use(cors({
+    origin: 'https://localhost:3000', // Cambia esto al origen de tu cliente
+    methods: ['GET', 'POST'],
+    credentials: true
+}));
+
+
+let rooms = {};
+let socketroom = {};
+let micSocket = {};
+let videoSocket = {};
+
+// Configurar CORS en Socket.IO
+const io = new Server(server, {
+    cors: {
+        origin: 'https://localhost:3000', // Cambia esto al origen de tu cliente
+        methods: ['GET', 'POST'],
+        credentials: true
     }
 });
 
-    ws.on('close', () => {
-        for (const roomId in waitingRooms) {
-            waitingRooms[roomId] = waitingRooms[roomId].filter(client => client !== ws);
+io.on('connection', (socket) => {
+    console.log('Usuario conectado:', socket.id);
+
+    socket.on('join-room', (roomID) => {
+        socketroom[socket.id] = roomID;
+        micSocket[socket.id] = 'on';
+        videoSocket[socket.id] = 'on';
+        socket.join(roomID);
+        
+        // Asegúrate de inicializar la sala si no existe
+        if (!rooms[roomID]) {
+            rooms[roomID] = []; // Inicializa el array para la sala
         }
-        for (const roomId in rooms) {
-            rooms[roomId].inCall = rooms[roomId].inCall.filter(client => client !== ws);
-            }
-        });
+    
+        console.log(`Usuario ${socket.id} se unió a la sala: ${roomID}`);
+        console.log(rooms[roomID]);
+        console.log(rooms[roomID].length);
+        
+        // Agregar el socket.id a la sala
+        rooms[roomID].push(socket.id);
+    
+        if (rooms[roomID].length > 1) { // Cambiar a > 1 para verificar si hay más usuarios
+            socket.to(roomID).emit('user-connected', socket.id); // Emitir evento a los demás usuarios
+            console.log(`[${moment().format("h:mm a")}] ${socket.id} joined the room.`);
+            io.to(socket.id).emit('join room', rooms[roomID].filter(pid => pid !== socket.id), socket.id, micSocket, videoSocket);
+        } else {
+            io.to(socket.id).emit('join room', null, null, null, null); // Emitir solo al usuario si es el primero
+        }
+    });
+    
+    socket.on('offer', (offer, userId) => {
+        socket.to(userId).emit('offer', offer, socket.id);
+    });
+
+    socket.on('answer', (answer, userId) => {
+        socket.to(userId).emit('answer', answer, socket.id);
+    });
+
+    socket.on('ice-candidate', (candidate, userId) => {
+        socket.to(userId).emit('ice-candidate', candidate, socket.id);
+    });
+
+    socket.on('disconnect', (roomID) => {
+        socket.to(roomID).emit('user-disconnected', socket.id);
+    });
+
+    socket.on('hang-up', (roomID) => {
+        // Remover el socket.id de la sala
+        rooms[roomID] = rooms[roomID].filter(id => id !== socket.id);
+        console.log(`[${moment().format("h:mm a")}] ${socket.id} leave the room.`);
+        console.log("Número de usuarios conectados", rooms[roomID].length);
+        // Emitir el evento de desconexión a los demás usuarios en la sala
+        socket.to(roomID).emit('user-disconnected', socket.id);
+    });
+});
+
+const PORT = process.env.PORT || 8080;
+server.listen(PORT, () => {
+    console.log(`Servidor escuchando en el puerto ${PORT}`);
 });

@@ -10,48 +10,59 @@ export const VideoProvider = ({ children }) => {
     const videoRef = useRef(null);
 
     const startStream = async (camAllowed, micAllowed) => {
+    
         try {
             const mediaConstraints = {
-                video: camAllowed ? true : false,
-                audio: micAllowed ? true : false
+                video: camAllowed, // Activar la cámara si camAllowed es verdadero
+                audio: micAllowed // Activar el micrófono según micAllowed
             };
+            
             const stream = await navigator.mediaDevices.getUserMedia(mediaConstraints);
+            
             if (videoRef.current) {
                 videoRef.current.srcObject = stream;
             }
         } catch (error) {
             console.error('Error al acceder a la cámara o el micrófono:', error);
+            alert("No se pudo acceder a la cámara o al micrófono. Asegúrate de que no haya otra aplicación usándolos y que se te haya dado permiso.");
         }
     };
+    
 
     const stopStream = () => {
         if (videoRef.current && videoRef.current.srcObject) {
             let stream = videoRef.current.srcObject;
             let tracks = stream.getTracks();
-            tracks.forEach(track => track.stop());
-            videoRef.current.srcObject = null;
+            tracks.forEach(track => {
+                track.stop(); // Detiene el track
+            });
+            videoRef.current.srcObject = null; // Limpia el srcObject
         }
     };
-
+    
     const toggleCamera = () => {
         setIsCameraActive(prev => {
             const newState = !prev;
             if (newState) {
-                startStream(true, isMicActive); // Iniciar la cámara
+                alert("La cámara se está encendiendo..."); // Alerta al encender
+                setTimeout(() => {
+                    startStream(true, isMicActive); // Reiniciar el stream después de un pequeño retraso
+                }, 1500); // 1500 ms de retraso
+                stopStream();
             } else {
                 stopStream(); // Detener el stream si la cámara se apaga
             }
             return newState;
         });
     };
-
+    
     const toggleMicrophone = () => {
         setIsMicActive(prev => {
-            const newState = !prev; // Invierte el estado actual del micrófono (encendido/apagado)
-    
+            const newState = !prev; // Invierte el estado actual del micrófono
+
             if (videoRef.current && videoRef.current.srcObject) {
                 const audioTracks = videoRef.current.srcObject.getAudioTracks(); // Obtiene las pistas de audio
-    
+
                 // Si el micrófono está encendido, activamos las pistas de audio
                 if (newState) {
                     audioTracks.forEach(track => track.enabled = true);
@@ -60,11 +71,10 @@ export const VideoProvider = ({ children }) => {
                     audioTracks.forEach(track => track.enabled = false);
                 }
             }
-    
+
             return newState; // Retorna el nuevo estado para actualizar `isMicActive`
         });
     };
-    
 
     return (
         <VideoContext.Provider value={{

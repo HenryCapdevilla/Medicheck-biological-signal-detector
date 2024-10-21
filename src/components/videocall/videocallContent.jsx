@@ -1,19 +1,43 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState} from 'react';
 import { VideoContext } from '../../context/videoProvider';
 import CameraToggleButton from '../livingRoom/cameraToggleButton';
 import MicrophoneToggleButton from '../livingRoom/microphoneToggleButton';
 import SignalToggleButton from './signalToggleButton';
 import VideoStream from './videoStreamUsers'; 
 import './videocallContent.css';
-
 import { FaHeartbeat, FaLungs } from 'react-icons/fa';  
 import RecordVideoToggleButton from './recordVideoUser';
+import useWebRTC from '../../helper/useWebRTC';
+import { useParams } from 'react-router-dom';
+import { io } from 'socket.io-client';
+import HangUpToggleButton from './hangupToggleButton';
+import HangUpButton from './hangupToggleButton';
 
 function VideocallContent() {
     const { isCameraActive, isMicActive, toggleCamera, toggleMicrophone, videoRef, startStream, stopStream } = useContext(VideoContext);
     
+    const [socket, setSocket] = useState(null);
     const [isSignalActive, setIsSignalActive] = useState(false);
-    const [heartRate, setHeartRate] = useState(null); // Estado para la frecuencia cardíaca
+    const [heartRate, setHeartRate] = useState(null);
+    const { roomID } = useParams(); // Obtenemos roomID de la URL
+    const { remoteVideoRefs } = useWebRTC(socket, roomID, videoRef); // Modifica el hook para aceptar el socket y roomID
+    useEffect(() => {
+        const newSocket = io('http://localhost:8080'); // Usa http si no tienes SSL en tu servidor
+        setSocket(newSocket);
+    
+        newSocket.on('connect', () => {
+            console.log('Connected to WebSocket server');
+            newSocket.emit('join-room', roomID); // Únete a la sala
+        });
+    
+        newSocket.on('connect_error', (error) => {
+            console.error('Connection Error:', error);
+        });
+    
+        return () => {
+            newSocket.disconnect();
+        };
+    }, [roomID]);
 
     useEffect(() => {
         if (isCameraActive || isMicActive) {
@@ -25,50 +49,57 @@ function VideocallContent() {
         return () => stopStream();
     }, [isCameraActive, isMicActive, startStream, stopStream]);
 
-    // Función que actualiza el estado cuando se activa/desactiva SignalToggleButton
     const toggleSignal = (isActive) => {
         setIsSignalActive(isActive);
     };
 
-    // Función para formatear el valor de heart_rate
     const formatHeartRate = (rate) => {
-        return Math.round(rate); // Redondea el valor al entero más cercano
+        return Math.round(rate);
     };
 
-    // Suponiendo que tienes una función para recibir el valor de heart_rate
     const handleHeartRateUpdate = (newHeartRate) => {
-        setHeartRate(formatHeartRate(newHeartRate)); // Formatear y establecer la nueva frecuencia cardíaca
+        setHeartRate(formatHeartRate(newHeartRate));
     };
 
     return (
         <div className={'VideoCall-wrapper'}>
-                <div className={`VideoCall-content ${isSignalActive ? 'signal-active' : ''}`}>
-                    <VideoStream 
-                        isCameraActive={isCameraActive} 
-                        videoRef={videoRef} 
-                        message="La cámara está desactivada" 
-                        isSignalActive={isSignalActive}
+            <div className={`VideoCall-content ${isSignalActive ? 'signal-active' : ''}`}>
+                <VideoStream 
+                    isCameraActive={isCameraActive} 
+                    videoRef={videoRef} 
+                    message="La cámara está desactivada" 
+                    isSignalActive={isSignalActive}
+                />
+                <div className={`RemoteUser VideoCall-content ${isSignalActive ? 'signal-active' : ''}`}>
+                    {Object.keys(remoteVideoRefs).map(userId => (
+                        <VideoStream 
+                            key={userId}
+                            isCameraActive={true} 
+                            videoRef={remoteVideoRefs[userId]} 
+                            message="Esperando conexión remota..." 
+                            isSignalActive={isSignalActive}
                         />
-                    <div className={`RemoteUser VideoCall-content ${isSignalActive ? 'signal-active' : ''}`}>
-                    </div>
-                    <div className={`display-buttons ${isSignalActive ? 'signal-active' : ''}`}>
-                        <CameraToggleButton isCameraActive={isCameraActive} toggleCamera={toggleCamera} />
-                        <MicrophoneToggleButton isMicActive={isMicActive} toggleMicrophone={toggleMicrophone} />
-                        <RecordVideoToggleButton onHeartRateUpdate={handleHeartRateUpdate} /> {/* Pasar la función para actualizar la frecuencia cardíaca */}
-                        <SignalToggleButton toggleSignal={toggleSignal} />
+                    ))}
+                </div>
+                <div className={`display-buttons ${isSignalActive ? 'signal-active' : ''}`}>
+                    <CameraToggleButton isCameraActive={isCameraActive} toggleCamera={toggleCamera} />
+                    <MicrophoneToggleButton isMicActive={isMicActive} toggleMicrophone={toggleMicrophone} />
+                    <RecordVideoToggleButton onHeartRateUpdate={handleHeartRateUpdate} />
+                    <SignalToggleButton toggleSignal={toggleSignal} />
+                    <HangUpButton socket={socket} roomID={roomID} />
+                </div>
+            </div>
+
+            {isSignalActive && (
+                <div className='Signal-data'>
+                    <div className="measurements">
+                        <p><FaHeartbeat className="icon-heart" /> Frecuencia cardíaca: {heartRate} bpm</p>
+                        <p><FaLungs className="icon-lungs" /> Oxígeno en sangre: 98%</p>
                     </div>
                 </div>
-
-                {isSignalActive && ( // Mostrar solo si isSignalActive y heartRate están disponibles
-                    <div className='Signal-data'>
-                        <div className="measurements">
-                            <p><FaHeartbeat className="icon-heart" /> Frecuencia cardíaca: {heartRate} bpm</p>
-                            <p><FaLungs className="icon-lungs" /> Oxígeno en sangre: 98%</p>
-                        </div>
-                    </div>
-                )}
+            )}
         </div>
     );
 }
 
-export default VideocallContent
+export default VideocallContent;

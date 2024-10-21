@@ -4,6 +4,7 @@ import { VideoContext } from '../../context/videoProvider';
 import CameraToggleButton from './cameraToggleButton';
 import MicrophoneToggleButton from './microphoneToggleButton';
 import './userCamaraContainer.css';
+import HangUpToggleButton from '../videocall/hangupToggleButton';
 
 const ButtonCamera = () => {
     const { roomID } = useParams(); 
