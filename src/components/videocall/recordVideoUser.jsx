@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { FaStop } from 'react-icons/fa'; // Para los iconos de grabación y detener
 import './recordVideoUser.css';
 
-const VideoRecordButton = ({ onHeartRateUpdate }) => { // Recibe la función como prop
+const VideoRecordButton = ({ onHeartRateUpdate, onSpo2RateUpdate }) => { // Recibe la función como prop
     const [isRecording, setIsRecording] = useState(false); // Estado de grabación
     const mediaRecorderRef = useRef(null); // Referencia para MediaRecorder
     const recordedChunks = useRef([]); // Fragmentos del video grabado
@@ -62,6 +62,13 @@ const VideoRecordButton = ({ onHeartRateUpdate }) => { // Recibe la función com
                     if (data.heart_rate) {
                         console.log('Video subido y procesado:', data.heart_rate);
                         onHeartRateUpdate(data.heart_rate); // Llama a la función para actualizar el heartRate
+                    } else {
+                        console.error('Error al procesar el video');
+                        console.error(data);
+                    }
+                    if (data.spo2_rate) {
+                        console.log('Video subido y procesado:', data.spo2_rate);
+                        onSpo2RateUpdate(data.spo2_rate); // Llama a la función para actualizar el heartRate
                     } else {
                         console.error('Error al procesar el video');
                         console.error(data);

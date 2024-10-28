@@ -10,7 +10,6 @@ import RecordVideoToggleButton from './recordVideoUser';
 import useWebRTC from '../../helper/useWebRTC';
 import { useParams } from 'react-router-dom';
 import { io } from 'socket.io-client';
-import HangUpToggleButton from './hangupToggleButton';
 import HangUpButton from './hangupToggleButton';
 
 function VideocallContent() {
@@ -19,6 +18,7 @@ function VideocallContent() {
     const [socket, setSocket] = useState(null);
     const [isSignalActive, setIsSignalActive] = useState(false);
     const [heartRate, setHeartRate] = useState(null);
+    const [sp02, setSp02] = useState(null);
     const { roomID } = useParams(); // Obtenemos roomID de la URL
     const { remoteVideoRefs } = useWebRTC(socket, roomID, videoRef); // Modifica el hook para aceptar el socket y roomID
     useEffect(() => {
@@ -61,6 +61,10 @@ function VideocallContent() {
         setHeartRate(formatHeartRate(newHeartRate));
     };
 
+    const handleSpo2Update = (newSp02) => {
+        setSp02(formatHeartRate(newSp02));
+    };
+
     return (
         <div className={'VideoCall-wrapper'}>
             <div className={`VideoCall-content ${isSignalActive ? 'signal-active' : ''}`}>
@@ -84,7 +88,7 @@ function VideocallContent() {
                 <div className={`display-buttons ${isSignalActive ? 'signal-active' : ''}`}>
                     <CameraToggleButton isCameraActive={isCameraActive} toggleCamera={toggleCamera} />
                     <MicrophoneToggleButton isMicActive={isMicActive} toggleMicrophone={toggleMicrophone} />
-                    <RecordVideoToggleButton onHeartRateUpdate={handleHeartRateUpdate} />
+                    <RecordVideoToggleButton onHeartRateUpdate={handleHeartRateUpdate} onSpo2RateUpdate={handleSpo2Update} />
                     <SignalToggleButton toggleSignal={toggleSignal} />
                     <HangUpButton socket={socket} roomID={roomID} />
                 </div>
@@ -94,7 +98,7 @@ function VideocallContent() {
                 <div className='Signal-data'>
                     <div className="measurements">
                         <p><FaHeartbeat className="icon-heart" /> Frecuencia cardíaca: {heartRate} bpm</p>
-                        <p><FaLungs className="icon-lungs" /> Oxígeno en sangre: 98%</p>
+                        <p><FaLungs className="icon-lungs" /> Oxígeno en sangre: {sp02} %</p>
                     </div>
                 </div>
             )}

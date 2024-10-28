@@ -1,2 +1,8 @@
 # Ignorar la carpeta node_modules
 node_modules/
+Signos_Vitales/.venv
+Signos_Vitales/__pycache__
+Signos_Vitales/output_masks
+Signos_Vitales/output_frames
+Signos_Vitales/rppg_json_2.py
+Signos_Vitales/rppg_json.py
