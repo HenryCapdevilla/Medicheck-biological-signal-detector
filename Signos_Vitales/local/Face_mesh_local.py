@@ -66,7 +66,7 @@ class ROIDetector:
         """
         self.face_mesh.close()
 
-def visualize_roi(video_source=0):
+def visualize_roi(video_source=1):
     """Función para capturar video y visualizar la máscara ROI.
     """
     cap = cv2.VideoCapture(video_source)

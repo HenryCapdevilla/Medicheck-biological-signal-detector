@@ -44,7 +44,7 @@ class RPPG:
         hr = 60 / avg_interval if avg_interval else 0
 
         # SpO₂ calculation
-        filtered_red = self.butter_bandpass_filter(self.red_intensity, lowcut=0.5, highcut=2.0, fs=fps)
+        filtered_red = self.butter_bandpass_filter(self.red_intensity, lowcut=0.7, highcut=1.5, fs=fps)
         filtered_green = filtered_intensity_values
 
         ac_red = np.std(filtered_red)
@@ -53,7 +53,7 @@ class RPPG:
         dc_green = np.mean(self.signal)
 
         r = (ac_red / dc_red) / (ac_green / dc_green) if dc_red != 0 and dc_green != 0 else 0
-        spo2 = 110 - 25 * r if r != 0 else 0
+        spo2 = 110 - 13.5 * r if r != 0 else 0
 
         return hr, spo2, filtered_intensity_values, peaks, filtered_red, filtered_green
 

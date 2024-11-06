@@ -1,29 +1,37 @@
 import './App.css';
 import Navbar from './components/home/navbar';
-import { BrowserRouter, Route, Routes, useLocation, matchPath } from 'react-router-dom';
+import { BrowserRouter, matchPath, Route, Routes, useLocation } from 'react-router-dom';
 import Divbanner from './components/home/divbanner';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import UserCamaraContainer from './components/livingRoom/userCamaraContainer';
 import VideocallContent from './components/videocall/videocallContent';
-
+import RegisterPage from './pages/register/RegisterPage';
+import { AuthProvider } from './context/AuthContext';
+import LoginPage from './pages/login/LoginPage'
+import ProtectedRoute from './ProtectedRoute';
+import Dashboard from './components/dashboard/Dashboard';
+import UserProfile from './components/profile/UserProfile';
+import { VideoProvider } from './context/videoProvider';
 function AppContent() {
-  const location = useLocation(); // Obtiene la ubicación actual de la ruta
+  const location = useLocation(); // Ahora se usa dentro de un componente envuelto por BrowserRouter
 
-  // Verifica si la ruta actual coincide con "/videocall/:roomID"
   const isVideocallPage = matchPath('/videocall/:roomID', location.pathname);
-
-  // Determina si se debe mostrar el banner: 
-  // El banner no se muestra en "/videocall/:roomID", pero sí en otras rutas
   const shouldShowBanner = !isVideocallPage;
 
   return (
     <>
-      {/* Mostrar Divbanner si no estamos en /videocall/:roomID */}
       {shouldShowBanner && <Navbar />}
       <Routes>
         <Route path="/" element={<Divbanner />} />
-        <Route path="/livingroom/:roomID" element={<UserCamaraContainer />} />
-        <Route path="/videocall/:roomID" element={<VideocallContent />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/login" element={<LoginPage />} />
+
+        <Route element={<ProtectedRoute/>}>
+          <Route path="/livingroom/:roomID" element={<UserCamaraContainer />} />
+          <Route path="/videocall/:roomID" element={<VideocallContent />} />
+          <Route path='/dashboard' element={<Dashboard/>}></Route>
+          <Route path='/Profile' element={<UserProfile/>}></Route>
+        </Route>
       </Routes>
     </>
   );
@@ -32,7 +40,11 @@ function AppContent() {
 function App() {
   return (
     <BrowserRouter>
-      <AppContent />
+      <AuthProvider>
+        <VideoProvider>
+          <AppContent />
+        </VideoProvider>
+      </AuthProvider>
     </BrowserRouter>
   );
 }

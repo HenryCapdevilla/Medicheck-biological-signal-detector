@@ -19,7 +19,7 @@ const ButtonCamera = () => {
         }
 
         return () => stopStream();
-    }, [isCameraActive, isMicActive, startStream, stopStream]);
+    }, [startStream, stopStream]);
 
     const joinCall = () => {
         navigate(`/videocall/${roomID}`);

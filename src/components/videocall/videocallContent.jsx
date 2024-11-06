@@ -11,6 +11,7 @@ import useWebRTC from '../../helper/useWebRTC';
 import { useParams } from 'react-router-dom';
 import { io } from 'socket.io-client';
 import HangUpButton from './hangupToggleButton';
+import ClinicalHistoryButton from './clinicalHistoryButton';
 
 function VideocallContent() {
     const { isCameraActive, isMicActive, toggleCamera, toggleMicrophone, videoRef, startStream, stopStream } = useContext(VideoContext);
@@ -91,6 +92,7 @@ function VideocallContent() {
                     <RecordVideoToggleButton onHeartRateUpdate={handleHeartRateUpdate} onSpo2RateUpdate={handleSpo2Update} />
                     <SignalToggleButton toggleSignal={toggleSignal} />
                     <HangUpButton socket={socket} roomID={roomID} />
+                    <ClinicalHistoryButton />
                 </div>
             </div>
 

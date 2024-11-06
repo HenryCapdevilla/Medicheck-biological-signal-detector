@@ -5,11 +5,8 @@ import Login from './login';
 import SocialMediaLogo from './socialMediaLogo';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
-import { useAuth0 } from '@auth0/auth0-react';
-import Profile from './profile';
 
 function Navbar() {
-  const { isAuthenticated } = useAuth0();
   const [isMenuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -27,12 +24,12 @@ function Navbar() {
       </div>
       <ul className={`navbar ${isMenuOpen ? 'active' : ''}`}>
         <li><Link to="/">Inicio</Link></li>
-        <li><Link to="#">Información</Link></li>
-        <li><Link to="#">Contactos</Link></li>
+        <li><Link to="/Profile">Perfil</Link></li>
+        <li><Link to="/dashboard">Dashboard</Link></li>
         <li><Link to="/videollamada">Conéctate</Link></li>
         <SocialMediaLogo src="./images/Github.svg"/>
         <SocialMediaLogo src="./images/Linkedin.svg"/>
-        {isAuthenticated ? <Profile/> : <Login/>}
+        <Login/>
       </ul>
     </div>
   );

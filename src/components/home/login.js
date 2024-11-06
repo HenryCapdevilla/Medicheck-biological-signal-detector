@@ -1,15 +1,19 @@
-import React from 'react'
-import './login.css'
-import { useAuth0 } from "@auth0/auth0-react";
+import React from 'react';
+import './login.css';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-    const { loginWithRedirect } = useAuth0();
-    
+    const navigate = useNavigate();
+
+    const handleRedirect = () => {
+        navigate('/register'); // Ajusta la ruta según tu configuración de rutas
+    };
+
     return (
         <div className='Button_login'>
-            <button onClick={() => loginWithRedirect()}>Iniciar Sesión</button>
+            <button onClick={handleRedirect}>Ir a Registro</button>
         </div>
-    )
+    );
 };
 
-export default Login
+export default Login;
