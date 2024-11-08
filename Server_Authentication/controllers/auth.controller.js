@@ -1,4 +1,5 @@
 import User from '../models/user.model.js';
+import Whitelist from '../models/MedicoWhitelist.js'; // Asegúrate de importar el modelo de la whitelist
 import bcrypt from 'bcryptjs';
 import { createAccessToken } from '../libs/jwt.js';
 import jwt from 'jsonwebtoken';
@@ -7,13 +8,27 @@ import { TOKEN_SECRET } from '../src/config.js';
 // Controlador para el registro de usuarios
 export const register = async (req, res) => {
     // Extrae los datos de la solicitud
-    const { email, password, username, role } = req.body;
+    const { email, password, username, nip } = req.body;
     try {
         // Verifica si el correo ya está registrado
         const userFound = await User.findOne({ email });
         if (userFound)
             return res.status(400).json(['The email already exists']);
-        
+
+        // Verifica si el nombre de usuario ya está registrado
+        const usernameFound = await User.findOne({ username });
+        if (usernameFound)
+            return res.status(400).json(['The username already exists']);
+
+        // Verifica si la cédula (NIP) ya está registrada
+        const nipFound = await User.findOne({ nip });
+        if (nipFound)
+            return res.status(400).json(['The NIP already exists']);
+
+        // Verifica si el NIP está en la whitelist (solo médicos)
+        const isInWhitelist = await Whitelist.findOne({ nip });
+        const role = isInWhitelist ? 'medico' : 'paciente'; // Si está en la whitelist, es médico
+
         // Cifra la contraseña antes de almacenarla
         const passwordHash = await bcrypt.hash(password, 10);
 
@@ -22,7 +37,8 @@ export const register = async (req, res) => {
             username,
             email,
             password: passwordHash,
-            role, // Incluye el rol del usuario
+            nip, // Cédula
+						role, // Asignar el rol según la verificación de la whitelist
         });
 
         // Guarda el nuevo usuario en la base de datos
@@ -41,7 +57,8 @@ export const register = async (req, res) => {
             email: userSaved.email,
             createdAt: userSaved.createdAt,
             updatedAt: userSaved.updatedAt,
-            role: userSaved.role, // Incluye el rol en la respuesta
+            nip: userSaved.nip, // Incluye el # cédula en la respuesta
+						role: userSaved.role, // Incluye el rol en la respuesta
         });
     } catch (error) {
         // Manejo de errores
@@ -77,7 +94,8 @@ export const login = async (req, res) => {
             email: userFound.email,
             createdAt: userFound.createdAt,
             updatedAt: userFound.updatedAt,
-            role: userFound.role, // Incluye el rol en la respuesta
+            nip: userFound.nip, // Incluye el rol en la respuesta
+						role: userFound.role, // Incluye el rol en la respuesta
         });
     } catch (error) {
         // Manejo de errores
@@ -112,7 +130,8 @@ export const profile = async (req, res) => {
         email: userFound.email,
         createdAt: userFound.createdAt,  // Convierte a string ISO
         updatedAt: userFound.updatedAt,  // Convierte a string ISO
-        role: userFound.role, // Incluye el rol en la respuesta
+        nip: userFound.nip, // Incluye el rol en la respuesta
+				role: userFound.role, // Incluye el rol en la respuesta
     });
 };
 
@@ -141,7 +160,8 @@ export const verifyToken = async (req, res) => {
             email: userFound.email,
             createdAt: userFound.createdAt,
             updatedAt: userFound.updatedAt,
-            role: userFound.role, // Incluye el rol en la respuesta
+            nip: userFound.nip, // Incluye el rol en la respuesta
+						role: userFound.role, // Incluye el rol en la respuesta
         });
     });
 };

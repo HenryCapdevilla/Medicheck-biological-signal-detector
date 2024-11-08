@@ -24,9 +24,10 @@ const UserProfile = () => {
       <p><strong>ID:</strong> {user.id}</p>
       <p><strong>Username:</strong> {user.username}</p>
       <p><strong>Email:</strong> {user.email}</p>
-      <p><strong>Role:</strong> {user.role}</p>
+      <p><strong>Cédula ciudadana:</strong> {user.nip}</p>
       <p><strong>Created At:</strong> {createdAt}</p>
       <p><strong>Updated At:</strong> {updatedAt}</p>
+      <p><strong>Role:</strong> {user.role}</p>
     </div>
   );
 };

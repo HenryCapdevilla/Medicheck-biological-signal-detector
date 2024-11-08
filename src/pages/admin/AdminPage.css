@@ -1,0 +1,88 @@
+/* Contenedor principal */
+.admin-container {
+    width: 400px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  /* Títulos */
+  h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  h2 {
+    font-size: 20px;
+    color: #555;
+    margin-top: 30px;
+    margin-bottom: 15px;
+  }
+  
+  /* Input y botón para agregar NIP */
+  .admin-input {
+    width: calc(100% - 110px);
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-right: 10px;
+  }
+  
+  .admin-button {
+    padding: 8px 15px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .admin-button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Mensaje de feedback */
+  .message {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #007bff;
+  }
+  
+  /* Lista de NIPs */
+  .nip-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .nip-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 10px;
+    background-color: #f7f7f7;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 8px;
+  }
+  
+  /* Botón de eliminar */
+  .delete-button {
+    padding: 5px 10px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #dc3545;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .delete-button:hover {
+    background-color: #c82333;
+	}

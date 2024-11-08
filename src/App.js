@@ -12,6 +12,8 @@ import ProtectedRoute from './ProtectedRoute';
 import Dashboard from './components/dashboard/Dashboard';
 import UserProfile from './components/profile/UserProfile';
 import { VideoProvider } from './context/videoProvider';
+import AdminPage from './pages/admin/AdminPage';
+import ProtectedAdminRoute from './ProtectedAdminRoute';
 function AppContent() {
   const location = useLocation(); // Ahora se usa dentro de un componente envuelto por BrowserRouter
 
@@ -29,8 +31,11 @@ function AppContent() {
         <Route element={<ProtectedRoute/>}>
           <Route path="/livingroom/:roomID" element={<UserCamaraContainer />} />
           <Route path="/videocall/:roomID" element={<VideocallContent />} />
-          <Route path='/dashboard' element={<Dashboard/>}></Route>
-          <Route path='/Profile' element={<UserProfile/>}></Route>
+          <Route path="/dashboard" element={<Dashboard/>}></Route>
+          <Route path="/Profile" element={<UserProfile/>}></Route>
+          <Route element={<ProtectedAdminRoute/>}>
+            <Route path="/admin" element={<AdminPage/>}></Route>
+          </Route>
         </Route>
       </Routes>
     </>

@@ -1,17 +1,14 @@
 import { useForm } from "react-hook-form";
 import { useAuth } from "../../context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
-
+import Button from "../register/Button";
+import Character from "../register/Character.jsx"
 function LoginPage() {
     const { register, handleSubmit, formState: {errors}} = useForm();
     const { signin, errors: loginErrors } = useAuth();
-    const navigate = useNavigate(); // Inicializa el hook de navegación
 
     const onSubmit = async (data) => {
-        const success = await signin(data); // Captura el resultado
-        if (success) { // Redirige solo si el inicio de sesión fue exitoso
-            navigate("/"); // Redirige a la página de inicio
-        }
+        signin(data); // Captura el resultado
     };
 
     return (
@@ -20,6 +17,7 @@ function LoginPage() {
                 className="register-form"
                 onSubmit={handleSubmit(onSubmit)}
             >   
+                <Character />
                 {
                     loginErrors.map((error, i) => (
                         <div className="Error-1" key={i}>
@@ -33,7 +31,7 @@ function LoginPage() {
                 <input type="password" {...register("password", { required: true })} placeholder="Password" />
                 {errors.password && <p className="Error">Password is required</p>}
 
-                <button type="submit">Login</button>
+                <Button text="Login" />
 
                 <p className="redirect-link">
                     Don't have an account?&nbsp;<Link to="/register">Register</Link>

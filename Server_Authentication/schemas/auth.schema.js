@@ -25,9 +25,17 @@ export const registerSchema = z.object({
     }).regex(/^(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]+$/, {
         message: 'Password must contain at least one uppercase letter and one number'
     }),
-    role: z.enum(['medico', 'paciente'], {
-        required_error: 'Role is required'
-    }).default('paciente')
+    nip: z.string({
+        required_error: 'Cédula is required',  // Este mensaje solo se mostrará si el campo está vacío.
+    }).min(6, {
+        message: 'Cédula must be at least 6 digits'
+    }).max(10, {
+        message: 'Cédula must not exceed 10 digits'
+    }).refine(value => /^[0-9]+$/.test(value), {
+        message: 'Cédula can only contain numbers'  // Solo permite números
+    }).refine(value => !/[^\d]/.test(value), {
+        message: 'Cédula must not contain special characters or letters'  // No permite caracteres especiales ni letras
+    })
 });
 
 // Esquema para login con validaciones adicionales

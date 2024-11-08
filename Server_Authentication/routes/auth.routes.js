@@ -16,4 +16,6 @@ router.get("/profile", authRequired, profile);
 
 router.get("/verify", verifyToken);
 
+router.get("/admin", )
+
 export default router

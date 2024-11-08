@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { registerRequest, loginRequest, verifyTokenRequest } from '../api/auth.js';
+import { registerRequest, loginRequest, verifyTokenRequest, logoutRequest } from '../api/auth.js';
 import Cookies from 'js-cookie';
 
 export const AuthContext = createContext()
@@ -26,8 +26,13 @@ export const AuthProvider = ({ children }) => {
       setUser(res.data);
       setIsAuthenticated(true);
     } catch (error) {
-      console.log(error.response);
-      setErrors(error.response.data);
+      console.log(error.response.data);
+        if (Array.isArray(error.response.data)) {
+            console.log(error.response.data)
+            setErrors(error.response.data);
+        } else {
+            setErrors([error.response.data]); // Asegúrate de que sea un array
+        }
     }
   };
 
@@ -47,6 +52,24 @@ export const AuthProvider = ({ children }) => {
         return false; // Retorna false para indicar que hubo un error
     }
 };
+
+  // Función para cerrar sesión
+  const logout = async () => {
+    try {
+      const res = await logoutRequest();
+      if (res.status === 200) {
+        // Eliminar el token de las cookies
+        Cookies.remove("token");
+        setUser(null);
+        setIsAuthenticated(false);
+        console.log("Cierre de sesión exitoso");
+      } else {
+        console.log("Hubo un problema al cerrar sesión");
+      }
+    } catch (error) {
+      console.log("Error al cerrar sesión:", error);
+    }
+  };
 
 
   //Para eliminar los errores mostrados luego de 5 segundos
@@ -93,6 +116,7 @@ export const AuthProvider = ({ children }) => {
       value={{
         signup,
         signin,
+        logout,
         loading,
         user,
         isAuthenticated,
