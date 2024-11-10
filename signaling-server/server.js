@@ -9,7 +9,7 @@ const server = http.createServer(app); // Si no tienes un certificado SSL, usa h
 
 // Configurar CORS en Express
 app.use(cors({
-    origin: 'https://localhost:3000', // Cambia esto al origen de tu cliente
+    origin: 'http://localhost:3000', // Cambia esto al origen de tu cliente
     methods: ['GET', 'POST'],
     credentials: true
 }));
@@ -23,7 +23,7 @@ let videoSocket = {};
 // Configurar CORS en Socket.IO
 const io = new Server(server, {
     cors: {
-        origin: 'https://localhost:3000', // Cambia esto al origen de tu cliente
+        origin: 'http://localhost:3000', // Cambia esto al origen de tu cliente
         methods: ['GET', 'POST'],
         credentials: true
     }

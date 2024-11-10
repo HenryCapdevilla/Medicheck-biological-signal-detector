@@ -1,7 +1,7 @@
 import React from 'react'
 import './bannerText.css'
-import DisplayButtons from './displayButtons'
-const BannerText = ( {titulo, slogantext} ) => {
+import DisplayButtons from './displayButtonsdefault'
+const BannerTextdefault = ( {titulo, slogantext} ) => {
 
   return (
     <div className='header-txt'>
@@ -14,4 +14,4 @@ const BannerText = ( {titulo, slogantext} ) => {
   )
 }
 
-export default BannerText
+export default BannerTextdefault

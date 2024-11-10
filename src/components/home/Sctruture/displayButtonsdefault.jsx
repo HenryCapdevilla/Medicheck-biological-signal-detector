@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import CrearNuevoBoton from './Crear_boton';
+import CrearNuevoBoton from '../Buttons/Crear_boton';
 import './displayButtons.css';
 import { useNavigate } from 'react-router-dom'; // Importa useNavigate para redireccionar
 
-const DisplayButtons = () => {
+const DisplayButtonsdefault = () => {
     const [inputText, setInputText] = useState(''); // Estado para manejar el texto ingresado
     const [roomID, setRoomID] = useState(null); // Estado para almacenar el ID de la sala
     const [redirectToRoom, setRedirectToRoom] = useState(false); // Estado para manejar la redirección
@@ -84,4 +84,4 @@ const DisplayButtons = () => {
     );
 };
 
-export default DisplayButtons;
+export default DisplayButtonsdefault;

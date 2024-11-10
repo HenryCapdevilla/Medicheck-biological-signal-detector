@@ -38,7 +38,7 @@ export const register = async (req, res) => {
             email,
             password: passwordHash,
             nip, // Cédula
-						role, // Asignar el rol según la verificación de la whitelist
+			role, // Asignar el rol según la verificación de la whitelist
         });
 
         // Guarda el nuevo usuario en la base de datos

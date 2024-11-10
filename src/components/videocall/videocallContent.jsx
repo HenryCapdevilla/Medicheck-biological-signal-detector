@@ -12,10 +12,11 @@ import { useParams } from 'react-router-dom';
 import { io } from 'socket.io-client';
 import HangUpButton from './hangupToggleButton';
 import ClinicalHistoryButton from './clinicalHistoryButton';
+import { useAuth } from '../../context/AuthContext';
 
 function VideocallContent() {
     const { isCameraActive, isMicActive, toggleCamera, toggleMicrophone, videoRef, startStream, stopStream } = useContext(VideoContext);
-    
+    const { user } = useAuth();
     const [socket, setSocket] = useState(null);
     const [isSignalActive, setIsSignalActive] = useState(false);
     const [heartRate, setHeartRate] = useState(null);
@@ -89,10 +90,17 @@ function VideocallContent() {
                 <div className={`display-buttons ${isSignalActive ? 'signal-active' : ''}`}>
                     <CameraToggleButton isCameraActive={isCameraActive} toggleCamera={toggleCamera} />
                     <MicrophoneToggleButton isMicActive={isMicActive} toggleMicrophone={toggleMicrophone} />
-                    <RecordVideoToggleButton onHeartRateUpdate={handleHeartRateUpdate} onSpo2RateUpdate={handleSpo2Update} />
-                    <SignalToggleButton toggleSignal={toggleSignal} />
+                    
+                    {/* Mostrar estos botones solo si el rol es 'medico' o 'admin' */}
+                    {['medico', 'admin'].includes(user.role) && (
+                        <>
+                            <RecordVideoToggleButton onHeartRateUpdate={handleHeartRateUpdate} onSpo2RateUpdate={handleSpo2Update} />
+                            <SignalToggleButton toggleSignal={toggleSignal} />
+                            <ClinicalHistoryButton />
+                        </>
+                    )}
+                    
                     <HangUpButton socket={socket} roomID={roomID} />
-                    <ClinicalHistoryButton />
                 </div>
             </div>
 

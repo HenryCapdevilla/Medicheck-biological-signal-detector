@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { registerRequest, loginRequest, verifyTokenRequest, logoutRequest } from '../api/auth.js';
+import { registerRequest, loginRequest, verifyTokenRequest, logoutRequest, upClinicalHRequest, downClinicalHRequest, updateClinicalHRequest } from '../api/auth.js';
 import Cookies from 'js-cookie';
 
 export const AuthContext = createContext()
@@ -71,6 +71,35 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+    // Subir nueva historia clínica
+    const handleUploadHistory = async (data) => {
+      try {
+          const res = await upClinicalHRequest(data);
+          console.log("Historia clínica subida:", res.data);
+      } catch (error) {
+          console.error("Error al subir historia clínica:", error);
+      }
+  };
+
+  // Descargar historia clínica
+  const handleDownloadHistory = async () => {
+      try {
+          const response = await downClinicalHRequest();
+          console.log("Datos de la historia clínica:", response.data);
+      } catch (error) {
+          console.error("Error al descargar historia clínica:", error);
+      }
+  };
+
+  // Actualizar historia clínica
+  const handleUpdateHistory = async (data) => {
+      try {
+          const response = await updateClinicalHRequest(data);
+          console.log("Historia clínica actualizada:", response.data);
+      } catch (error) {
+          console.error("Error al actualizar historia clínica:", error);
+      }
+  };
 
   //Para eliminar los errores mostrados luego de 5 segundos
   useEffect(() => {
@@ -117,6 +146,9 @@ export const AuthProvider = ({ children }) => {
         signup,
         signin,
         logout,
+        handleUploadHistory,
+        handleDownloadHistory,
+        handleUpdateHistory,
         loading,
         user,
         isAuthenticated,

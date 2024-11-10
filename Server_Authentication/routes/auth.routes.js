@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { login, register, logout, profile, verifyToken } from '../controllers/auth.controller.js';
+import { donwloadData, uploadData, updateData } from '../controllers/historyclinical.controller.js'
 import { authRequired } from '../middlewares/validate.tokens.js';
 import { validateSchema } from '../middlewares/validator.middleware.js';
 import { registerSchema, loginSchema } from '../schemas/auth.schema.js'
@@ -16,6 +17,10 @@ router.get("/profile", authRequired, profile);
 
 router.get("/verify", verifyToken);
 
-router.get("/admin", )
+router.post("/clinical-history", uploadData);
+
+router.get("/clinical-history", donwloadData);
+
+router.patch("/clinical-history", updateData);
 
 export default router
