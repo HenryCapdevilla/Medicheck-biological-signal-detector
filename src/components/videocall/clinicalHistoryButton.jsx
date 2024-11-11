@@ -1,26 +1,31 @@
 import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { useAuth } from '../../context/AuthContext';
-import './clinicalHistoryButton.css'
+import { AiFillFolder } from "react-icons/ai";
+import './clinicalHistoryButton.css';
+
 const ClinicalHistoryButton = () => {
   const { handleUploadHistory, user } = useAuth();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, setValue } = useForm();
   const [isModalOpen, setModalOpen] = useState(false);
+  const [step, setStep] = useState(1);
+  const [formData, setFormData] = useState({
+    patientName: user.name,
+    nip: user.nip,
+    birthDate: user.birthDate,
+    gender: user.gender,
+    diagnosis: '',
+    history: '',
+    medications: '',
+    treatment: '',
+  });
 
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
 
   const onSubmit = async (data) => {
-    const formData = {
-      patientName: data.name,
-      age: parseInt(data.age),
-      diagnosis: data.diagnosis,
-      history: data.history,
-      nip: user.nip,
-    };
-
     try {
-      await handleUploadHistory(formData);
+      await handleUploadHistory(data);
       alert('Historia clínica subida exitosamente.');
       closeModal();
     } catch (error) {
@@ -29,31 +34,114 @@ const ClinicalHistoryButton = () => {
     }
   };
 
+  const nextStep = () => setStep(step + 1);
+  const prevStep = () => setStep(step - 1);
+
   return (
     <div>
-      <button onClick={openModal}>Abrir Formulario de Historia Clínica</button>
+      <button onClick={openModal} className="Button-history-clinical">
+        <AiFillFolder size={24} color="white" />
+      </button>
 
-      {/* Modal */}
       {isModalOpen && (
         <div className="modal-overlay">
           <div className="modal-content">
+            <button className="close-button" onClick={closeModal}>×</button>
             <h2>Historia Clínica del Paciente</h2>
+
             <form onSubmit={handleSubmit(onSubmit)}>
-              <label htmlFor="name">Nombre del Paciente:</label>
-              <input type="text" id="name" required {...register('name')} />
+              {/* Información Básica */}
+              {step === 1 && (
+                <div className="single-column">
+                  <label>Nombre del Paciente:</label>
+                  <div className="readonly">{formData.patientName}</div>
 
-              <label htmlFor="age">Edad:</label>
-              <input type="number" id="age" required {...register('age')} />
+                  <label>Número de Identificación (NIP):</label>
+                  <div className="readonly">{formData.nip}</div>
 
-              <label htmlFor="diagnosis">Diagnóstico:</label>
-              <input type="text" id="diagnosis" required {...register('diagnosis')} />
+                  <label>Fecha de Nacimiento:</label>
+                  <div className="readonly">{formData.birthDate}</div>
 
-              <label htmlFor="history">Historia Clínica:</label>
-              <textarea id="history" rows="4" required {...register('history')}></textarea>
+                  <label>Sexo:</label>
+                  <div className="readonly">{formData.gender}</div>
 
-              <button type="submit">Guardar</button>
-              <button type="button" onClick={closeModal}>Cerrar</button>
+                  <div className="navigation-buttons">
+                    <button type="button" onClick={nextStep}>Siguiente</button>
+                  </div>
+                </div>
+              )}
+
+              {/* Información Detectada */}
+              {step === 2 && (
+                <div className="single-column">
+                  <div>
+                    <label htmlFor="diagnosis">Diagnóstico:</label>
+                    <input
+                      type="text"
+                      id="diagnosis"
+                      {...register('diagnosis')}
+                      value={formData.diagnosis}
+                      onChange={(e) => setFormData({ ...formData, diagnosis: e.target.value })}
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="history">Historia Clínica:</label>
+                    <textarea
+                      id="history"
+                      rows="4"
+                      {...register('history')}
+                      value={formData.history}
+                      onChange={(e) => setFormData({ ...formData, history: e.target.value })}
+                    ></textarea>
+                  </div>
+
+                  <div className="navigation-buttons">
+                    <button type="button" onClick={prevStep}>Anterior</button>
+                    <button type="button" onClick={nextStep}>Siguiente</button>
+                  </div>
+                </div>
+              )}
+
+              {/* Medicamentos y Tratamiento */}
+              {step === 3 && (
+                <div className="single-column">
+                  <div>
+                    <label htmlFor="medications">Medicamentos:</label>
+                    <input
+                      type="text"
+                      id="medications"
+                      {...register('medications')}
+                      value={formData.medications}
+                      onChange={(e) => setFormData({ ...formData, medications: e.target.value })}
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="treatment">Tratamiento:</label>
+                    <input
+                      type="text"
+                      id="treatment"
+                      {...register('treatment')}
+                      value={formData.treatment}
+                      onChange={(e) => setFormData({ ...formData, treatment: e.target.value })}
+                    />
+                  </div>
+
+                  <div className="navigation-buttons">
+                    <button type="button" onClick={prevStep}>Anterior</button>
+                    <button type="submit">Guardar</button>
+                  </div>
+                </div>
+              )}
             </form>
+
+            {/* Puntos de navegación */}
+            <div className="navigation-dots">
+              <span className={step === 1 ? 'active' : ''} onClick={() => setStep(1)}></span>
+              <span className={step === 2 ? 'active' : ''} onClick={() => setStep(2)}></span>
+              <span className={step === 3 ? 'active' : ''} onClick={() => setStep(3)}></span>
+            </div>
           </div>
         </div>
       )}

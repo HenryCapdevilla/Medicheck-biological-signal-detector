@@ -95,8 +95,6 @@ const useWebRTC = (socket, roomID, localVideoRef) => {
             delete peerConnections.current[userId]; // Eliminar la referencia
         }
     });
-
-
         return () => {
             Object.values(peerConnections.current).forEach(peerConnection => peerConnection.close());
         };

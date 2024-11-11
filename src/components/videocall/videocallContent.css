@@ -53,7 +53,7 @@
     bottom: 10%; /* Modifica la posición desde el borde inferior */
     left: 31%; /* Sigue centrado horizontalmente */
     transform: translateX(-50%); /* Mantén la centralización */
-    width: 26%; /* Ajusta el ancho de los botones */
+    width: 65%; /* Ajusta el ancho de los botones */
     height: 70px;
     display: flex;
     justify-content: space-evenly; /* Distribuye uniformemente los botones */
@@ -65,7 +65,7 @@
     width: 25%;
     height: 25%;
     z-index: 8;
-    top: -50%;
+    top: -60%;
     right: -56%;
     transform: translate(50%,50%);
     display: flex;
@@ -77,7 +77,7 @@
     bottom: 12%; /* Ajusta la distancia desde el borde inferior */
     left: 50%; /* Centra horizontalmente respecto al contenedor */
     transform: translateX(-54%); /* Centra en relación al 50% del ancho del contenedor */
-    width: 26%; /* Ajusta el ancho de los botones */
+    width: 65%; /* Ajusta el ancho de los botones */
     height: 70px;
     display: flex;
     justify-content: space-evenly; /* Distribuye uniformemente los botones */
@@ -87,12 +87,12 @@
 /* Ajuste en pantallas más pequeñas */
 @media (max-width: 768px) {
     .display-buttons {
-        width: 200px; /* Reduce el ancho de los botones en pantallas más pequeñas */
+        width: 40%; /* Reduce el ancho de los botones en pantallas más pequeñas */
         bottom: 10%; /* Aumenta la distancia desde el borde inferior */
     }
 
     .display-buttons.signal-active {
-        width: 180px; /* Aún más pequeño cuando signal-active está activo */
+        width: 30%; /* Aún más pequeño cuando signal-active está activo */
         bottom: 15%; /* Ajusta la posición desde el borde inferior */
     }
 }
@@ -110,32 +110,31 @@
 }
 
 .Signal-data {
-    flex: 0.39 1 0;
-    align-self: flex-end;
     border: 2px solid #ccc;
-    background-color: #1a1a1a;
-    border-radius: 10px;
     transition: all 0.5s ease;
-    height: 50vh;
-    color: #ffffff;
-    margin-right: 20px;
+    height: 12vh;
+    color: #000000;
     position: relative;
-    display: flex; /* Añade flexbox al contenedor principal */
-    justify-content: center; /* Centra horizontalmente */
-    align-items: center; /* Centra verticalmente */
-    text-align: center; /* Opcional: alinea el texto en el centro */
-}
-.measurements {
     display: flex;
-    flex-direction: column; /* Los elementos se apilan verticalmente */
-    justify-content: center; /* Centra verticalmente el contenido */
-    align-items: initial; /* Centra horizontalmente el contenido */
+    background: #ffffff;
+    box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.3);
+    margin-top: 20px;
+    border-radius: 10px;
+    gap: 10px;
+    width: 36vw;
+    transform: translate(-8%, 0%);
+}
+
+.measurements {
+    display: inline-flex;
+    width: 100%;
 }
 .measurements p {
-    font-size: 25px;
+    font-size: 18px;
     margin: 10px 0;
     display: flex;
     align-items: center; /* Alinea los íconos con el texto */
+    justify-content: center;
 }
 .measurements .icon-heart {
     margin-right: 10px;
@@ -144,6 +143,10 @@
 .measurements .icon-lungs {
     margin-right: 10px;
     color: blue;
+}
+
+.one-column{
+    width: 50%;
 }
 .VideoCall-content {
     flex: 1;

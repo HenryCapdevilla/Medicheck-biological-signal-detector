@@ -1,26 +1,137 @@
+/* Aplica la fuente Roboto solo al modal y sus elementos hijos */
 .modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.3);
   display: flex;
   align-items: flex-start;
-  justify-content: flex-end;
+  justify-content: center;
   padding: 20px;
+  transform: translate(42%, -105%);
+  position: absolute;
+  width: 40vw;
+  height: 70vh;
+  z-index: 10;
+  border-radius: 6px;
+}
+
+.modal-content h2 {
+  font-size: 1.4rem; /* Título más grande */
+  color: #333;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.modal-content .readonly {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: 12px;
+  margin-bottom: 20px;
+  font-size: 1rem; /* Texto legible */
+  font-family: 'Roboto', sans-serif; /* Mantener la fuente Roboto */
+}
+
+.modal-content .double-column {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.modal-content label {
+  display: block;
+  font-weight: 600;
+  margin: 5px 0;
+  font-size: 1rem; /* Tamaño de texto adecuado */
+  color: #333;
+}
+
+.modal-content input[type="text"],
+.modal-content textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  margin-bottom: 20px;
+  height: 15vh;
+  font-family: 'Roboto', sans-serif; /* Asegurarse de que los campos usen Roboto */
+}
+
+.modal-content button {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.modal-content .navigation-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-content .navigation-dots {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.modal-content .navigation-dots span {
+  width: 12px; /* Puntos más grandes */
+  height: 12px;
+  border-radius: 50%;
+  background-color: #ccc;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.modal-content .navigation-dots .active {
+  background-color: #3f8efc;
+}
+
+.Button-history-clinical {
+  position: relative;
+  display: inline-block;
+  padding: 15px 20px;
+  color: #ffffff;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: 0.5s;
+  letter-spacing: 4px;
+  overflow: hidden;
+  background: none;
+  border-radius: 50%;
+}
+
+.Button-history-clinical:hover {
+  background: #b9b9b99f;
+  color: #ffffff;
+  -webkit-box-reflect:below 1px linear-gradient(transparent, #0005);
+  border: 2px solid #ffffff; /* Crear el borde blanco */
+  font-weight: bold;
 }
 
 .modal-content {
-  background: #fff;
+  background: #ffffff;
   padding: 20px;
-  border-radius: 8px;
-  width: 398px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-  position: fixed;
-  top: -477px;
-  right: -392px;
+  border-radius: 10px;
+  max-width: 400px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  height: 70vh;
+  font-family: 'Roboto', sans-serif;
+  position: relative;
 }
-button {
-  margin-top: 10px;
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
 }
+
+

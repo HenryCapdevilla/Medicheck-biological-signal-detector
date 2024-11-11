@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { FaPhoneSlash } from 'react-icons/fa';
 import './hanguptoggleButton.css';
 import { VideoContext } from '../../context/videoProvider';
-import { io } from 'socket.io-client';
 const HangUpButton = ({ socket, roomID }) => {
 
     const navigate = useNavigate(); // Usar useNavigate

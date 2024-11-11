@@ -21,13 +21,40 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       trim: true,
-      unique: true, // Asegura que el NIP sea único
+      unique: true,
     },
     role: {
-			type: String,
+      type: String,
       enum: ['admin', 'paciente', 'medico'],
-      default:'paciente',
-		}, // Campo para rol de administrador
+      default: 'paciente',
+    },
+    firstName: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    secondName: {
+      type: String,
+      trim: true,
+    },
+    firstSurname: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    secondSurname: {
+      type: String,
+      trim: true,
+    },
+    birthDate: {
+      type: String,
+      required: true,
+    },
+    gender: {
+      type: String,
+      enum: ['male', 'female', 'other'],
+      required: true,
+    },
   },
   {
     timestamps: true,

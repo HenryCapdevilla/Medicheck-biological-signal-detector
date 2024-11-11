@@ -7,7 +7,6 @@ import VideoStream from './videoStreamUsers';
 import './videocallContent.css';
 import { FaHeartbeat, FaLungs } from 'react-icons/fa';  
 import RecordVideoToggleButton from './recordVideoUser';
-import useWebRTC from '../../helper/useWebRTC';
 import { useParams } from 'react-router-dom';
 import { io } from 'socket.io-client';
 import HangUpButton from './hangupToggleButton';
@@ -22,7 +21,7 @@ function VideocallContent() {
     const [heartRate, setHeartRate] = useState(null);
     const [sp02, setSp02] = useState(null);
     const { roomID } = useParams(); // Obtenemos roomID de la URL
-    const { remoteVideoRefs } = useWebRTC(socket, roomID, videoRef); // Modifica el hook para aceptar el socket y roomID
+    
     useEffect(() => {
         const newSocket = io('http://localhost:8080'); // Usa http si no tienes SSL en tu servidor
         setSocket(newSocket);
@@ -77,15 +76,6 @@ function VideocallContent() {
                     isSignalActive={isSignalActive}
                 />
                 <div className={`RemoteUser VideoCall-content ${isSignalActive ? 'signal-active' : ''}`}>
-                    {Object.keys(remoteVideoRefs).map(userId => (
-                        <VideoStream 
-                            key={userId}
-                            isCameraActive={true} 
-                            videoRef={remoteVideoRefs[userId]} 
-                            message="Esperando conexión remota..." 
-                            isSignalActive={isSignalActive}
-                        />
-                    ))}
                 </div>
                 <div className={`display-buttons ${isSignalActive ? 'signal-active' : ''}`}>
                     <CameraToggleButton isCameraActive={isCameraActive} toggleCamera={toggleCamera} />
@@ -107,8 +97,14 @@ function VideocallContent() {
             {isSignalActive && (
                 <div className='Signal-data'>
                     <div className="measurements">
-                        <p><FaHeartbeat className="icon-heart" /> Frecuencia cardíaca: {heartRate} bpm</p>
-                        <p><FaLungs className="icon-lungs" /> Oxígeno en sangre: {sp02} %</p>
+                        <div className='one-column'>
+                            <p> Frecuencia cardíaca </p>
+                            <p> <FaHeartbeat className="icon-heart" />{heartRate} bpm</p>
+                        </div>
+                        <div className='one-column'>
+                            <p> Oxígeno en sangre </p>
+                            <p> <FaLungs className="icon-lungs" /> {sp02} % </p>
+                        </div>
                     </div>
                 </div>
             )}

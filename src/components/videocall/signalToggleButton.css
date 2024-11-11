@@ -27,17 +27,15 @@
 
 /* Cuando el botón de señales está activado, reducimos el tamaño */
 .VideoCall-content.signal-active {
-    flex: 0.7; /* Ajusta el tamaño para dar espacio al div de señales */
+    flex: 1; /* Ajusta el tamaño para dar espacio al div de señales */
 }
 
 .RemoteUser.VideoCall-content.signal-active {
     position: absolute;
-    top: -18%;
-    right: 18%;
-    width: 35%;
-    height: 40%;
-    margin: 10px;
+    top: 44%;
+    right: 53%;
+    width: 20%;
+    height: 21%;
     z-index: 10;
-    background-color: #fff;
     border-radius: 6px;
 }
