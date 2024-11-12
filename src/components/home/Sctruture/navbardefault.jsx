@@ -26,11 +26,7 @@ function Navbardefault() {
       <ul className={`navbar ${isMenuOpen ? 'active' : ''}`}>
         {/* Enlace común para todos */}
         <li><Link to="/">Inicio</Link></li>
-
-        {/* Condicionales según el estado de autenticación y rol */}
-        {!isAuthenticated && (
-          <LoginButton text="Login" />
-        )}
+        <LoginButton text="Login" />
         
         {isAuthenticated && user?.role === 'paciente' && (
           <>

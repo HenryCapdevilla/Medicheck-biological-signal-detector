@@ -10,24 +10,24 @@ export const VideoProvider = ({ children }) => {
     const videoRef = useRef(null);
 
     const startStream = async (camAllowed, micAllowed) => {
-    
         try {
             const mediaConstraints = {
-                video: camAllowed, // Activar la cámara si camAllowed es verdadero
-                audio: micAllowed // Activar el micrófono según micAllowed
+                video: camAllowed,
+                audio: micAllowed,
             };
-            
+    
             const stream = await navigator.mediaDevices.getUserMedia(mediaConstraints);
-            
             if (videoRef.current) {
                 videoRef.current.srcObject = stream;
             }
+            if (stream) {
+                return stream;
+            }
         } catch (error) {
-            console.error('Error al acceder a la cámara o el micrófono:', error);
-            alert("No se pudo acceder a la cámara o al micrófono. Asegúrate de que no haya otra aplicación usándolos y que se te haya dado permiso.");
+            console.error("Error al acceder a la cámara o el micrófono:", error);
+            alert("No se pudo acceder a la cámara o al micrófono. Verifica permisos y disponibilidad.");
         }
     };
-    
 
     const stopStream = () => {
         if (videoRef.current && videoRef.current.srcObject) {
@@ -46,15 +46,15 @@ export const VideoProvider = ({ children }) => {
             if (newState) {
                 alert("La cámara se está encendiendo..."); // Alerta al encender
                 setTimeout(() => {
-                    startStream(true, isMicActive); // Reiniciar el stream después de un pequeño retraso
+                    startStream(true, isMicActive); // Inicia el stream después de un pequeño retraso
                 }, 1500); // 1500 ms de retraso
-                stopStream();
             } else {
                 stopStream(); // Detener el stream si la cámara se apaga
             }
             return newState;
         });
     };
+    
     
     const toggleMicrophone = () => {
         setIsMicActive(prev => {
@@ -84,7 +84,7 @@ export const VideoProvider = ({ children }) => {
             toggleMicrophone,
             videoRef,
             startStream,
-            stopStream
+            stopStream,
         }}>
             {children}
         </VideoContext.Provider>

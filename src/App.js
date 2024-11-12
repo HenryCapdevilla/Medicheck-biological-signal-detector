@@ -6,7 +6,7 @@ import UserCamaraContainer from './components/livingRoom/userCamaraContainer';
 import VideocallContent from './components/videocall/videocallContent';
 import RegisterPage from './pages/register/RegisterPage';
 import { AuthProvider } from './context/AuthContext';
-import LoginPage from './pages/login/LoginPage'
+import LoginPage from './pages/login/LoginPage';
 import ProtectedRoute from './ProtectedRoute';
 import Dashboard from './components/dashboard/Dashboard';
 import UserProfile from './components/profile/UserProfile';
@@ -14,8 +14,12 @@ import { VideoProvider } from './context/videoProvider';
 import AdminPage from './pages/admin/AdminPage';
 import ProtectedAdminRoute from './ProtectedAdminRoute';
 import Divbannerdefault from './components/home/Sctruture/Divbannerdefault';
-function AppContent() {
+// Importa 'process' y asignalo a window
+import process from 'process';
+import VideoCallApp from './components/home/videollamada/VideoCallApp';
+window.process = process;
 
+function AppContent() {
   return (
     <>
       <Routes>
@@ -23,14 +27,15 @@ function AppContent() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
 
-        <Route element={<ProtectedRoute/>}>
+        <Route element={<ProtectedRoute />}>
           <Route path="/" element={<Divbanner />} />
-          <Route path="/Profile" element={<UserProfile/>}></Route>
+          <Route path="/Profile" element={<UserProfile />} />
           <Route path="/livingroom/:roomID" element={<UserCamaraContainer />} />
           <Route path="/videocall/:roomID" element={<VideocallContent />} />
-          <Route path="/dashboard" element={<Dashboard/>}></Route>
-          <Route element={<ProtectedAdminRoute/>}>
-            <Route path="/admin" element={<AdminPage/>}></Route>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/videollamada" element={<VideoCallApp/>}></Route>
+          <Route element={<ProtectedAdminRoute />}>
+            <Route path="/admin" element={<AdminPage />} />
           </Route>
         </Route>
       </Routes>
