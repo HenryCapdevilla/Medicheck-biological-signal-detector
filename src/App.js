@@ -33,7 +33,7 @@ function AppContent() {
           <Route path="/livingroom/:roomID" element={<UserCamaraContainer />} />
           <Route path="/videocall/:roomID" element={<VideocallContent />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/videollamada" element={<VideoCallApp/>}></Route>
+          <Route path="/videollamada/:roomID" element={<VideoCallApp/>}></Route>
           <Route element={<ProtectedAdminRoute />}>
             <Route path="/admin" element={<AdminPage />} />
           </Route>

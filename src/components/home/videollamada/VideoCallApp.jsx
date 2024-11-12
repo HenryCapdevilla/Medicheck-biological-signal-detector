@@ -12,6 +12,7 @@ import "./VIdeoCallApp.css";
 import CameraToggleButton from "../../livingRoom/cameraToggleButton";
 import MicrophoneToggleButton from "../../livingRoom/microphoneToggleButton";
 import { useAuth } from "../../../context/AuthContext";
+import { useParams } from "react-router-dom";
 
 // Conecta el cliente con el servidor de Socket.IO en el puerto 8080
 const socket = io.connect('http://localhost:8080');
@@ -23,7 +24,7 @@ const VideoCallApp = () => {
 	const { user } = useAuth();
     // Definición de los estados para manejar la información en el componente
     const [me, setMe] = useState(""); // Almacena el ID de usuario generado por Socket.IO
-	const [ stream, setStream ] = useState()
+	const [stream, setStream ] = useState()
 	//------------------------Importante-----------------------------------//
 	const [receivingCall, setReceivingCall] = useState(false); // Indica si el usuario está recibiendo una llamada
     const [caller, setCaller] = useState(""); // ID del usuario que está llamando
@@ -40,9 +41,11 @@ const VideoCallApp = () => {
     const userVideo = useRef(); // Referencia al video del usuario remoto
     const connectionRef = useRef(); // Referencia a la conexión de `Peer`
 
+    const { roomID } = useParams(); 
+
     // useEffect para registrar el usuario y configurar la conexión inicial con el servidor
     useEffect(() => {
-        socket.emit("registerUser", { Username: user.username }); // Enviar un email único al servidor
+        socket.emit("registerUser", { Username: user.username, RoomID:roomID }); // Enviar un email único al servidor
 
         socket.on("me", (id) => {
             console.log("ID del usuario:", id);

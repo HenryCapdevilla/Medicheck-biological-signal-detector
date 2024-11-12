@@ -21,7 +21,7 @@ const ButtonCamera = () => {
     }, [startStream, stopStream]);
 
     const joinCall = () => {
-        navigate(`/videocall/${roomID}`);
+        navigate(`/videollamada/${roomID}`);
     };
 
     return (
