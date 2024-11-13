@@ -35,16 +35,7 @@ function Navbardefault() {
           </>
         )}
         
-        {isAuthenticated && user?.role === 'medico' && (
-          <>
-            <li><Link to="/Profile">Perfil</Link></li>
-            <li><Link to="/dashboard">Dashboard</Link></li>
-            <li><Link to="/videollamada">Conéctate</Link></li>
-            <LogoutButton />
-          </>
-        )}
-
-        {isAuthenticated && user?.role === '' && (
+        {isAuthenticated && user?.role === 'medico' || 'admin' && (
           <>
             <li><Link to="/Profile">Perfil</Link></li>
             <li><Link to="/dashboard">Dashboard</Link></li>

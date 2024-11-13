@@ -3,10 +3,10 @@ import ClinicalHistory from '../models/ClinicalHistory.js';
 export const uploadData = async (req, res) => {
   try {
     console.log(req.body); // Verifica los datos recibidos
-    let { patientName, age, diagnosis, history, nip } = req.body;
+    const { patientName, birthDate, gender, diagnosis, history, medications, treatment, nip } = req.body;
 
     // Validar que todos los campos necesarios estén presentes
-    if (!patientName || !age || !diagnosis || !history || !nip) {
+    if (!patientName || !birthDate || !gender || !diagnosis || !history || !medications || !treatment || !nip) {
       return res.status(400).json({ error: 'Faltan datos necesarios' });
     }
 
@@ -17,7 +17,16 @@ export const uploadData = async (req, res) => {
     }
 
     // Crear una nueva historia clínica
-    const newHistory = new ClinicalHistory({ patientName, age, diagnosis, history, nip });
+    const newHistory = new ClinicalHistory({
+      patientName,
+      birthDate,
+      gender,
+      diagnosis,
+      history,
+      medications,
+      treatment,
+      nip
+    });
     await newHistory.save();
 
     res.status(201).json({ message: 'Historia clínica guardada exitosamente' });
@@ -27,31 +36,35 @@ export const uploadData = async (req, res) => {
   }
 };
 
-
 // Ruta para consultar una historia clínica por paciente
 export const donwloadData = async (req, res) => {
-    try {
-      const history = await ClinicalHistory.findById(req.params.id);
-      if (!history) return res.status(404).json({ error: 'Historia clínica no encontrada' });
-      res.json(history);
-    } catch (error) {
-      res.status(500).json({ error: 'Error al obtener la historia clínica' });
-    }
-  };
-  
+  try {
+    const history = await ClinicalHistory.findById(req.params.id);
+    if (!history) return res.status(404).json({ error: 'Historia clínica no encontrada' });
+    res.json(history);
+  } catch (error) {
+    console.error('Error al obtener la historia clínica:', error);
+    res.status(500).json({ error: 'Error al obtener la historia clínica' });
+  }
+};
+
 // Ruta para actualizar una historia clínica (sin eliminar datos previos)
 export const updateData = async (req, res) => {
   try {
-    const { history: newEntry } = req.body;
+    const { diagnosis, history: newHistory, medications, treatment } = req.body;
     const history = await ClinicalHistory.findById(req.params.id);
-    if (!history)
-      return res.status(404).json({ error: "Historia clínica no encontrada" });
+    if (!history) return res.status(404).json({ error: "Historia clínica no encontrada" });
 
-    // Concatenar el nuevo historial al existente
-    history.history += `\n${newEntry}`;
+    // Actualizar solo los campos proporcionados en la solicitud
+    if (diagnosis) history.diagnosis = diagnosis;
+    if (newHistory) history.history += `\n${newHistory}`; // Concatenar nuevo historial al existente
+    if (medications) history.medications = medications;
+    if (treatment) history.treatment = treatment;
+
     await history.save();
-    res.json({ message: "Historia clínica actualizada" });
+    res.json({ message: "Historia clínica actualizada exitosamente" });
   } catch (error) {
+    console.error('Error al actualizar la historia clínica:', error);
     res.status(500).json({ error: "Error al actualizar la historia clínica" });
   }
 };

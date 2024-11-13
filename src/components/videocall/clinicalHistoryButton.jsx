@@ -10,7 +10,7 @@ const ClinicalHistoryButton = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
-    patientName: user.name,
+    patientName: user.firstName + " " + user.secondName + " " + user.firstSurname + " "  + user.secondSurname,
     nip: user.nip,
     birthDate: user.birthDate,
     gender: user.gender,

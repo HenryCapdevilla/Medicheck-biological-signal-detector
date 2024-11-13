@@ -20,6 +20,7 @@ import SignalToggleButton from "../../videocall/signalToggleButton";
 import ClinicalHistoryButton from "../../videocall/clinicalHistoryButton";
 import { FaHeartbeat, FaLungs } from "react-icons/fa";
 import VideoStream from "../../videocall/videoStreamUsers";
+import CameraLuminosityCheck from "../../livingRoom/CameraLuminosityCheck";
 
 // Conecta el cliente con el servidor de Socket.IO en el puerto 8080
 const socket = io.connect('http://localhost:8080');
@@ -219,6 +220,7 @@ const VideoCallApp = () => {
                             <p>Oxígeno en sangre</p>
                             <p><FaLungs className="icon-lungs" /> {sp02} %</p>
                         </div>
+                        <CameraLuminosityCheck videoRef={videoRef} />
                     </div>
                 </div>
             )};

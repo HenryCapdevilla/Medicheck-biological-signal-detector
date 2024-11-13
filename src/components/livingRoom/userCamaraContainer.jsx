@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { VideoContext } from '../../context/videoProvider';
 import CameraToggleButton from './cameraToggleButton';
 import MicrophoneToggleButton from './microphoneToggleButton';
+import CameraLuminosityCheck from './CameraLuminosityCheck';
 import './userCamaraContainer.css';
 
 const ButtonCamera = () => {
@@ -18,7 +19,7 @@ const ButtonCamera = () => {
         }
 
         return () => stopStream();
-    }, [startStream, stopStream]);
+    }, [isCameraActive, isMicActive, startStream, stopStream]);
 
     const joinCall = () => {
         navigate(`/videollamada/${roomID}`);
@@ -49,6 +50,7 @@ const ButtonCamera = () => {
                     <h1 className="text-general">ROOM ID: {roomID} </h1>
                 </div>
             </div>
+            <CameraLuminosityCheck videoRef={videoRef} />
             <h1 className="footer-disclamer">Esta reunión está encriptada en la nube.</h1>
         </div>
     );
