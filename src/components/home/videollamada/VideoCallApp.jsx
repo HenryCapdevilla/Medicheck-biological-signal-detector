@@ -9,10 +9,17 @@ import io from "socket.io-client";
 import { VideoContext } from "../../../context/videoProvider"; // Asegúrate de importar correctamente el VideoContext
 
 import "./VIdeoCallApp.css";
+
+import HangUpButton from './hangupToggleButton';
+import RecordVideoToggleButton from './recordVideoUser';
 import CameraToggleButton from "../../livingRoom/cameraToggleButton";
 import MicrophoneToggleButton from "../../livingRoom/microphoneToggleButton";
 import { useAuth } from "../../../context/AuthContext";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import SignalToggleButton from "../../videocall/signalToggleButton";
+import ClinicalHistoryButton from "../../videocall/clinicalHistoryButton";
+import { FaHeartbeat, FaLungs } from "react-icons/fa";
+import VideoStream from "../../videocall/videoStreamUsers";
 
 // Conecta el cliente con el servidor de Socket.IO en el puerto 8080
 const socket = io.connect('http://localhost:8080');
@@ -41,7 +48,27 @@ const VideoCallApp = () => {
     const userVideo = useRef(); // Referencia al video del usuario remoto
     const connectionRef = useRef(); // Referencia a la conexión de `Peer`
 
+    const [isSignalActive, setIsSignalActive] = useState(false);
+    const [heartRate, setHeartRate] = useState(null);
+    const [sp02, setSp02] = useState(null);
+
+    const navigate = useNavigate(); // Usar useNavigate
+
     const { roomID } = useParams(); 
+
+    const toggleSignal = (isActive) => {
+        setIsSignalActive(isActive);
+    };
+
+    const formatHeartRate = (rate) => Math.round(rate);
+
+    const handleHeartRateUpdate = (newHeartRate) => {
+        setHeartRate(formatHeartRate(newHeartRate));
+    };
+
+    const handleSpo2Update = (newSp02) => {
+        setSp02(formatHeartRate(newSp02));
+    };
 
     // useEffect para registrar el usuario y configurar la conexión inicial con el servidor
     useEffect(() => {
@@ -89,6 +116,31 @@ const VideoCallApp = () => {
             stopStream(); // Detener el stream al desmontar el componente
         };
     }, [isCameraActive, isMicActive]);
+
+    // Escuchar el evento de finalización de llamada desde el servidor
+    useEffect(() => {
+        socket.on("callEnded", () => {
+            setCallEnded(true);
+        });
+
+        // Limpieza del evento al desmontar el componente
+        return () => socket.off("callEnded");
+    }, [socket]);
+    
+    // useEffect para manejar la lógica cuando isCallEnded cambie a true
+    useEffect(() => {
+        if (callEnded) {
+            console.log("La llamada ha sido colgada.");
+            stopStream();
+            navigate('/');
+        }
+    }, [callEnded]);
+
+    // Función para manejar el colgado de la llamada desde el botón
+    const handleHangUp = () => {
+        socket.emit('hang-up', roomID); // Emitir el evento de colgar la llamada
+        setCallEnded(true); // Actualizar el estado para activar el useEffect
+    };
 
     // Función para iniciar una llamada a otro usuario
     const callUser = (id) => {
@@ -153,23 +205,32 @@ const VideoCallApp = () => {
         connectionRef.current = peer;
     };
 
-    // Función para finalizar la llamada
-    const leaveCall = () => {
-        setCallEnded(true); // Cambia el estado a llamada terminada
-        connectionRef.current.destroy(); // Destruye la conexión de `Peer`
-    };
-
     // Renderizado del componente
     return (
-        <>
-            <h1 style={{ textAlign: "center", color: "#fff" }}>Zoomish</h1>
-            <div className="container">
-                <div className="video-container">
-                    <div className="video">
-                        <p>{user.username}</p>
-                        {/* Renderiza el video local */}
-                        {stream && <video playsInline muted ref={videoRef} autoPlay style={{ width: "300px" }} />}
+        <> 
+            {isSignalActive && (
+                <div className='Signal-data'>
+                    <div className="measurements">
+                        <div className='one-column'>
+                            <p>Frecuencia cardíaca</p>
+                            <p><FaHeartbeat className="icon-heart" /> {heartRate} bpm</p>
+                        </div>
+                        <div className='one-column'>
+                            <p>Oxígeno en sangre</p>
+                            <p><FaLungs className="icon-lungs" /> {sp02} %</p>
+                        </div>
                     </div>
+                </div>
+            )};
+            <div className="VideoCall-wrapper">
+                <div className={`VideoCall-content ${isSignalActive ? 'signal-active' : ''}`}>
+                        <p>{user.username}</p>
+                        <VideoStream
+                            isCameraActive={isCameraActive}
+                            videoRef={videoRef}
+                            message="La cámara está desactivada"
+                            isSignalActive={isSignalActive}
+                        />
                     <div className="video">
                         {/* Renderiza el video remoto si la llamada está aceptada */}
                         {callAccepted && !callEnded ? (
@@ -215,26 +276,35 @@ const VideoCallApp = () => {
                         value={idToCall}
                         onChange={(e) => setIdToCall(e.target.value)}
                     />
-                    {/* Aquí agregamos los botones para activar/desactivar cámara y micrófono */}
-                    <div className="controls">
-                        <CameraToggleButton isCameraActive={isCameraActive} toggleCamera={toggleCamera} />
-                        <MicrophoneToggleButton isMicActive={isMicActive} toggleMicrophone={toggleMicrophone} />
-                    </div>
                     {/* Botón para iniciar o finalizar la llamada */}
                     <div className="call-actions">
-                        {callAccepted && !callEnded ? (
-                            <Button variant="contained" color="secondary" onClick={leaveCall}>
-                                End Call
-                            </Button>
-                        ) : (
-                            <Button variant="contained" color="primary" onClick={() => callUser(idToCall)}>
-                                Call
-                            </Button>
+                            {callAccepted && !callEnded ? (
+                                <HangUpButton socket={socket} roomID={roomID} onHangUp={handleHangUp} />
+                            ) : (
+                                <Button variant="contained" color="primary" onClick={() => callUser(idToCall)}>
+                                    Call
+                                </Button>
+                            )}
+                    </div>
+                    {/* Aquí agregamos los botones para activar/desactivar cámara y micrófono */}
+                    <div className={`display-buttons ${isSignalActive ? 'signal-active' : ''}`}>
+                        <CameraToggleButton isCameraActive={isCameraActive} toggleCamera={toggleCamera} />
+                        <MicrophoneToggleButton isMicActive={isMicActive} toggleMicrophone={toggleMicrophone} />
+                        
+                        {['medico', 'admin'].includes(user.role) && (
+                            <>
+                                <RecordVideoToggleButton 
+                                    onHeartRateUpdate={handleHeartRateUpdate}
+                                    onSpo2RateUpdate={handleSpo2Update}
+                                    userVideoRef={userVideo} // Pasa la referencia del video
+                                />
+                                <SignalToggleButton toggleSignal={toggleSignal} />
+                                <ClinicalHistoryButton />
+                            </>
                         )}
                     </div>
                 </div>
             </div>
-
             {/* Mostrar la interfaz para recibir la llamada */}
             {receivingCall && !callAccepted && (
                 <div className="caller">

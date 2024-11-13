@@ -93,6 +93,37 @@ io.on("connection", (socket) => {
         io.to(data.to).emit("callAccepted", data.signal)
         console.log("Estado actual de rooms:", JSON.stringify(rooms, null, 2));
     });
+
+    // Evento para colgar la llamada
+    socket.on("hang-up", (roomID) => {
+        console.log(`El usuario ${socket.id} colgó la llamada en la sala ${roomID}.`);
+        
+        // Notificar a todos los demás usuarios en la sala que la llamada ha finalizado
+        socket.to(roomID).emit("callEnded");
+    
+        // Verificar si la sala y el usuario existen
+        if (rooms[roomID]) {
+            // Buscar el Username correspondiente al socket.id en la sala
+            const username = Object.keys(rooms[roomID]).find(
+                (user) => rooms[roomID][user] === socket.id
+            );
+        
+            if (username) {
+                // Eliminar al usuario de la sala
+                delete rooms[roomID][username];
+                socket.leave(roomID);
+            
+                // Si la sala queda vacía, eliminarla del objeto rooms
+                if (Object.keys(rooms[roomID]).length === 0) {
+                    delete rooms[roomID];
+                }
+            }
+        }
+    
+        console.log("Estado actual de rooms después de colgar:", JSON.stringify(rooms, null, 2));
+    });
+
+
 });
 
 server.listen(8080, () => {
