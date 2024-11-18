@@ -9,6 +9,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    border: none;
 }
 
 .input-field {
@@ -16,7 +17,6 @@
     padding: 15px; /* Padding interno */
     background: rgb(39, 39, 39); /* Fondo oscuro */
     color: white; /* Texto en color blanco */
-    border: none;
     border-radius: 10px;
     font-size: 15px;
     outline: none; /* Eliminar el borde de enfoque por defecto */
@@ -30,21 +30,12 @@
     box-shadow: 0 0 10px rgba(3, 233, 244, 0.8); /* Brillo cian cuando está enfocado */
 }
 
-@media (max-width: 3000px) {
-    .input-field {
-        width: 75%; /* Aumenta el ancho del input */
-        height: 100%;
-        padding: 13px; /* Ajusta el padding */
-        font-size: 2rem; /* Reduce el tamaño de la fuente */
-    }
-}
-
 @media (max-width: 1800px) {
     .input-field {
-        width: 70%; /* Aumenta el ancho del input */
-        height: 100%;
+        width: 6rem; /* Aumenta el ancho del input */
+        height: 3rem;
         padding: 13px; /* Ajusta el padding */
-        font-size: 1rem; /* Reduce el tamaño de la fuente */
+        font-size: 0.8rem; /* Reduce el tamaño de la fuente */
     }
 }
 /* Media query para pantallas menores a 1052px */

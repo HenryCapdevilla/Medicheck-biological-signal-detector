@@ -18,9 +18,8 @@ import { useAuth } from "../../../context/AuthContext";
 import { useNavigate, useParams } from "react-router-dom";
 import SignalToggleButton from "../../videocall/signalToggleButton";
 import ClinicalHistoryButton from "../../videocall/clinicalHistoryButton";
-import { FaHeartbeat, FaLungs } from "react-icons/fa";
 import VideoStream from "../../videocall/videoStreamUsers";
-import CameraLuminosityCheck from "../../livingRoom/CameraLuminosityCheck";
+import UserCard from "./DashboardSignals";
 
 // Conecta el cliente con el servidor de Socket.IO en el puerto 8080
 const socket = io.connect('http://localhost:8080');
@@ -208,115 +207,134 @@ const VideoCallApp = () => {
 
     // Renderizado del componente
     return (
-        <> 
-            {isSignalActive && (
-                <div className='Signal-data'>
-                    <div className="measurements">
-                        <div className='one-column'>
-                            <p>Frecuencia cardíaca</p>
-                            <p><FaHeartbeat className="icon-heart" /> {heartRate} bpm</p>
-                        </div>
-                        <div className='one-column'>
-                            <p>Oxígeno en sangre</p>
-                            <p><FaLungs className="icon-lungs" /> {sp02} %</p>
-                        </div>
-                        <CameraLuminosityCheck videoRef={videoRef} />
-                    </div>
-                </div>
-            )};
-            <div className="VideoCall-wrapper">
-                <div className={`VideoCall-content ${isSignalActive ? 'signal-active' : ''}`}>
-                        <p>{user.username}</p>
-                        <VideoStream
-                            isCameraActive={isCameraActive}
-                            videoRef={videoRef}
-                            message="La cámara está desactivada"
-                            isSignalActive={isSignalActive}
-                        />
-                    <div className="video">
-                        {/* Renderiza el video remoto si la llamada está aceptada */}
-                        {callAccepted && !callEnded ? (
-                            <video playsInline ref={userVideo} autoPlay style={{ width: "300px" }} />
-                        ) : null}
-                    </div>
-                </div>
-                <div className="myId">
-                    {/* Campo para ingresar el nombre del usuario */}
-                    <TextField
-                        id="filled-basic"
-                        label="Name"
-                        variant="filled"
-                        value={user.username}
-                        onChange={(e) => setName(user.username)}
-                        style={{ marginBottom: "20px" }}
-                    />
-                    {/* Botón para copiar el ID del usuario */}
-                    <CopyToClipboard
-                        text={me || "ID no disponible"}
-                        style={{ marginBottom: "2rem" }}
-                        onCopy={() => {
-                            if (me) {
-                                console.log("ID copiado:", me);
-                            } else {
-                                console.log("El ID aún no está disponible");
-                            }
-                        }}
-                    >
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            startIcon={<AssignmentIcon fontSize="large" />}
-                        >
-                            Copy ID
-                        </Button>
-                    </CopyToClipboard>
-                    {/* Campo para ingresar el ID al que se desea llamar */}
-                    <TextField
-                        id="filled-basic"
-                        label="ID to call"
-                        variant="filled"
-                        value={idToCall}
-                        onChange={(e) => setIdToCall(e.target.value)}
-                    />
-                    {/* Botón para iniciar o finalizar la llamada */}
-                    <div className="call-actions">
-                            {callAccepted && !callEnded ? (
-                                <HangUpButton socket={socket} roomID={roomID} onHangUp={handleHangUp} />
-                            ) : (
-                                <Button variant="contained" color="primary" onClick={() => callUser(idToCall)}>
-                                    Call
-                                </Button>
-                            )}
-                    </div>
-                    {/* Aquí agregamos los botones para activar/desactivar cámara y micrófono */}
-                    <div className={`display-buttons ${isSignalActive ? 'signal-active' : ''}`}>
-                        <CameraToggleButton isCameraActive={isCameraActive} toggleCamera={toggleCamera} />
-                        <MicrophoneToggleButton isMicActive={isMicActive} toggleMicrophone={toggleMicrophone} />
-                        
-                        {['medico', 'admin'].includes(user.role) && (
-                            <>
-                                <RecordVideoToggleButton 
-                                    onHeartRateUpdate={handleHeartRateUpdate}
-                                    onSpo2RateUpdate={handleSpo2Update}
-                                    userVideoRef={userVideo} // Pasa la referencia del video
-                                />
-                                <SignalToggleButton toggleSignal={toggleSignal} />
-                                <ClinicalHistoryButton />
-                            </>
-                        )}
-                    </div>
-                </div>
+      <>
+        <div className="VideoCall-wrapper">
+          <div
+            className={`VideoCall-content ${
+              isSignalActive ? "signal-active" : ""
+            }`}
+          >
+            <VideoStream
+              isCameraActive={isCameraActive}
+              videoRef={videoRef}
+              message="La cámara está desactivada"
+              isSignalActive={isSignalActive}
+            />
+
+            {/* Aquí agregamos los botones para activar/desactivar cámara y micrófono */}
+            <div
+              className={`display-buttons ${
+                isSignalActive ? "signal-active" : ""
+              }`}
+            >
+              <CameraToggleButton
+                isCameraActive={isCameraActive}
+                toggleCamera={toggleCamera}
+              />
+              <MicrophoneToggleButton
+                isMicActive={isMicActive}
+                toggleMicrophone={toggleMicrophone}
+              />
+
+              {["medico", "admin"].includes(user.role) && (
+                <>
+                  <RecordVideoToggleButton
+                    onHeartRateUpdate={handleHeartRateUpdate}
+                    onSpo2RateUpdate={handleSpo2Update}
+                    userVideoRef={userVideo} // Pasa la referencia del video
+                  />
+                  <SignalToggleButton toggleSignal={toggleSignal} />
+                  <ClinicalHistoryButton />
+                </>
+              )}
             </div>
-            {/* Mostrar la interfaz para recibir la llamada */}
-            {receivingCall && !callAccepted && (
-                <div className="caller">
-                    <h1>{name} is calling...</h1>
-                    <Button variant="contained" color="primary" onClick={answerCall}>
-                        Answer
-                    </Button>
-                </div>
-            )}
-        </>
+          </div>
+          <div className="myId">
+            <div className="video">
+              {/* Renderiza el video remoto si la llamada está aceptada */}
+              {callAccepted && !callEnded && (
+                <video
+                  playsInline
+                  ref={userVideo}
+                  autoPlay
+                  style={{
+                    maxWidth: "100%",
+                    paddingLeft: "10%",
+                    paddingRight: "10%",
+                  }}
+                />
+              )}
+            </div>
+            {/* Campo para ingresar el nombre del usuario */}
+            <TextField
+              id="filled-basic"
+              label="Name"
+              variant="filled"
+              value={user.username}
+              onChange={(e) => setName(user.username)}
+              style={{ marginBottom: "20px" }}
+            />
+            {/* Botón para copiar el ID del usuario */}
+            <CopyToClipboard
+              text={me || "ID no disponible"}
+              style={{ marginBottom: "2rem" }}
+              onCopy={() => {
+                if (me) {
+                  console.log("ID copiado:", me);
+                } else {
+                  console.log("El ID aún no está disponible");
+                }
+              }}
+            >
+              <Button
+                variant="contained"
+                color="primary"
+                startIcon={<AssignmentIcon fontSize="large" />}
+              >
+                Copy ID
+              </Button>
+            </CopyToClipboard>
+            {/* Campo para ingresar el ID al que se desea llamar */}
+            <TextField
+              id="filled-basic"
+              label="ID to call"
+              variant="filled"
+              value={idToCall}
+              onChange={(e) => setIdToCall(e.target.value)}
+            />
+            {/* Botón para iniciar o finalizar la llamada */}
+            <div className="call-actions">
+              {callAccepted && !callEnded ? (
+                <HangUpButton
+                  socket={socket}
+                  roomID={roomID}
+                  onHangUp={handleHangUp}
+                />
+              ) : (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => callUser(idToCall)}
+                >
+                  Call
+                </Button>
+              )}
+            </div>
+            {isSignalActive && (
+							<UserCard heartRate={heartRate} spO2={sp02}/>
+            )};
+          </div>
+        </div>
+        {/* Mostrar la interfaz para recibir la llamada */}
+        {receivingCall && !callAccepted && (
+          <div className="caller">
+            <h1>{name} is calling...</h1>
+            <Button variant="contained" color="primary" onClick={answerCall}>
+              Answer
+            </Button>
+          </div>
+        )}
+      </>
     );
 };
 

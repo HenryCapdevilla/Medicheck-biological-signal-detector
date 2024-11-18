@@ -1,7 +1,6 @@
 .Button-call{
     position: relative;
     display: inline-block;
-    padding: 25px 30px;
     color: #03e9f4;
     text-decoration: none;
     text-transform: uppercase;
@@ -23,6 +22,7 @@
     -webkit-box-reflect:below 1px linear-gradient(transparent, #0005);
     border: 2px solid #ffffff; /* Crear el borde blanco */
     font-weight: bold;
+    font-size: 0.6rem; /* Reduce ligeramente el tamaño de la fuente */
 }
 
 /* Animaciones de los spans durante el hover */
@@ -207,41 +207,12 @@ a span{
     }
 }
 
-/* Estilos básicos del campo de entrada */
-
-.input-container {
-    position: relative; /* Necesario para el pseudo-elemento */
-    display: flex; /* Asegura que el pseudo-elemento tenga el tamaño adecuado */
-    align-items: center;
-}
-
-.input-field {
-    background: rgb(39, 39, 39);
-    cursor: pointer;
-    padding: 8px 16px;
-    color: rgb(255, 255, 255);
-    font-size: 1rem;
-    font-weight: bold;
-    position: relative;
-    border-radius: 12px;
-    border: none;
-}
-
-@media (max-width: 3000px) {
-    .Button-call {
-        padding: 20px 25px; /* Ajusta el padding */
-        font-size: 2rem; /* Reduce ligeramente el tamaño de la fuente */
-    }
-
-    .Button-call:hover {
-        box-shadow: 0 0 5px #03e9f4, 0 0 20px #03e9f4, 0 0 40px #03e9f4, 0 0 150px #03e9f4;
-    }
-}
-
 @media (max-width: 1800px) {
     .Button-call {
-        padding: 20px 25px; /* Ajusta el padding */
         font-size: 0.8rem; /* Reduce ligeramente el tamaño de la fuente */
+        height: 3rem;
+        width: 8rem;
+        padding-top: 5px;
     }
 
     .Button-call:hover {
@@ -252,7 +223,9 @@ a span{
 /* Media query para pantallas menores a 1052px */
 @media (max-width: 1052px) {
     .Button-call {
-        padding: 20px 25px; /* Ajusta el padding */
+        height: 3rem;
+        width: 8rem;
+        padding-top: 5px;
         font-size: 0.9rem; /* Reduce ligeramente el tamaño de la fuente */
     }
 
@@ -264,7 +237,9 @@ a span{
 /* Media query para pantallas menores a 860px */
 @media (max-width: 860px) {
     .Button-call {
-        padding: 15px 20px; /* Reduce más el padding */
+        height: 3rem;
+        width: 8rem;
+        padding-top: 5px;
         font-size: 0.8rem; /* Reduce aún más el tamaño de la fuente */
         letter-spacing: 2px; /* Reduce el espacio entre letras */
     }

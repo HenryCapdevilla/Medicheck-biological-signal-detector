@@ -23,27 +23,26 @@ function Navbardefault() {
           onClick={toggleMenu} 
         />
       </div>
+      
       <ul className={`navbar ${isMenuOpen ? 'active' : ''}`}>
-        {/* Enlace común para todos */}
         <li><Link to="/">Inicio</Link></li>
-        <LoginButton text="Login" />
-        
+        <li><Link to="/about">Acerca de</Link></li>
         {isAuthenticated && user?.role === 'paciente' && (
-          <>
-            <li><Link to="/videollamada">Conéctate</Link></li>
-            <LogoutButton />
-          </>
+          <li><Link to="/videollamada">Conéctate</Link></li>
         )}
         
-        {isAuthenticated && user?.role === 'medico' || 'admin' && (
+        {isAuthenticated && (user?.role === 'medico' || user?.role === 'admin') && (
           <>
             <li><Link to="/Profile">Perfil</Link></li>
             <li><Link to="/dashboard">Dashboard</Link></li>
             <li><Link to="/videollamada">Conéctate</Link></li>
-            <LogoutButton />
           </>
         )}
       </ul>
+
+      <div className="auth-buttons">
+        {isAuthenticated ? <LogoutButton /> : <LoginButton text="Login" />}
+      </div>
     </div>
   );
 }

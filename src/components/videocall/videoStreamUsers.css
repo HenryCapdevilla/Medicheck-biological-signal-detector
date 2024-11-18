@@ -1,0 +1,9 @@
+#camera-off-message {
+    font-size: 24px;
+    color: red;
+    text-align: center;
+}
+
+.signal-active {
+    color: green;
+}

@@ -1,0 +1,43 @@
+.about-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    color: #333;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    text-align: center;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #006622;
+}
+
+.about-section {
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.about-section h2 {
+    font-size: 1.8em;
+    color: #02f50f;
+    margin-bottom: 10px;
+}
+
+.team-list, .tech-list, .infra-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.team-list li, .tech-list li, .infra-list li {
+    font-size: 1em;
+    padding: 5px 0;
+}
+
+p {
+    line-height: 1.6;
+    color: #555;
+}

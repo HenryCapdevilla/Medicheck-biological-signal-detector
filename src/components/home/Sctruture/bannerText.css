@@ -19,7 +19,7 @@
 
 @media (max-width: 1800px) {
     .header-txt {
-        width: 60%;
+        width: 100%;
         display: inline-block;
         align-content: center;
         justify-content: center;
@@ -44,7 +44,7 @@
 @media (max-width: 1052px) {
     .header-txt {
         padding-top: 50px;
-        width: 80%; /* Aumenta el ancho para pantallas medianas */
+        width: 100%;
         padding-left: 10px; /* Reduce el padding */
         align-content: center;
         justify-content: center;

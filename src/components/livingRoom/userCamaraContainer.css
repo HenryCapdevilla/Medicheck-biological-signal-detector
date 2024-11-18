@@ -6,6 +6,7 @@
 
 .body-livingroom{
     display: flex;
+    padding-top: 5em;
 }
 .User-Content {
     width: 90vw;
@@ -86,7 +87,7 @@
         text-align: center;
         z-index: 10;
         top: 40%;
-        transform: translate(65%, 0%);
+        transform: translate(35%, 0%);
     }
 
     .footer-disclamer{

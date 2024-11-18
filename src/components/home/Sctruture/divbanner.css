@@ -1,10 +1,21 @@
+.shape__bg {
+			position: fixed;
+      width: 100%;
+			height: 80vh;
+      object-fit: cover;
+      mix-blend-mode: soft-light;
+      opacity: 0.5;
+      z-index: -100;
+}
+
+
 /* Estilos generales */
 .ContainerBanner {
     display: flex;
     position: relative;
     width: 100%;
     padding: 20px; /* Añade un poco de padding para el espacio en pantallas pequeñas */
-    padding-left: 140px;
+		padding-left: 50px !important;
 }
 
 /* Media query para pantallas menores a 1052px */

@@ -1,14 +1,17 @@
 import { useForm } from "react-hook-form";
 import { useAuth } from "../../context/AuthContext";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Button from "../register/Button";
 import Character from "../register/Character.jsx"
 function LoginPage() {
     const { register, handleSubmit, formState: {errors}} = useForm();
     const { signin, errors: loginErrors } = useAuth();
-
+    const navigate = useNavigate();
+    const location = useLocation();
     const onSubmit = async (data) => {
         signin(data); // Captura el resultado
+        const redirectPath = location.state?.from || '/'; // Ruta a donde redirigir después del login
+        navigate(redirectPath);
     };
 
     return (

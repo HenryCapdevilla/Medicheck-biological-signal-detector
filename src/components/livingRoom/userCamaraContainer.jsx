@@ -48,10 +48,10 @@ const ButtonCamera = () => {
                     <h1 className="text-general">Ya puedes ingresar a la reunión</h1>
                     <button onClick={joinCall} className="join-call-button">Unirse a la Videollamada</button>
                     <h1 className="text-general">ROOM ID: {roomID} </h1>
+                    <CameraLuminosityCheck videoRef={videoRef} />
+                    <h1 className="footer-disclamer">Esta reunión está encriptada en la nube.</h1>
                 </div>
             </div>
-            <CameraLuminosityCheck videoRef={videoRef} />
-            <h1 className="footer-disclamer">Esta reunión está encriptada en la nube.</h1>
         </div>
     );
 };

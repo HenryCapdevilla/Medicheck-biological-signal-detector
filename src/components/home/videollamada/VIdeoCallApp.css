@@ -1,15 +1,6 @@
 .myId {
-	margin-right: 5rem;
+	margin-right: 1rem;
 	border-radius: 5px;
-	background: #c9d6ff; /* fallback for old browsers */
-	background: -webkit-linear-gradient(to right, #e2e2e2, #c9d6ff); /* Chrome 10-25, Safari 5.1-6 */
-	background: linear-gradient(
-		to right,
-		#e2e2e2,
-		#c9d6ff
-	); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-	padding: 2rem;
 	display: grid;
 	justify-content: center;
 	align-content: center;
@@ -99,18 +90,6 @@
     position: relative;
 }
 
-.display-buttons {
-    position: absolute;
-    bottom: 12%; /* Ajusta la distancia desde el borde inferior */
-    left: 38%; /* Centra horizontalmente respecto al contenedor */
-    transform: translateX(-54%); /* Centra en relación al 50% del ancho del contenedor */
-    width: 65%; /* Ajusta el ancho de los botones */
-    height: 70px;
-    display: flex;
-    justify-content: space-evenly; /* Distribuye uniformemente los botones */
-    z-index: 10;
-}
-
 /* Ajuste en pantallas más pequeñas */
 @media (max-width: 768px) {
     .display-buttons {
@@ -127,33 +106,10 @@
 
 /* videocallContent.css */
 
-.VideoCall-wrapper {
-    display: flex;
-    justify-content: space-between;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    background: white;
-    position:absolute;
-    top:0;
-}
-
 .Signal-data {
-    border: 2px solid #ccc;
-    transition: all 0.5s ease;
-    height: 12vh;
     color: #000000;
-    position: relative;
-    display: flex;
     background: #ffffff;
-    box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.3);
-    margin-top: 20px;
-    border-radius: 10px;
-    gap: 10px;
-    width: 45vw;
-    transform: translate(-8%, 0%);
     z-index: 100;
-    margin-left: 10%;
 }
 
 .measurements {
@@ -182,6 +138,8 @@
 .VideoCall-content {
     flex: 1;
     margin-right: 20px; /* Añadimos margen entre VideoCall y Signal */
+    padding-left: 35px;
+    padding-top: 3em;
 }
 
 /* Estilos del botón de señal */
@@ -198,10 +156,120 @@
 }
 
 .video{
-    display: flex;
+    display: grid;
     position: relative;
-    z-index: 100;
-    top: -56%;
-    left: 70%;
-    width: 30vw;
+    grid-column: 1 / 3; /* Ocupa todo el ancho */
+    grid-row: 1; /* En la primera fila */
+}
+
+/* Contenedor principal de la videollamada */
+.VideoCall-wrapper {
+    background: #c9d6ff; /* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, #e2e2e2, #c9d6ff); /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(
+		to right,
+		#e2e2e2,
+		#c9d6ff
+	); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dos columnas iguales */
+    grid-template-rows: auto auto; /* Ajusta según el contenido */
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    gap: 10px; /* Espacio entre elementos */
+}
+
+/* Contenedor del video principal */
+.video-container {
+    grid-column: 1 / 3; /* Ocupa todo el ancho */
+    grid-row: 1; /* En la primera fila */
+    width: 95%;
+    height: 95%;
+    margin: auto;
+    position: relative;
+    background: lightgrey;
+    border-radius: 19px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 50px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 26px -18px inset;
+}
+
+/* Texto centrado cuando la cámara está apagada */
+.Camera-off-text {
+    color: white;
+    font-size: 30px;
+    display: grid;
+    place-items: center; /* Centra el texto horizontal y verticalmente */
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+}
+
+/* Ajuste para pantallas pequeñas */
+@media (max-width: 768px) {
+    .Camera-off-text {
+        font-size: 20px;
+    }
+}
+
+/* Contenedor de botones debajo del video */
+.display-buttons {
+    grid-column: 1 / 3; /* Ocupa todo el ancho */
+    grid-row: 2; /* En la segunda fila */
+    justify-self: center; /* Centra horizontalmente dentro del grid */
+    width: 65%; 
+    height: 70px;
+    display: grid;
+    grid-auto-flow: column;
+    gap: 10px;
+    z-index: 10;
+    align-items: start;
+    justify-content: center;
+}
+
+/* Contenedor de usuarios remotos */
+.RemoteUser {
+    background-color: aqua;
+    width: 25%;
+    height: 25%;
+    grid-column: 2; /* Segunda columna */
+    grid-row: 1; /* Primera fila */
+    align-self: start; /* Alinea al inicio de la fila */
+    justify-self: end; /* Alinea al final de la columna */
+    border-radius: 10px;
+    z-index: 8;
+}
+
+/* Contenedor de datos de señal */
+.Signal-data {
+    grid-column: 1; /* Primera columna */
+    grid-row: 5; /* Segunda fila */
+    width: 90%;
+    height: 12vh;
+    margin: auto;
+    background: #ffffff;
+    box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.3);
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dos columnas iguales */
+    gap: 10px; /* Espacio entre columnas */
+}
+
+/* Medidas y textos dentro del Signal-data */
+.measurements {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+}
+.measurements p {
+    font-size: 18px;
+    margin: 0;
+}
+.measurements .icon-heart {
+    color: red;
+}
+.measurements .icon-lungs {
+    color: blue;
 }
