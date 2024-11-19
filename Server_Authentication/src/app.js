@@ -10,7 +10,9 @@ const app = express();
 
 app.use(cors({
     origin: ['http://localhost:3000', 'https://medicheck.website'],
-    credentials:true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],  // Métodos permitidos
+    allowedHeaders: ['Content-Type', 'Authorization'],  // Cabeceras permitidas
+    credentials: true,  // Si usas cookies o autenticación basada en sesión
 }));
 app.use(morgan('dev'));
 app.use(express.json());
