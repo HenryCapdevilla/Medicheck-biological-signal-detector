@@ -15,7 +15,6 @@ import { AuthProvider } from "./context/AuthContext";
 import { VideoProvider } from "./context/videoProvider";
 import ProtectedRoute from "./ProtectedRoute";
 import Profile from "./components/profile/Profile";
-import VideocallContent from "./components/videocall/videocallContent";
 import Dashboard from "./components/dashboard/Dashboard.jsx";
 import VideoCallApp from "./components/home/videollamada/VideoCallApp";
 import AdminPage from "./pages/admin/AdminPage";
@@ -72,7 +71,6 @@ function AppContent() {
             <Route path="/Profile" element={<Profile />} />
             <Route path="/homecall" element={<CrudRooms />} />
             <Route path="/livingroom/:roomID" element={<UserCamaraContainer />} />
-            <Route path="/videocall/:roomID" element={<VideocallContent />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/videollamada/:roomID" element={<VideoCallApp />} />
             <Route element={<ProtectedAdminRoute />}>
