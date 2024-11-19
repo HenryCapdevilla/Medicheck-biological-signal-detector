@@ -17,7 +17,7 @@ const server = https.createServer(options, app);
 // Configurar Socket.IO con CORS
 const io = socketIo(server, {
     cors: {
-        origin: ['https://localhost:3000', 'https://medicheck.website'],
+        origin: ['https://localhost:3000', 'https://medicheck.website', 'https://medicheck.website/signal'],
         methods: ['GET', 'POST', 'PUT', 'DELETE'],
         allowedHeaders: ['Content-Type', 'Authorization'],
         credentials: true,

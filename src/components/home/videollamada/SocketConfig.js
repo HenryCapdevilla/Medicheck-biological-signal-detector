@@ -1,12 +1,11 @@
 // socketConfig.js
 import io from "socket.io-client";
 
-const socket = io('https://localhost:8080', {
+const socket = io('https://medicheck.website/signal', {
     withCredentials: true,
-    transports: ['websocket'],
-  });
-  
-//Hola.auida
+    transports: ['websocket'], // Forzar WebSocket como transporte
+});
+
 // Configura el listener para el evento 'newUserJoined' aquí
 socket.on("newUserJoined", (data) => {
   const { newUserID, newUsername } = data;

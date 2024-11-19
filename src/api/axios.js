@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-    baseURL: 'https://localhost:3001/api',
+    baseURL: 'https://medicheck.website/api',
     withCredentials: true // Permitir el envío de cookies
 });
 
