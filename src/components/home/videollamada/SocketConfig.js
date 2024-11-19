@@ -3,7 +3,6 @@ import io from "socket.io-client";
 
 const socket = io('https://medicheck.website/signal', {
     withCredentials: true,
-    transports: ['websocket'], // Forzar WebSocket como transporte
 });
 
 // Configura el listener para el evento 'newUserJoined' aquí
