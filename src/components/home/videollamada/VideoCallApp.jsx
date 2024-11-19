@@ -19,7 +19,7 @@ import SignalToggleButton from "../../videocall/signalToggleButton";
 import ClinicalHistoryButton from "../../videocall/clinicalHistoryButton";
 import VideoStream from "../../videocall/videoStreamUsers";
 import UserCard from "./DashboardSignals";
-import socket from "./SocketConfig"
+import socket from './SocketConfig'; // Asegúrate de usar la configuración correcta de socket
 
 // Componente principal de la aplicación de videollamada
 const VideoCallApp = () => {
@@ -49,6 +49,7 @@ const VideoCallApp = () => {
     const [heartRate, setHeartRate] = useState(null);
     const [sp02, setSp02] = useState(null);
 
+    const [isConnected, setIsConnected] = useState(false); // Estado para controlar si se conectó
     const navigate = useNavigate(); // Usar useNavigate
 
     const { roomID } = useParams(); 
@@ -69,17 +70,22 @@ const VideoCallApp = () => {
 
     // useEffect para registrar el usuario y configurar la conexión inicial con el servidor
     useEffect(() => {
-        socket.emit("registerUser", { Username: user.username, RoomID:roomID }); // Enviar un email único al servidor
+      if (!isConnected) return; // Solo se ejecuta si la conexión está activa
 
-        socket.on("me", (id) => {
-            console.log("ID del usuario:", id);
-            setMe(id);
-        });
+      // Registrar el usuario en el servidor
+      socket.emit("registerUser", { Username: user.username, RoomID: roomID });
 
-        return () => {
-            socket.off("me"); // Remover el evento cuando se desmonte el componente
-        };
-    }, []); // Solo se ejecuta al montar el componente
+      // Configura el listener para recibir la ID del usuario
+      socket.on("me", (id) => {
+          console.log("ID del usuario:", id);
+          setMe(id);
+      });
+
+      // Limpia los listeners cuando el componente se desmonte
+      return () => {
+          socket.off("me");
+      };
+  }, [isConnected, roomID, user.username]); // Ejecuta solo cuando `isConnected` cambie
 
     // useEffect para obtener el stream de video y configurar el socket
     useEffect(() => {

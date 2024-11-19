@@ -9,9 +9,8 @@ import taskRoutes from '../routes/task.routes.js';
 const app = express();
 
 app.use(cors({
-    origin: ['https://localhost:3000', 'https://medicheck.website'],
+    origin: "*", 
     methods: ['GET', 'POST', 'PUT', 'DELETE'],  // Métodos permitidos
-    allowedHeaders: ['Content-Type', 'Authorization'],  // Cabeceras permitidas
     credentials: true,  // Si usas cookies o autenticación basada en sesión
 }));
 app.use(morgan('dev'));
