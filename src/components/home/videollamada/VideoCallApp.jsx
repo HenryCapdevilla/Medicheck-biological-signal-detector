@@ -5,7 +5,6 @@ import AssignmentIcon from "@mui/icons-material/Assignment";
 
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import Peer from "simple-peer";
-import io from "socket.io-client";
 import { VideoContext } from "../../../context/videoProvider"; // Asegúrate de importar correctamente el VideoContext
 
 import "./VIdeoCallApp.css";
@@ -20,9 +19,7 @@ import SignalToggleButton from "../../videocall/signalToggleButton";
 import ClinicalHistoryButton from "../../videocall/clinicalHistoryButton";
 import VideoStream from "../../videocall/videoStreamUsers";
 import UserCard from "./DashboardSignals";
-
-// Conecta el cliente con el servidor de Socket.IO en el puerto 8080
-const socket = io.connect('http://localhost:8080');
+import socket from "./SocketConfig"
 
 // Componente principal de la aplicación de videollamada
 const VideoCallApp = () => {

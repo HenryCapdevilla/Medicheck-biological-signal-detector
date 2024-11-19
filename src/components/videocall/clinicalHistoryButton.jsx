@@ -6,7 +6,7 @@ import './clinicalHistoryButton.css';
 
 const ClinicalHistoryButton = () => {
   const { handleUploadHistory, user } = useAuth();
-  const { register, handleSubmit, setValue } = useForm();
+  const { register, handleSubmit } = useForm();
   const [isModalOpen, setModalOpen] = useState(false);
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({

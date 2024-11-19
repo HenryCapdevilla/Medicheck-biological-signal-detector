@@ -1,7 +1,5 @@
 import React from 'react';
 import BannerText from './BannerTextdefault.jsx';
-import Imagenbanner from '../imagenbanner.jsx';
-import img1 from '../../../shape-bg.png';
 import { Container, Row, Col } from 'react-bootstrap';
 import "./divbanner.css"
 

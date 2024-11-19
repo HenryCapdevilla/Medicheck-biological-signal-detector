@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import CameraToggleButton from '../livingRoom/cameraToggleButton';
 import MicrophoneToggleButton from '../livingRoom/microphoneToggleButton';
 import SignalToggleButton from './signalToggleButton';

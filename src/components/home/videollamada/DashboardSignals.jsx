@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { HeartIcon, SunIcon, GlobeAltIcon } from '@heroicons/react/outline'; // Importamos íconos desde Heroicons
 import './DashboardSignals.css';
-import useBrightness from "../../../helper/useBrightness";
 
 const UserCard = ({ heartRate, spO2, lux }) => {
   const [clicked, setClicked] = useState(false);

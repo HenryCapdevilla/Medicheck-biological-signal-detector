@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Routes, Navigate, useLocation } from "react-router-dom";
-import Preloader from "../src/components/home/Pre";
+
 import Navbar from "./components/Navbar";
 import Home from "./components/home/Home";
 import About from "./components/About/About";
@@ -14,7 +14,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { AuthProvider } from "./context/AuthContext";
 import { VideoProvider } from "./context/videoProvider";
 import ProtectedRoute from "./ProtectedRoute";
-import UserProfile from "./components/profile/UserProfile";
 import Profile from "./components/profile/Profile";
 import VideocallContent from "./components/videocall/videocallContent";
 import Dashboard from "./components/dashboard/Dashboard.jsx";
