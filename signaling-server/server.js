@@ -24,6 +24,7 @@ function areUsersInSameRoom(userID1, userID2, rooms) {
   };
 
 io.on("connection", (socket) => {
+    console.log('Nuevo cliente conectado:', socket.id);
     socket.on("registerUser", (data) => {
         const { Username, RoomID } = data;
 

@@ -13,4 +13,12 @@ socket.on("newUserJoined", (data) => {
   // Aquí podrías actualizar el estado global si lo necesitas
 });
 
+socket.on('connect', () => {
+  console.log('Conexión WebSocket establecida');
+});
+
+socket.on('connect_error', (error) => {
+  console.error('Error de conexión WebSocket:', error);
+});
+
 export default socket;
