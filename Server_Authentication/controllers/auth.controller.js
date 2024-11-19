@@ -78,7 +78,12 @@ export const register = async (req, res) => {
         const token = await createAccessToken({ id: userSaved._id });
 
         // Envía la cookie con el token al cliente
-        res.cookie("token", token);
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: true, // Solo en HTTPS
+            domain: 'medicheck.website',
+            sameSite: 'Strict', // Opcional: Asegura que las cookies solo se envíen en el dominio principal
+        });
 
         // Responde con los datos del usuario recién creado
         res.status(201).json({
@@ -121,7 +126,12 @@ export const login = async (req, res) => {
         const token = await createAccessToken({ id: userFound._id });
 
         // Envía la cookie con el token al cliente
-        res.cookie("token", token);
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: true, // Solo en HTTPS
+            domain: 'medicheck.website',
+            sameSite: 'Strict', // Opcional: Asegura que las cookies solo se envíen en el dominio principal
+        });
 
         // Responde con los datos del usuario
         res.json({
@@ -212,8 +222,11 @@ export const verifyToken = async (req, res) => {
         if (!userFound) return res.status(401).json({ message: "Unauthorized" });
 
         // Vuelve a enviar la cookie con el token al cliente
-        res.cookie("token", token, {
-            sameSite: "None",
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: true, // Solo en HTTPS
+            domain: 'medicheck.website',
+            sameSite: 'Strict', // Opcional: Asegura que las cookies solo se envíen en el dominio principal
         });
 
         // Responde con los datos del usuario
