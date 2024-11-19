@@ -1,7 +1,7 @@
 // socketConfig.js
 import io from "socket.io-client";
 
-const socket = io('http://localhost:8080', {
+const socket = io('https://localhost:8080', {
     withCredentials: true,
     transports: ['websocket'],
   });

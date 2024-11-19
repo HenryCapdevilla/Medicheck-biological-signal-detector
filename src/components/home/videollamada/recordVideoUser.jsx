@@ -46,7 +46,7 @@ const VideoRecordButton = ({ onHeartRateUpdate, onSpo2RateUpdate, userVideoRef }
                 const formData = new FormData();
                 formData.append('video', videoFile, videoFile.name);
 
-                fetch('http://localhost:5000/upload', {
+                fetch('https://localhost:5000/upload', {
                     method: 'POST',
                     body: formData
                 })
