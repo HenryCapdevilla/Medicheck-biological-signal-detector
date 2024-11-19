@@ -1,27 +1,14 @@
-const fs = require("fs");
-const https = require("https");
 const express = require("express");
-const socketIo = require("socket.io");
-
+const http = require("http");
 const app = express();
-
-// Configuración de certificados SSL
-const options = {
-    key: fs.readFileSync("/etc/ssl/private/clave.key"), // Ruta a la clave privada
-    cert: fs.readFileSync("/etc/ssl/certs/fullchain.pem"), // Ruta al certificado
-};
-
-// Crear el servidor HTTPS
-const server = https.createServer(options, app);
-
-// Configurar Socket.IO con CORS
-const io = socketIo(server, {
+const server = http.createServer(app);
+const io = require("socket.io")(server, {
     cors: {
-        origin: ['https://localhost:3000', 'https://medicheck.website', 'https://medicheck.website/signal'],
-        methods: ['GET', 'POST', 'PUT', 'DELETE'],
-        allowedHeaders: ['Content-Type', 'Authorization'],
-        credentials: true,
-    },
+        origin: ['https://medicheck.website/signal'],
+        methods: ['GET', 'POST', 'PUT', 'DELETE'],  // Métodos permitidos
+        allowedHeaders: ['Content-Type', 'Authorization'],  // Cabeceras permitidas
+        credentials: true,  // Si usas cookies o autenticación basada en sesión
+    }
 });
 
 let rooms = {}; // Almacena los RoomID y los usuarios asociados a cada uno
