@@ -6,7 +6,7 @@ const socket = io('http://localhost:8080', {
     transports: ['websocket'],
   });
   
-
+//Hola.auida
 // Configura el listener para el evento 'newUserJoined' aquí
 socket.on("newUserJoined", (data) => {
   const { newUserID, newUsername } = data;
