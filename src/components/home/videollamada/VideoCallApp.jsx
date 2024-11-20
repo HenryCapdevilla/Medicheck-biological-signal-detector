@@ -48,16 +48,13 @@ const VideoCallApp = () => {
     const iceServers = [
       {
         urls: [
-          'stun:relay1.expressturn.com:3478',
-          'turn:relay1.expressturn.com:3478'
+          'turn:turn.anyfirewall.com:443?transport=tcp'  // El servidor TURN que mencionaste
         ],
-        username: 'efDOVNZ6UJENHV6O8B',
-        credential: 'ZbOL2NC3hpqf2HuH'
-      }
+        username: 'webrtc',   // Tu nombre de usuario
+        credential: 'webrtc'  // Tu contraseña
+      },
     ];
     
-    
-
     const [isSignalActive, setIsSignalActive] = useState(false);
     const [heartRate, setHeartRate] = useState(null);
     const [sp02, setSp02] = useState(null);
@@ -152,74 +149,105 @@ const VideoCallApp = () => {
         setCallEnded(true); // Actualizar el estado para activar el useEffect
     };
 
-    // Función para iniciar una llamada a otro usuario
     const callUser = (id) => {
-		console.log("Stream", stream); // Verifica si stream es un MediaStream
-		if (stream && stream.getTracks) {
-		    console.log("stream es un MediaStream válido");
-		} else {
-		    console.log("stream no es un MediaStream válido");
-		}
-
-        const peer = new Peer({
-            initiator: true, // Define que este usuario inicia la conexión
-            trickle: false, // Desactiva la transmisión de señalización en modo "trickle"
-            stream: stream, // Incluye el stream de video local
-            config: {
-              iceServers: iceServers // Usar los servidores ICE
+      console.log("Stream", stream); // Verifica si stream es un MediaStream
+      if (stream && stream.getTracks) {
+          console.log("stream es un MediaStream válido");
+      } else {
+          console.log("stream no es un MediaStream válido");
+      }
+  
+      // Creación de la conexión WebRTC usando RTCPeerConnection
+      const peerConnection = new RTCPeerConnection({
+          iceServers: iceServers // Usar los servidores ICE
+      });
+  
+      // Se agrega el stream local a la conexión
+      stream.getTracks().forEach(track => peerConnection.addTrack(track, stream));
+  
+      // Evento 'icecandidate' para manejar la recolección de candidatos ICE
+      peerConnection.onicecandidate = event => {
+          if (event.candidate) {
+              socket.emit("iceCandidate", {
+                  candidate: event.candidate,
+                  roomID: roomID
+              });
           }
-        });
-		console.log("peer", peer)
+      };
+  
+      // Evento 'track' para manejar el stream remoto
+      peerConnection.ontrack = (event) => {
+          userVideo.current.srcObject = event.streams[0]; // Asigna el stream remoto al video
+      };
+  
+      // Creación de la oferta de la llamada
+      peerConnection.createOffer()
+          .then(offer => {
+              return peerConnection.setLocalDescription(offer);
+          })
+          .then(() => {
+              socket.emit("callUser", {
+                  userToCall: id,
+                  signalData: peerConnection.localDescription,
+                  from: me,
+                  name: name,
+              });
+          })
+          .catch(err => {
+              console.error("Error al crear la oferta", err);
+          });
+  };
+  
 
-        // Evento 'signal' para enviar datos de señalización al usuario remoto
-        peer.on("signal", (data) => {
-            socket.emit("callUser", { // Emite un evento al servidor con los datos de la llamada
-                userToCall: id,
-                signalData: data,
-                from: me,
-                name: name,
-            });
-        });
+  const answerCall = () => {
+    setCallAccepted(true); // Cambia el estado a llamada aceptada
 
-        // Evento 'stream' para recibir el stream de video del usuario remoto
-        peer.on("stream", (stream) => {
-            userVideo.current.srcObject = stream; // Asigna el stream remoto a la referencia de video
-        });
+    // Creación de la conexión WebRTC usando RTCPeerConnection
+    const peerConnection = new RTCPeerConnection({
+      iceServers: iceServers, // Usar los servidores ICE
+    });
 
-        // Evento para aceptar la llamada desde el servidor
-        socket.on("callAccepted", (signal) => {
-            setCallAccepted(true); // Cambia el estado a llamada aceptada
-            peer.signal(signal); // Completa la conexión de señalización con la señal remota
-        });
+    // Se agrega el stream local a la conexión
+    stream
+      .getTracks()
+      .forEach((track) => peerConnection.addTrack(track, stream));
 
-        connectionRef.current = peer; // Almacena la referencia de la conexión
+    // Evento 'icecandidate' para manejar la recolección de candidatos ICE
+    peerConnection.onicecandidate = (event) => {
+      if (event.candidate) {
+        socket.emit("iceCandidate", {
+          candidate: event.candidate,
+          roomID: roomID,
+        });
+      }
     };
 
-    // Función para responder una llamada entrante
-    const answerCall = () => {
-        setCallAccepted(true); // Cambia el estado a llamada aceptada
-        const peer = new Peer({
-            initiator: false, // Define que este usuario responde la conexión
-            trickle: false,
-            stream: stream,
-            config: {
-              iceServers: iceServers // Usar los servidores ICE
-          }
-        });
-
-        // Evento 'signal' para enviar la señal de respuesta al llamante
-        peer.on("signal", (data) => {
-            socket.emit("answerCall", { signal: data, to: caller });
-        });
-
-        // Evento 'stream' para recibir el stream de video del usuario llamante
-        peer.on("stream", (stream) => {
-            userVideo.current.srcObject = stream;
-        });
-
-        peer.signal(callerSignal); // Completa la conexión de señalización con la señal del llamante
-        connectionRef.current = peer;
+    // Evento 'track' para manejar el stream remoto
+    peerConnection.ontrack = (event) => {
+      userVideo.current.srcObject = event.streams[0]; // Asigna el stream remoto al video
     };
+
+    // Responder con la señal del llamante
+    peerConnection
+      .setRemoteDescription(callerSignal)
+      .then(() => {
+        return peerConnection.createAnswer();
+      })
+      .then((answer) => {
+        return peerConnection.setLocalDescription(answer);
+      })
+      .then(() => {
+        socket.emit("answerCall", {
+          signal: peerConnection.localDescription,
+          to: caller,
+        });
+      })
+      .catch((err) => {
+        console.error("Error al responder la llamada", err);
+      });
+
+    connectionRef.current = peerConnection;
+  };
 
     // Renderizado del componente
     return (
