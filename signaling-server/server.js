@@ -13,18 +13,21 @@ const io = require("socket.io")(server, {
 
 let rooms = {}; // Almacena los RoomID y los usuarios asociados a cada uno
 
+// Función para verificar si dos usuarios están en la misma sala
 function areUsersInSameRoom(userID1, userID2, rooms) {
     for (const roomID in rooms) {
-      const usersInRoom = Object.values(rooms[roomID]);
-      if (usersInRoom.includes(userID1) && usersInRoom.includes(userID2)) {
-        return roomID; // Devuelve el RoomID si ambos usuarios están en la misma sala
-      }
+        const usersInRoom = Object.values(rooms[roomID]);
+        if (usersInRoom.includes(userID1) && usersInRoom.includes(userID2)) {
+            return roomID; // Devuelve el RoomID si ambos usuarios están en la misma sala
+        }
     }
     return null; // Si no están en la misma sala
-  };
+}
 
 io.on("connection", (socket) => {
     console.log('Nuevo cliente conectado:', socket.id);
+
+    // Registrar un usuario en una sala
     socket.on("registerUser", (data) => {
         const { Username, RoomID } = data;
 
@@ -68,32 +71,33 @@ io.on("connection", (socket) => {
 
     // Registrar evento 'callUser'
     socket.on("callUser", (data) => {
-        const { userToCall, from } = data;
-        
-        console.log(typeof rooms);
-        console.log("Usuario que llama:", userToCall);
-        console.log("Usuario que recibe:", from);
-    
+        const { userToCall, from, signalData, name } = data;
+
         const roomID = areUsersInSameRoom(userToCall, from, rooms);
+
         // Validación de la sala
-        console.log("userRoom encontrado:", roomID);
-    
-        // Solo permite la llamada si ambos usuarios están en la misma sala
         if (roomID) {
             console.log(`Llamada iniciada de ${from} a ${userToCall} en la sala ${roomID}`);
-            io.to(data.userToCall).emit("callUser", { signal: data.signalData, from: data.from, name: data.name });
+            io.to(rooms[roomID][userToCall]).emit("callUser", {
+                signal: signalData,
+                from: data.from,
+                name: data.name
+            });
         } else {
             console.log(`Llamada no permitida: ${from} y ${userToCall} no están en la misma sala.`);
         }
-    
-        console.log("Estado actual de rooms:", JSON.stringify(rooms, null, 2));
     });
-
 
     // Registrar evento 'answerCall'
     socket.on("answerCall", (data) => {
-        io.to(data.to).emit("callAccepted", data.signal)
-        console.log("Estado actual de rooms:", JSON.stringify(rooms, null, 2));
+        io.to(data.to).emit("callAccepted", data.signal);
+    });
+
+    // Manejo de ICE Candidates
+    socket.on("iceCandidate", (data) => {
+        console.log("Enviando candidato ICE:", data);
+        // Enviar el candidato ICE al usuario correspondiente
+        io.to(data.to).emit("newIceCandidate", data.candidate);
     });
 
     // Evento para colgar la llamada
@@ -102,30 +106,28 @@ io.on("connection", (socket) => {
         
         // Notificar a todos los demás usuarios en la sala que la llamada ha finalizado
         socket.to(roomID).emit("callEnded");
-    
+
         // Verificar si la sala y el usuario existen
         if (rooms[roomID]) {
             // Buscar el Username correspondiente al socket.id en la sala
             const username = Object.keys(rooms[roomID]).find(
                 (user) => rooms[roomID][user] === socket.id
             );
-        
+
             if (username) {
                 // Eliminar al usuario de la sala
                 delete rooms[roomID][username];
                 socket.leave(roomID);
-            
+
                 // Si la sala queda vacía, eliminarla del objeto rooms
                 if (Object.keys(rooms[roomID]).length === 0) {
                     delete rooms[roomID];
                 }
             }
         }
-    
+
         console.log("Estado actual de rooms después de colgar:", JSON.stringify(rooms, null, 2));
     });
-
-
 });
 
 server.listen(8080, () => {
