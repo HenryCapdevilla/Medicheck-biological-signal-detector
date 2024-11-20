@@ -45,6 +45,13 @@ const VideoCallApp = () => {
     const userVideo = useRef(); // Referencia al video del usuario remoto
     const connectionRef = useRef(); // Referencia a la conexión de `Peer`
 
+    const iceServers = [
+      {
+        urls: ['stun:stun.l.google.com:19302', 'turn:turn.server.com:3478']
+      }
+    ];
+    
+
     const [isSignalActive, setIsSignalActive] = useState(false);
     const [heartRate, setHeartRate] = useState(null);
     const [sp02, setSp02] = useState(null);
@@ -152,6 +159,9 @@ const VideoCallApp = () => {
             initiator: true, // Define que este usuario inicia la conexión
             trickle: false, // Desactiva la transmisión de señalización en modo "trickle"
             stream: stream, // Incluye el stream de video local
+            config: {
+              iceServers: iceServers // Usar los servidores ICE
+          }
         });
 		console.log("peer", peer)
 
@@ -186,6 +196,9 @@ const VideoCallApp = () => {
             initiator: false, // Define que este usuario responde la conexión
             trickle: false,
             stream: stream,
+            config: {
+              iceServers: iceServers // Usar los servidores ICE
+          }
         });
 
         // Evento 'signal' para enviar la señal de respuesta al llamante
