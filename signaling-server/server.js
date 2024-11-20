@@ -6,11 +6,9 @@ const io = require("socket.io")(server, {
     cors: {
         origin: "*",  // Permite cualquier origen
         methods: ['GET', 'POST', 'PUT', 'DELETE'],
-        allowedHeaders: ['Content-Type', 'Authorization'],
         credentials: true,  // Mantiene la opción para las credenciales (cookies, autenticación)
     }
 });
-
 
 let rooms = {}; // Almacena los RoomID y los usuarios asociados a cada uno
 
