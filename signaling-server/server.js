@@ -69,24 +69,30 @@ io.on("connection", (socket) => {
         console.log("Estado actual de rooms:", JSON.stringify(rooms, null, 2));
     });
 
-    // Registrar evento 'callUser'
     socket.on("callUser", (data) => {
-        const { userToCall, from, signalData, name } = data;
-
+        const { userToCall, from } = data;
+        
+        console.log("Usuario que llama:", userToCall);
+        console.log("Usuario que recibe:", from);
+    
         const roomID = areUsersInSameRoom(userToCall, from, rooms);
-
-        // Validación de la sala
+    
         if (roomID) {
             console.log(`Llamada iniciada de ${from} a ${userToCall} en la sala ${roomID}`);
+            
+            // Envía el mensaje de señalización de la llamada al usuario receptor
             io.to(rooms[roomID][userToCall]).emit("callUser", {
-                signal: signalData,
+                signal: data.signalData,
                 from: data.from,
                 name: data.name
             });
+            
+            // Ahora el receptor puede enviar sus candidatos ICE al que llamó
         } else {
             console.log(`Llamada no permitida: ${from} y ${userToCall} no están en la misma sala.`);
         }
     });
+    
 
     // Registrar evento 'answerCall'
     socket.on("answerCall", (data) => {
