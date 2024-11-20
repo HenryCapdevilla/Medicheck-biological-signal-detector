@@ -79,9 +79,6 @@ export const register = async (req, res) => {
 
         // Envía la cookie con el token al cliente
         res.cookie('token', token, {
-            httpOnly: true,
-            secure: true, // Solo en HTTPS
-            domain: 'medicheck.website',
             sameSite: 'none', // Opcional: Asegura que las cookies solo se envíen en el dominio principal
         });
 
@@ -127,9 +124,6 @@ export const login = async (req, res) => {
 
         // Envía la cookie con el token al cliente
         res.cookie('token', token, {
-            httpOnly: true,
-            secure: true, // Solo en HTTPS
-            domain: 'medicheck.website',
             sameSite: 'none', // Opcional: Asegura que las cookies solo se envíen en el dominio principal
         });
 
@@ -223,9 +217,6 @@ export const verifyToken = async (req, res) => {
 
         // Vuelve a enviar la cookie con el token al cliente
         res.cookie('token', token, {
-            httpOnly: true,
-            secure: true, // Solo en HTTPS
-            domain: 'medicheck.website',
             sameSite: 'none', // Opcional: Asegura que las cookies solo se envíen en el dominio principal
         });
 
