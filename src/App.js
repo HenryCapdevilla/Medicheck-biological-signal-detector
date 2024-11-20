@@ -25,6 +25,8 @@ import RegisterPage from "./pages/register/RegisterPage.jsx";
 import LoginPage from "./pages/login/LoginPage.jsx";
 import CrudRooms from "./components/home/Sctruture/CrudRooms";
 import OffcanvasMenu from "./components/Offcanvas"; // Componente Offcanvas
+import process from 'process';
+window.process = process;
 
 function AppContent() {
   const [load, updateLoad] = useState(true);
