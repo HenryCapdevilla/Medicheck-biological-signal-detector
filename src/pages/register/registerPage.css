@@ -3,13 +3,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  background-color: #f7f7f7;
+  min-height: 60vh;
+  padding-top: 4vh;
 }
 
 /* Estilos del formulario de registro */
 .register-form {
-  width: 100%;
+  width: 90%;
   max-width: 500px;
   padding: 30px;
   background: #ffffff;

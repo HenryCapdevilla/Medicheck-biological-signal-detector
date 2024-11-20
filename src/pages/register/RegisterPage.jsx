@@ -1,11 +1,10 @@
 import { useForm } from "react-hook-form";
-import './registerPage.css';
+import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { useAuth } from "../../context/AuthContext";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import Character from './Character';
-import Button from './Button';
 
 function RegisterPage() {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
@@ -20,162 +19,160 @@ function RegisterPage() {
     }, [isAuthenticated, navigate]);
 
     const onSubmit = async (values) => {
-        // Crear una copia de values sin el campo confirmPassword
         const { confirmPassword, ...userData } = values;
-        // Llamar a signup con los datos que se enviarán al backend
         signup(userData);
     };
 
     const password = watch("password");
 
     return (
-      <div className="register-container">
-        <form className="register-form" onSubmit={handleSubmit(onSubmit)}>
-          <Character />
-          {registerErrors.map((error, i) => (
-            <div className="Error-1" key={i}>
-              {error}
-            </div>
-          ))}
+        <Container className="d-flex justify-content-center align-items-center min-vh-100">
+            <Form className="p-4 shadow rounded" onSubmit={handleSubmit(onSubmit)} style={{ maxWidth: "500px", width: "100%" }}>
+                <Character />
+                {registerErrors.map((error, i) => (
+                    <div className="text-danger" key={i}>{error}</div>
+                ))}
 
-          {section === 1 && (
-            <div className="section">
-              <input
-                type="text"
-                {...register("firstName", { required: true })}
-                placeholder="Primer Nombre"
-              />
-              {errors.firstName && (
-                <p className="Error">Primer nombre es requerido</p>
-              )}
+                {section === 1 && (
+                    <div>
+                        <Form.Group controlId="firstName">
+                            <Form.Control
+                                type="text"
+                                {...register("firstName", { required: true })}
+                                placeholder="Primer Nombre"
+                                isInvalid={errors.firstName}
+                            />
+                            <Form.Control.Feedback type="invalid">Primer nombre es requerido</Form.Control.Feedback>
+                        </Form.Group>
 
-              <input
-                type="text"
-                {...register("secondName")}
-                placeholder="Segundo Nombre"
-              />
+                        <Form.Group controlId="secondName">
+                            <Form.Control
+                                type="text"
+                                {...register("secondName")}
+                                placeholder="Segundo Nombre"
+                            />
+                        </Form.Group>
 
-              <input
-                type="text"
-                {...register("firstSurname", { required: true })}
-                placeholder="Primer Apellido"
-              />
-              {errors.firstSurname && (
-                <p className="Error">Primer apellido es requerido</p>
-              )}
+                        <Form.Group controlId="firstSurname">
+                            <Form.Control
+                                type="text"
+                                {...register("firstSurname", { required: true })}
+                                placeholder="Primer Apellido"
+                                isInvalid={errors.firstSurname}
+                            />
+                            <Form.Control.Feedback type="invalid">Primer apellido es requerido</Form.Control.Feedback>
+                        </Form.Group>
 
-              <input
-                type="text"
-                {...register("secondSurname")}
-                placeholder="Segundo Apellido"
-              />
+                        <Form.Group controlId="secondSurname">
+                            <Form.Control
+                                type="text"
+                                {...register("secondSurname")}
+                                placeholder="Segundo Apellido"
+                            />
+                        </Form.Group>
 
-              <input
-                type="date"
-                {...register("birthDate", { required: true })}
-                max={new Date().toISOString().split("T")[0]}
-                placeholder="Fecha de Nacimiento"
-              />
-              {errors.birthDate && (
-                <p className="Error">Fecha de nacimiento es requerida</p>
-              )}
+                        <Form.Group controlId="birthDate">
+                            <Form.Control
+                                type="date"
+                                {...register("birthDate", { required: true })}
+                                max={new Date().toISOString().split("T")[0]}
+                                isInvalid={errors.birthDate}
+                            />
+                            <Form.Control.Feedback type="invalid">Fecha de nacimiento es requerida</Form.Control.Feedback>
+                        </Form.Group>
 
-              <select {...register("gender", { required: true })}>
-                <option value="">Seleccionar Sexo</option>
-                <option value="male">Masculino</option>
-                <option value="female">Femenino</option>
-                <option value="other">Otro</option>
-              </select>
-              {errors.gender && <p className="Error">Sexo es requerido</p>}
-            </div>
-          )}
+                        <Form.Group controlId="gender">
+                            <Form.Control as="select" {...register("gender", { required: true })} isInvalid={errors.gender}>
+                                <option value="">Seleccionar Sexo</option>
+                                <option value="male">Masculino</option>
+                                <option value="female">Femenino</option>
+                                <option value="other">Otro</option>
+                            </Form.Control>
+                            <Form.Control.Feedback type="invalid">Sexo es requerido</Form.Control.Feedback>
+                        </Form.Group>
+                    </div>
+                )}
 
-          {section === 2 && (
-            <div className="section">
-              <input
-                type="text"
-                {...register("username", { required: true })}
-                placeholder="Username"
-              />
-              {errors.username && (
-                <p className="Error">Username es requerido</p>
-              )}
+                {section === 2 && (
+                    <div>
+                        <Form.Group controlId="username">
+                            <Form.Control
+                                type="text"
+                                {...register("username", { required: true })}
+                                placeholder="Username"
+                                isInvalid={errors.username}
+                            />
+                            <Form.Control.Feedback type="invalid">Username es requerido</Form.Control.Feedback>
+                        </Form.Group>
 
-              <input
-                type="email"
-                {...register("email", { required: true })}
-                placeholder="Email"
-              />
-              {errors.email && <p className="Error">Email es requerido</p>}
+                        <Form.Group controlId="email">
+                            <Form.Control
+                                type="email"
+                                {...register("email", { required: true })}
+                                placeholder="Email"
+                                isInvalid={errors.email}
+                            />
+                            <Form.Control.Feedback type="invalid">Email es requerido</Form.Control.Feedback>
+                        </Form.Group>
 
-              <div className="password-field">
-                <input
-                  type={showPassword ? "text" : "password"}
-                  {...register("password", { required: true })}
-                  placeholder="Password"
-                />
-                <button
-                  type="button"
-                  className="toggle-password-visibility"
-                  onClick={() => setShowPassword(!showPassword)}
-                >
-                  {showPassword ? <VisibilityOff /> : <Visibility />}
-                </button>
-              </div>
-              {errors.password && (
-                <p className="Error">Password es requerido</p>
-              )}
+                        <Form.Group controlId="password">
+                            <Form.Control
+                                type={showPassword ? "text" : "password"}
+                                {...register("password", { required: true })}
+                                placeholder="Password"
+                                isInvalid={errors.password}
+                            />
+                            <Button variant="link" onClick={() => setShowPassword(!showPassword)} className="position-absolute" style={{ right: 10, top: 5 }}>
+                                {showPassword ? <VisibilityOff /> : <Visibility />}
+                            </Button>
+                            <Form.Control.Feedback type="invalid">Password es requerido</Form.Control.Feedback>
+                        </Form.Group>
 
-              <div className="password-field">
-                <input
-                  type={showConfirmPassword ? "text" : "password"}
-                  {...register("confirmPassword", {
-                    required: true,
-                    validate: (value) =>
-                      value === password || "Passwords do not match",
-                  })}
-                  placeholder="Confirm Password"
-                />
-                <button
-                  type="button"
-                  className="toggle-password-visibility"
-                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                >
-                  {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
-                </button>
-              </div>
-              {errors.confirmPassword && (
-                <p className="Error">{errors.confirmPassword.message}</p>
-              )}
+                        <Form.Group controlId="confirmPassword">
+                            <Form.Control
+                                type={showConfirmPassword ? "text" : "password"}
+                                {...register("confirmPassword", {
+                                    required: true,
+                                    validate: (value) => value === password || "Passwords do not match",
+                                })}
+                                placeholder="Confirm Password"
+                                isInvalid={errors.confirmPassword}
+                            />
+                            <Button variant="link" onClick={() => setShowConfirmPassword(!showConfirmPassword)} className="position-absolute" style={{ right: 10, top: 5 }}>
+                                {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                            </Button>
+                            <Form.Control.Feedback type="invalid">{errors.confirmPassword?.message}</Form.Control.Feedback>
+                        </Form.Group>
 
-              <input
-                type="text"
-                {...register("nip", { required: true })}
-                placeholder="Cédula Colombiana / NIP"
-              />
-              {errors.nip && <p className="Error">Cédula es requerida</p>}
-            </div>
-          )}
+                        <Form.Group controlId="nip">
+                            <Form.Control
+                                type="text"
+                                {...register("nip", { required: true })}
+                                placeholder="Cédula Colombiana / NIP"
+                                isInvalid={errors.nip}
+                            />
+                            <Form.Control.Feedback type="invalid">Cédula es requerida</Form.Control.Feedback>
+                        </Form.Group>
+                    </div>
+                )}
 
-          <div className="button-container">
-            {section > 1 && (
-              <button type="button" onClick={() => setSection(section - 1)}>
-                Anterior
-              </button>
-            )}
-            {section < 2 && (
-              <button type="button" onClick={() => setSection(section + 1)}>
-                Siguiente
-              </button>
-            )}
-            {section === 2 && <Button text="Registrar" />}
-          </div>
+                <div className="d-flex justify-content-between">
+                    {section > 1 && (
+                        <Button variant="secondary" onClick={() => setSection(section - 1)}>Anterior</Button>
+                    )}
+                    {section < 2 && (
+                        <Button variant="primary" onClick={() => setSection(section + 1)}>Siguiente</Button>
+                    )}
+                    {section === 2 && (
+                        <Button variant="success" type="submit" className="w-100">Registrar</Button>
+                    )}
+                </div>
 
-          <p className="redirect-link">
-            Already have an account? <Link to="/login">Login</Link>
-          </p>
-        </form>
-      </div>
+                <p className="text-center mt-3">
+                    ¿Ya tienes cuenta? <Link to="/login">Iniciar sesión</Link>
+                </p>
+            </Form>
+        </Container>
     );
 }
 
