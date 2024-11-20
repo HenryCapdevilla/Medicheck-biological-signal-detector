@@ -2,14 +2,13 @@ import { useForm } from "react-hook-form";
 import { useAuth } from "../../context/AuthContext";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Button from "../register/Button";
-import Character from "../register/Character.jsx";
-
+import Character from "../register/Character.jsx"
+import "../register/registerPage.css"
 function LoginPage() {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: {errors}} = useForm();
     const { signin, errors: loginErrors } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
-    
     const onSubmit = async (data) => {
         signin(data); // Captura el resultado
         const redirectPath = location.state?.from || '/'; // Ruta a donde redirigir después del login
@@ -18,35 +17,25 @@ function LoginPage() {
 
     return (
         <div className="register-container">
-            <form className="register-form" onSubmit={handleSubmit(onSubmit)}>
+            <form 
+                className="register-form"
+                onSubmit={handleSubmit(onSubmit)}
+            >   
                 <Character />
-                {loginErrors.map((error, i) => (
-                    <div className="Error-1" key={i}>
-                        {error}
-                    </div>
-                ))}
-                <div className="form-group mb-3">
-                    <input
-                        type="email"
-                        {...register("email", { required: true })}
-                        placeholder="Email"
-                        className="form-control"
-                    />
-                    {errors.email && <p className="Error">Email is required</p>}
-                </div>
+                {
+                    loginErrors.map((error, i) => (
+                        <div className="Error-1" key={i}>
+                            {error}
+                        </div>
+                    ))
+                }
+                <input type="email" {...register("email", { required: true })} placeholder="Email" />
+                {errors.email && <p className="Error">Email is required</p>}
 
-                <div className="form-group mb-3">
-                    <input
-                        type="password"
-                        {...register("password", { required: true })}
-                        placeholder="Password"
-                        className="form-control"
-                    />
-                    {errors.password && <p className="Error">Password is required</p>}
-                </div>
+                <input type="password" {...register("password", { required: true })} placeholder="Password" />
+                {errors.password && <p className="Error">Password is required</p>}
 
-                {/* Botón con tamaño reducido */}
-                <Button text="Login" className="btn btn-sm" />
+                <Button text="Login" />
 
                 <p className="redirect-link">
                     Don't have an account?&nbsp;<Link to="/register">Register</Link>
