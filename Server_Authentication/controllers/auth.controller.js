@@ -79,7 +79,7 @@ export const register = async (req, res) => {
 
         res.cookie('token', token, {
             httpOnly: true, // Seguridad, la cookie no se puede acceder con JavaScript
-            secure: process.env.NODE_ENV === 'production', // Solo si la aplicación está en producción (HTTPS)
+            secure: true, // Solo si la aplicación está en producción (HTTPS)
             sameSite: 'None', // Permite que la cookie se envíe en contextos cross-origin
             maxAge: 24 * 60 * 60 * 1000 // Duración de la cookie (1 día)
         });
@@ -124,11 +124,11 @@ export const login = async (req, res) => {
 
         // Genera un token de acceso para el usuario
         const token = await createAccessToken({ id: userFound._id });
-
+        console.log("token login", token);
         // Envía la cookie con el token al cliente
         res.cookie('token', token, {
             httpOnly: true, // Seguridad, la cookie no se puede acceder con JavaScript
-            secure: process.env.NODE_ENV === 'production', // Solo si la aplicación está en producción (HTTPS)
+            secure: true, // Solo si la aplicación está en producción (HTTPS)
             sameSite: 'None', // Permite que la cookie se envíe en contextos cross-origin
             maxAge: 24 * 60 * 60 * 1000 // Duración de la cookie (1 día)
         });
@@ -212,6 +212,7 @@ export const profile = async (req, res) => {
 // Controlador para verificar el token de acceso
 export const verifyToken = async (req, res) => {
     const { token } = req.cookies;
+    console.log("token verificado", token);
     if (!token) return res.status(401).json({ message: "Unauthorized" });
 
     // Verifica la validez del token
@@ -224,11 +225,11 @@ export const verifyToken = async (req, res) => {
 
         res.cookie('token', token, {
             httpOnly: true, // Seguridad, la cookie no se puede acceder con JavaScript
-            secure: process.env.NODE_ENV === 'production', // Solo si la aplicación está en producción (HTTPS)
+            secure: true, // Solo si la aplicación está en producción (HTTPS)
             sameSite: 'None', // Permite que la cookie se envíe en contextos cross-origin
             maxAge: 24 * 60 * 60 * 1000 // Duración de la cookie (1 día)
         });
-        
+
         // Responde con los datos del usuario
         return res.json({
             id: userFound._id,
