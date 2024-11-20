@@ -77,11 +77,13 @@ export const register = async (req, res) => {
         // Genera un token de acceso para el usuario
         const token = await createAccessToken({ id: userSaved._id });
 
-        // Envía la cookie con el token al cliente
-        res.cookie('token', token, {
-            sameSite: 'none', // Opcional: Asegura que las cookies solo se envíen en el dominio principal
-            domain: 'medicheck.website',
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: true, // Solo si usas HTTPS
+            sameSite: "strict", // Evita problemas con subdominios
+            maxAge: 1000 * 60 * 60 * 24, // 1 día de duración
         });
+        
 
         // Responde con los datos del usuario recién creado
         res.status(201).json({
@@ -124,10 +126,13 @@ export const login = async (req, res) => {
         const token = await createAccessToken({ id: userFound._id });
 
         // Envía la cookie con el token al cliente
-        res.cookie('token', token, {
-            sameSite: 'none', // Opcional: Asegura que las cookies solo se envíen en el dominio principal
-            domain: 'medicheck.website',
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: true, // Solo si usas HTTPS
+            sameSite: "strict", // Evita problemas con subdominios
+            maxAge: 1000 * 60 * 60 * 24, // 1 día de duración
         });
+        
 
         // Responde con los datos del usuario
         res.json({
@@ -217,11 +222,13 @@ export const verifyToken = async (req, res) => {
         const userFound = await User.findById(user.id);
         if (!userFound) return res.status(401).json({ message: "Unauthorized" });
 
-        // Vuelve a enviar la cookie con el token al cliente
-        res.cookie('token', token, {
-            sameSite: 'none', // Opcional: Asegura que las cookies solo se envíen en el dominio principal
-            domain: 'medicheck.website',
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: true, // Solo si usas HTTPS
+            sameSite: "strict", // Evita problemas con subdominios
+            maxAge: 1000 * 60 * 60 * 24, // 1 día de duración
         });
+        
 
         // Responde con los datos del usuario
         return res.json({
