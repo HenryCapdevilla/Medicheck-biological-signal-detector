@@ -112,33 +112,34 @@ export const AuthProvider = ({ children }) => {
   }, [errors]);
 
   useEffect(() => {
-    async function checkLogin() {
-        const cookies = Cookies.get();
-        if (!cookies.token) {
+    const checkLogin = async () => {
+        const token = Cookies.get("token");
+        if (!token) {
+            setUser(null);
             setIsAuthenticated(false);
             setLoading(false);
-            return setUser(null);
+            return;
         }
         try {
-            const res = await verifyTokenRequest(cookies.token);
-            console.log(res)
-            if (!res.data) {
+            const res = await verifyTokenRequest(token);
+            if (res.data) {
+                setUser(res.data);
+                setIsAuthenticated(true);
+            } else {
+                setUser(null);
                 setIsAuthenticated(false);
-                setLoading(false);
-                return;
             }
-            setIsAuthenticated(true);
-            setUser(res.data);
-            setLoading(false);
         } catch (error) {
-            console.log(error);
-            setIsAuthenticated(false);
+            console.error("Error verifying token:", error);
             setUser(null);
+            setIsAuthenticated(false);
+        } finally {
             setLoading(false);
         }
-    }
+    };
     checkLogin();
-  }, []);
+}, []);
+
 
   return (
     <AuthContext.Provider
