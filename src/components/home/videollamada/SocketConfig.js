@@ -1,7 +1,5 @@
-// socketConfig.js
 import io from "socket.io-client";
 
-// No establecemos la conexión aquí
 let socket;
 
 export const initializeSocket = () => {
@@ -18,8 +16,14 @@ export const initializeSocket = () => {
       console.error('Error de conexión WebSocket:', error);
     });
   }
+  return socket; // Asegúrate de devolver el socket inicializado
 };
 
-export const getSocket = () => socket;
+export const getSocket = () => {
+  if (!socket) {
+    throw new Error("Socket no inicializado. Llama a initializeSocket primero.");
+  }
+  return socket;
+};
 
-export default socket;
+export default initializeSocket;

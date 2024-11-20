@@ -37,8 +37,10 @@ function NavBar() {
       className={navColour ? "sticky" : "navbar"}
     >
       <Container>
-        <Navbar.Brand href="/" className="d-flex">
-          <img src={logo} className="img-fluid logo" alt="brand" />
+        <Navbar.Brand className="d-flex">
+          <Nav.Link as={Link} to="/" className="d-flex align-items-center">
+            <img src={logo} className="img-fluid logo" alt="brand" />
+          </Nav.Link>
         </Navbar.Brand>
         <Navbar.Toggle
           aria-controls="responsive-navbar-nav"
@@ -75,7 +77,8 @@ function NavBar() {
                 {user?.role === "paciente" && (
                   <Nav.Item>
                     <Nav.Link as={Link} to="/homecall">
-                      <CgFileDocument style={{ marginBottom: "2px" }} /> Conéctate
+                      <CgFileDocument style={{ marginBottom: "2px" }} />{" "}
+                      Conéctate
                     </Nav.Link>
                   </Nav.Item>
                 )}
@@ -92,7 +95,8 @@ function NavBar() {
                     </Nav.Item>
                     <Nav.Item>
                       <Nav.Link as={Link} to="/homecall">
-                        <CgFileDocument style={{ marginBottom: "2px" }} /> Conéctate
+                        <CgFileDocument style={{ marginBottom: "2px" }} />{" "}
+                        Conéctate
                       </Nav.Link>
                     </Nav.Item>
                   </>

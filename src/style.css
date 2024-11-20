@@ -289,12 +289,12 @@ button:focus {
 }
 
 .main-name {
-  color: #00ff0d;
+  color: #7ed957;
 }
 
 .Typewriter__wrapper {
   font-size: 1.5em !important;
-  color: #00ff0d !important;
+  color: #7ed957 !important;
   font-weight: 600 !important;
   line-height: 0.8;
 }
