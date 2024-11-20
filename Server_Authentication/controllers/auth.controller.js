@@ -79,9 +79,8 @@ export const register = async (req, res) => {
 
         res.cookie("token", token, {
             httpOnly: true,
-            secure: true, // Solo si usas HTTPS
-            sameSite: "strict", // Evita problemas con subdominios
-            maxAge: 1000 * 60 * 60 * 24, // 1 día de duración
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "strict",
         });
         
 
@@ -128,9 +127,8 @@ export const login = async (req, res) => {
         // Envía la cookie con el token al cliente
         res.cookie("token", token, {
             httpOnly: true,
-            secure: true, // Solo si usas HTTPS
-            sameSite: "strict", // Evita problemas con subdominios
-            maxAge: 1000 * 60 * 60 * 24, // 1 día de duración
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "strict",
         });
         
 
@@ -224,10 +222,10 @@ export const verifyToken = async (req, res) => {
 
         res.cookie("token", token, {
             httpOnly: true,
-            secure: true, // Solo si usas HTTPS
-            sameSite: "strict", // Evita problemas con subdominios
-            maxAge: 1000 * 60 * 60 * 24, // 1 día de duración
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "strict",
         });
+
         
 
         // Responde con los datos del usuario
