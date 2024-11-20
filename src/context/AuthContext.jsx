@@ -105,8 +105,9 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
       async function checkLogin() {
+        setLoading(true); // Establece el estado a "cargando"
         try {
-          const res = await verifyTokenRequest(); // No necesitas pasar manualmente la cookie
+          const res = await verifyTokenRequest(); // Verifica el token
           if (res.data) {
             setIsAuthenticated(true);
             setUser(res.data);
@@ -119,9 +120,11 @@ export const AuthProvider = ({ children }) => {
           setIsAuthenticated(false);
           setUser(null);
         }
+        setLoading(false); // Establece el estado a "no cargando"
       }
       checkLogin();
     }, []);
+    
     
 
     return (
