@@ -77,10 +77,11 @@ export const register = async (req, res) => {
         // Genera un token de acceso para el usuario
         const token = await createAccessToken({ id: userSaved._id });
 
-        res.cookie("token", token, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            sameSite: "strict",
+        res.cookie('token', token, {
+            httpOnly: true, // Seguridad, la cookie no se puede acceder con JavaScript
+            secure: process.env.NODE_ENV === 'production', // Solo si la aplicación está en producción (HTTPS)
+            sameSite: 'None', // Permite que la cookie se envíe en contextos cross-origin
+            maxAge: 24 * 60 * 60 * 1000 // Duración de la cookie (1 día)
         });
         
 
@@ -125,10 +126,11 @@ export const login = async (req, res) => {
         const token = await createAccessToken({ id: userFound._id });
 
         // Envía la cookie con el token al cliente
-        res.cookie("token", token, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            sameSite: "strict",
+        res.cookie('token', token, {
+            httpOnly: true, // Seguridad, la cookie no se puede acceder con JavaScript
+            secure: process.env.NODE_ENV === 'production', // Solo si la aplicación está en producción (HTTPS)
+            sameSite: 'None', // Permite que la cookie se envíe en contextos cross-origin
+            maxAge: 24 * 60 * 60 * 1000 // Duración de la cookie (1 día)
         });
         
 
@@ -220,14 +222,13 @@ export const verifyToken = async (req, res) => {
         const userFound = await User.findById(user.id);
         if (!userFound) return res.status(401).json({ message: "Unauthorized" });
 
-        res.cookie("token", token, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            sameSite: "strict",
+        res.cookie('token', token, {
+            httpOnly: true, // Seguridad, la cookie no se puede acceder con JavaScript
+            secure: process.env.NODE_ENV === 'production', // Solo si la aplicación está en producción (HTTPS)
+            sameSite: 'None', // Permite que la cookie se envíe en contextos cross-origin
+            maxAge: 24 * 60 * 60 * 1000 // Duración de la cookie (1 día)
         });
-
         
-
         // Responde con los datos del usuario
         return res.json({
             id: userFound._id,
