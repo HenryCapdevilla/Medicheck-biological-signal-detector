@@ -2,8 +2,9 @@
 import io from "socket.io-client";
 
 const socket = io('https://medicheck.website/signal', {
-  withCredentials: true,
-  transports: ['websocket'],  // Forzar el uso de WebSocket
+  path: '/signal/socket.io', // Configura el prefijo si estás utilizando "/signal"
+  transports: ['websocket'], // Fuerza el uso de WebSocket
+  withCredentials: true,     // Permite el envío de cookies/sesiones
 });
   
 // Configura el listener para el evento 'newUserJoined' aquí
