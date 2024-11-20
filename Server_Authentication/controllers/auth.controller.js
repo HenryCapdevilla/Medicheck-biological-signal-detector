@@ -82,7 +82,7 @@ export const register = async (req, res) => {
             httpOnly: true,
             secure: true, // Solo en HTTPS
             domain: 'medicheck.website',
-            sameSite: 'Strict', // Opcional: Asegura que las cookies solo se envíen en el dominio principal
+            sameSite: 'none', // Opcional: Asegura que las cookies solo se envíen en el dominio principal
         });
 
         // Responde con los datos del usuario recién creado
@@ -130,7 +130,7 @@ export const login = async (req, res) => {
             httpOnly: true,
             secure: true, // Solo en HTTPS
             domain: 'medicheck.website',
-            sameSite: 'Strict', // Opcional: Asegura que las cookies solo se envíen en el dominio principal
+            sameSite: 'none', // Opcional: Asegura que las cookies solo se envíen en el dominio principal
         });
 
         // Responde con los datos del usuario
@@ -226,7 +226,7 @@ export const verifyToken = async (req, res) => {
             httpOnly: true,
             secure: true, // Solo en HTTPS
             domain: 'medicheck.website',
-            sameSite: 'Strict', // Opcional: Asegura que las cookies solo se envíen en el dominio principal
+            sameSite: 'none', // Opcional: Asegura que las cookies solo se envíen en el dominio principal
         });
 
         // Responde con los datos del usuario
