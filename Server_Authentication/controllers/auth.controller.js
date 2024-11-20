@@ -78,10 +78,6 @@ export const register = async (req, res) => {
         const token = await createAccessToken({ id: userSaved._id });
 
         res.cookie('token', token, {
-            httpOnly: true, // Seguridad, la cookie no se puede acceder con JavaScript
-            secure: true, // Solo si la aplicación está en producción (HTTPS)
-            sameSite: 'None', // Permite que la cookie se envíe en contextos cross-origin
-            maxAge: 24 * 60 * 60 * 1000 // Duración de la cookie (1 día)
         });
         
 
@@ -127,10 +123,6 @@ export const login = async (req, res) => {
         console.log("token login", token);
         // Envía la cookie con el token al cliente
         res.cookie('token', token, {
-            httpOnly: true, // Seguridad, la cookie no se puede acceder con JavaScript
-            secure: true, // Solo si la aplicación está en producción (HTTPS)
-            sameSite: 'None', // Permite que la cookie se envíe en contextos cross-origin
-            maxAge: 24 * 60 * 60 * 1000 // Duración de la cookie (1 día)
         });
         
 
@@ -224,10 +216,6 @@ export const verifyToken = async (req, res) => {
         if (!userFound) return res.status(401).json({ message: "Unauthorized" });
 
         res.cookie('token', token, {
-            httpOnly: true, // Seguridad, la cookie no se puede acceder con JavaScript
-            secure: true, // Solo si la aplicación está en producción (HTTPS)
-            sameSite: 'None', // Permite que la cookie se envíe en contextos cross-origin
-            maxAge: 24 * 60 * 60 * 1000 // Duración de la cookie (1 día)
         });
 
         // Responde con los datos del usuario
