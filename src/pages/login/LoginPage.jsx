@@ -30,7 +30,7 @@ function LoginPage() {
                         type="email"
                         {...register("email", { required: true })}
                         placeholder="Email"
-                        className="form-control form-control-sm w-auto"
+                        className="form-control"
                     />
                     {errors.email && <p className="Error">Email is required</p>}
                 </div>
@@ -40,12 +40,13 @@ function LoginPage() {
                         type="password"
                         {...register("password", { required: true })}
                         placeholder="Password"
-                        className="form-control form-control-sm w-auto"
+                        className="form-control"
                     />
                     {errors.password && <p className="Error">Password is required</p>}
                 </div>
 
-                <Button text="Login" />
+                {/* Botón con tamaño reducido */}
+                <Button text="Login" className="btn btn-sm" />
 
                 <p className="redirect-link">
                     Don't have an account?&nbsp;<Link to="/register">Register</Link>
