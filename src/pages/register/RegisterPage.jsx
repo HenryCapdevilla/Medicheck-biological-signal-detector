@@ -27,7 +27,7 @@ function RegisterPage() {
 
     return (
         <Container className="d-flex justify-content-center align-items-center min-vh-100">
-            <Form className="p-4 shadow rounded" onSubmit={handleSubmit(onSubmit)} style={{ maxWidth: "500px", width: "100%" }}>
+            <Form className="p-4 shadow rounded bg-light shadow-lg" onSubmit={handleSubmit(onSubmit)} style={{ maxWidth: "500px", width: "100%" }}>
                 <Character />
                 {registerErrors.map((error, i) => (
                     <div className="text-danger" key={i}>{error}</div>
