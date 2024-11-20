@@ -16,12 +16,12 @@ export const initializeSocket = () => {
       console.error('Error de conexión WebSocket:', error);
     });
   }
-  return socket; // Asegúrate de devolver el socket inicializado
+  return socket;
 };
 
 export const getSocket = () => {
   if (!socket) {
-    throw new Error("Socket no inicializado. Llama a initializeSocket primero.");
+    throw new Error("Socket no inicializado. Asegúrate de llamar a `initializeSocket` primero.");
   }
   return socket;
 };
