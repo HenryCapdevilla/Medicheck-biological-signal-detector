@@ -123,9 +123,15 @@ export const AuthProvider = ({ children }) => {
         const res = await verifyTokenRequest(cookies.token);
         console.log(res);
         if (!res.data) {
+          // Si no hay datos en la respuesta, el usuario no está autenticado
           setIsAuthenticated(false);
+          setUser(null);
           setLoading(false);
-          return setIsAuthenticated(true), setUser(res.data), setLoading(false);
+        } else {
+          // Si hay datos, el usuario está autenticado
+          setIsAuthenticated(true);
+          setUser(res.data);
+          setLoading(false);
         }
       } catch (error) {
         console.log('Error in token verification:', error.response || error);
@@ -133,10 +139,9 @@ export const AuthProvider = ({ children }) => {
         setUser(null);
         setLoading(false);
       }
-    }
+    };
     checkLogin();
   }, []);
-  
 
   return (
     <AuthContext.Provider
