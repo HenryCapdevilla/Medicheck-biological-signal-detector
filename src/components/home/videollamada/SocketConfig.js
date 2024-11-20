@@ -1,8 +1,8 @@
 // socketConfig.js
 import io from "socket.io-client";
 
-const socket = io('https://medicheck.website/signal', {
-  path: '/signal/socket.io', // Configura el prefijo si estás utilizando "/signal"
+const socket = io('https://medicheck.website', {
+  path: '/signal', // Configura el prefijo si estás utilizando "/signal"
   transports: ['websocket'], // Fuerza el uso de WebSocket
   withCredentials: true,     // Permite el envío de cookies/sesiones
 });

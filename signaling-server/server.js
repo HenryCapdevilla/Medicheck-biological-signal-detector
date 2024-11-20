@@ -3,7 +3,7 @@ const http = require("http");
 const app = express();
 const server = http.createServer(app);
 const io = require("socket.io")(server, {
-    path: '/signal/socket.io',
+    path: '/signal',
     cors: {
         origin: "*",  // Permite cualquier origen
         methods: ['GET', 'POST', 'PUT', 'DELETE'],
