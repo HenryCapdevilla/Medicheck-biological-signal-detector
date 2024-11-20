@@ -112,9 +112,8 @@ export const AuthProvider = ({ children }) => {
   }, [errors]);
 
   useEffect(() => {
-    async function checkLogin() {
+    const checkLogin = async () => {
       const cookies = Cookies.get();
-      console.log(cookies)
       if (!cookies.token) {
         setIsAuthenticated(false);
         setLoading(false);
@@ -126,11 +125,8 @@ export const AuthProvider = ({ children }) => {
         if (!res.data) {
           setIsAuthenticated(false);
           setLoading(false);
-          return;
+          return setIsAuthenticated(true), setUser(res.data), setLoading(false);
         }
-        setIsAuthenticated(true);
-        setUser(res.data);
-        setLoading(false);
       } catch (error) {
         console.log('Error in token verification:', error.response || error);
         setIsAuthenticated(false);

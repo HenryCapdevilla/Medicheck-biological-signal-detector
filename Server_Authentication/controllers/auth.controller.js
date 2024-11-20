@@ -200,23 +200,17 @@ export const profile = async (req, res) => {
     }
 };
 
-
 // Controlador para verificar el token de acceso
 export const verifyToken = async (req, res) => {
     const { token } = req.cookies;
-    console.log("token verificado", token);
-    if (!token) return res.status(401).json({ message: "Unauthorized" });
+    if (!token) return res.send(false);
 
     // Verifica la validez del token
-    jwt.verify(token, TOKEN_SECRET, async (err, user) => {
-        if (err) return res.status(401).json({ message: "Unauthorized" });
-
-        // Busca al usuario por su ID obtenido del token
+    jwt.verify(token, TOKEN_SECRET, async (error, user) => {
+        if (error) return res.sendStatus(401);
+    
         const userFound = await User.findById(user.id);
-        if (!userFound) return res.status(401).json({ message: "Unauthorized" });
-
-        res.cookie('token', token, {
-        });
+        if (!userFound) return res.sendStatus(401);
 
         // Responde con los datos del usuario
         return res.json({
