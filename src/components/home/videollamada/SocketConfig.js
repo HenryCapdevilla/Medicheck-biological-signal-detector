@@ -1,29 +1,16 @@
+// socketConfig.js
 import io from "socket.io-client";
 
-let socket;
+const socket = io('https://medicheck.website/signal', {
+  withCredentials: true,
+  transports: ['websocket'],  // Forzar el uso de WebSocket
+});
+  
+// Configura el listener para el evento 'newUserJoined' aquí
+socket.on("newUserJoined", (data) => {
+  const { newUserID, newUsername } = data;
+  console.log(`Nuevo usuario ${newUsername} se unió con ID: ${newUserID}`);
+  // Aquí podrías actualizar el estado global si lo necesitas
+});
 
-export const initializeSocket = () => {
-  if (!socket) {
-    socket = io('https://medicheck.website/signal', {
-      withCredentials: true,
-    });
-
-    socket.on('connect', () => {
-      console.log('Conexión WebSocket establecida');
-    });
-
-    socket.on('connect_error', (error) => {
-      console.error('Error de conexión WebSocket:', error);
-    });
-  }
-  return socket;
-};
-
-export const getSocket = () => {
-  if (!socket) {
-    throw new Error("Socket no inicializado. Asegúrate de llamar a `initializeSocket` primero.");
-  }
-  return socket;
-};
-
-export default initializeSocket;
+export default socket;
