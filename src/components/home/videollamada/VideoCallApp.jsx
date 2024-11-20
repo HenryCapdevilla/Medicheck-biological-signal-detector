@@ -47,9 +47,15 @@ const VideoCallApp = () => {
 
     const iceServers = [
       {
-        urls: ['stun:stun.l.google.com:19302', 'turn:turn.server.com:3478']
+        urls: [
+          'stun:relay1.expressturn.com:3478',
+          'turn:relay1.expressturn.com:3478'
+        ],
+        username: 'efDOVNZ6UJENHV6O8B',
+        credential: 'ZbOL2NC3hpqf2HuH'
       }
     ];
+    
     
 
     const [isSignalActive, setIsSignalActive] = useState(false);
