@@ -61,7 +61,7 @@ body {
   color: var(--white-color);
   overflow-y: hidden;
   z-index: -1;
-  background-image: url(http://localhost:3000/static/media/home-bg2.d8825cac53e47920cc73.png);
+  background-image: url(/src/Assets/home-bg2.png); /* Desde public */
   background-position: bottom right;
   background-repeat: no-repeat;
   height: auto;
