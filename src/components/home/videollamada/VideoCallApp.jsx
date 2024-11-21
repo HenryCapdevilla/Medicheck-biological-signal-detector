@@ -47,10 +47,15 @@ const VideoCallApp = () => {
 
     const iceServers = [
       {
-        urls: ['stun:stun.l.google.com:19302', 'turn:turn.server.com:3478']
+          urls: "turn:46.202.93.182:3478",  // TURN server
+          username: "test",
+          credential: "test123"
+      },
+      {
+          urls: "stun:stun.l.google.com:19302"  // STUN server público de Google
       }
-    ];
-    
+  ];
+  
 
     const [isSignalActive, setIsSignalActive] = useState(false);
     const [heartRate, setHeartRate] = useState(null);
