@@ -14,8 +14,8 @@ const UserCard = ({ heartRate, spO2 }) => {
     <Container className="py-3">
       <Row className="justify-content-center">
         {/* Card de Frecuencia Cardiaca */}
-        <Col xs={12} sm={6} md={4} className="mb-3">
-          <Card className="statBox text-center" onClick={handleClick}>
+        <Col xs={12} sm={6} md={5} className="mb-3">
+          <Card className="statBox custom-card" onClick={handleClick}>
             <Card.Body>
               <HeartIcon className="icon mb-2" />
               <Card.Text className={`statText ${clicked ? 'show' : ''}`}>
@@ -26,8 +26,8 @@ const UserCard = ({ heartRate, spO2 }) => {
         </Col>
 
         {/* Card de Oxígeno en Sangre */}
-        <Col xs={12} sm={6} md={4} className="mb-3">
-          <Card className="statBox text-center" onClick={handleClick}>
+        <Col xs={12} sm={6} md={5} className="mb-3">
+          <Card className="statBox custom-card" onClick={handleClick}>
             <Card.Body>
               <GlobeAltIcon className="icon mb-2" />
               <Card.Text className={`statText ${clicked ? 'show' : ''}`}>
