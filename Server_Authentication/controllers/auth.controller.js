@@ -109,22 +109,35 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
     // Extrae los datos de la solicitud
     const { email, password } = req.body;
+    console.log("Datos recibidos en el login:", { email, password }); // Verifica los datos recibidos
+
     try {
         // Verifica si el usuario existe
         const userFound = await User.findOne({ email });
-        if (!userFound) return res.status(400).json(["User not found"]);
+        console.log("Usuario encontrado:", userFound); // Muestra si el usuario fue encontrado
+
+        if (!userFound) {
+            console.log("Usuario no encontrado.");
+            return res.status(400).json(["User not found"]);
+        }
 
         // Verifica si la contraseña es correcta
         const isMatch = await bcrypt.compare(password, userFound.password);
-        if (!isMatch) return res.status(400).json(["Incorrect password"]);
+        console.log("¿Contraseña correcta?", isMatch); // Muestra si la contraseña es correcta
+
+        if (!isMatch) {
+            console.log("Contraseña incorrecta.");
+            return res.status(400).json(["Incorrect password"]);
+        }
 
         // Genera un token de acceso para el usuario
         const token = await createAccessToken({ id: userFound._id });
-        console.log("token login", token);
+        console.log("token login", token); // Muestra el token generado
+
         // Envía la cookie con el token al cliente
         res.cookie('token', token, {
+            // Puedes agregar opciones de la cookie si es necesario
         });
-        
 
         // Responde con los datos del usuario
         res.json({
@@ -136,11 +149,13 @@ export const login = async (req, res) => {
         });
     } catch (error) {
         // Manejo de errores
+        console.error("Error en el inicio de sesión:", error.message); // Muestra el error si ocurre
         res.status(500).json({
             message: error.message
         });
     }
 };
+
 
 // Controlador para cerrar sesión
 export const logout = (req, res) => {

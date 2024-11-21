@@ -12,6 +12,8 @@ function LoginPage() {
     const location = useLocation();
 
     const onSubmit = async (data) => {
+        console.log("Datos enviados en el login:", data); // Aquí se imprimen los datos
+
         signin(data); // Captura el resultado
         const redirectPath = location.state?.from || '/'; // Ruta a donde redirigir después del login
         navigate(redirectPath);
