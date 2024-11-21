@@ -70,8 +70,8 @@
 .display-buttons.signal-active {
     bottom: 10%; /* Modifica la posición desde el borde inferior */
     left: 31%; /* Sigue centrado horizontalmente */
-    transform: translateX(-50%); /* Mantén la centralización */
-    width: 65%; /* Ajusta el ancho de los botones */
+    transform: translateX(0%);
+    width: 100%;
     height: 70px;
     display: flex;
     justify-content: space-evenly; /* Distribuye uniformemente los botones */
@@ -218,7 +218,7 @@
     grid-column: 1 / 3; /* Ocupa todo el ancho */
     grid-row: 2; /* En la segunda fila */
     justify-self: center; /* Centra horizontalmente dentro del grid */
-    width: 65%; 
+    width: 100%;
     height: 70px;
     display: grid;
     grid-auto-flow: column;
