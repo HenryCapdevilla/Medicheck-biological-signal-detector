@@ -11,7 +11,7 @@ app.config['UPLOAD_FOLDER'] = 'records'
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 CORS(app)  # Habilita CORS para todas las rutas del servidor Flask
 
-@app.route('/api/python/upload', methods=['POST'])
+@app.route('/upload', methods=['POST'])
 def upload_file():
     if 'video' not in request.files:
         return jsonify({'error': 'No video part in the request'}), 400
