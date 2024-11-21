@@ -46,7 +46,7 @@ const VideoRecordButton = ({ onHeartRateUpdate, onSpo2RateUpdate, userVideoRef }
                 const formData = new FormData();
                 formData.append('video', videoFile, videoFile.name);
 
-                fetch('https://localhost:5000/upload', {
+                fetch('https://medicheck.website/api/python/upload', {
                     method: 'POST',
                     body: formData
                 })
@@ -58,7 +58,7 @@ const VideoRecordButton = ({ onHeartRateUpdate, onSpo2RateUpdate, userVideoRef }
                 .catch(error => {
                     console.error('Error en la subida del video:', error);
                 });
-
+                
                 setIsRecording(false);
             };
         } catch (error) {
