@@ -1,33 +1,43 @@
 import React, { useState } from 'react';
-import { HeartIcon, SunIcon, GlobeAltIcon } from '@heroicons/react/outline'; // Importamos íconos desde Heroicons
+import { HeartIcon, GlobeAltIcon } from '@heroicons/react/outline'; // Íconos para BPM y SPO2
+import { Card, Row, Col, Container } from 'react-bootstrap'; // Componentes de Bootstrap
 import './DashboardSignals.css';
 
-const UserCard = ({ heartRate, spO2, lux }) => {
+const UserCard = ({ heartRate, spO2 }) => {
   const [clicked, setClicked] = useState(false);
+
   const handleClick = () => {
     setClicked(!clicked);
   };
 
   return (
-    <div className="fitCard">
-      {/* Card de Frecuencia Cardiaca */}
-      <div className="statBox" onClick={handleClick}>
-        <HeartIcon className="icon" />
-        <p className={`statText ${clicked ? 'show' : ''}`}>{heartRate} bpm</p>
-      </div>
+    <Container className="py-3">
+      <Row className="justify-content-center">
+        {/* Card de Frecuencia Cardiaca */}
+        <Col xs={12} sm={6} md={4} className="mb-3">
+          <Card className="statBox text-center" onClick={handleClick}>
+            <Card.Body>
+              <HeartIcon className="icon mb-2" />
+              <Card.Text className={`statText ${clicked ? 'show' : ''}`}>
+                {heartRate} bpm
+              </Card.Text>
+            </Card.Body>
+          </Card>
+        </Col>
 
-      {/* Card de Oxígeno en Sangre */}
-      <div className="statBox" onClick={handleClick}>
-        <GlobeAltIcon className="icon" />
-        <p className={`statText ${clicked ? 'show' : ''}`}>{spO2}% O₂</p>
-      </div>
-
-      {/* Card de Luz Solar */}
-      <div className="statBox" onClick={handleClick}>
-        <SunIcon className="icon" />
-        <p className={`statText ${clicked ? 'show' : ''}`}> lux</p>
-      </div>
-    </div>
+        {/* Card de Oxígeno en Sangre */}
+        <Col xs={12} sm={6} md={4} className="mb-3">
+          <Card className="statBox text-center" onClick={handleClick}>
+            <Card.Body>
+              <GlobeAltIcon className="icon mb-2" />
+              <Card.Text className={`statText ${clicked ? 'show' : ''}`}>
+                {spO2}% O₂
+              </Card.Text>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

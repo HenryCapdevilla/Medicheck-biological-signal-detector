@@ -6,11 +6,11 @@ import './clinicalHistoryButton.css';
 
 const ClinicalHistoryButton = () => {
   const { handleUploadHistory, user } = useAuth();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, formState: { errors } } = useForm();
   const [isModalOpen, setModalOpen] = useState(false);
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
-    patientName: user.firstName + " " + user.secondName + " " + user.firstSurname + " "  + user.secondSurname,
+    patientName: user.firstName + " " + user.secondName + " " + user.firstSurname + " " + user.secondSurname,
     nip: user.nip,
     birthDate: user.birthDate,
     gender: user.gender,
@@ -25,7 +25,12 @@ const ClinicalHistoryButton = () => {
 
   const onSubmit = async (data) => {
     try {
-      await handleUploadHistory(data);
+      const completeData = { 
+        ...formData, 
+        ...data 
+      };
+
+      await handleUploadHistory(completeData);
       alert('Historia clínica subida exitosamente.');
       closeModal();
     } catch (error) {
@@ -79,10 +84,11 @@ const ClinicalHistoryButton = () => {
                     <input
                       type="text"
                       id="diagnosis"
-                      {...register('diagnosis')}
+                      {...register('diagnosis', { required: 'El diagnóstico es obligatorio.' })}
                       value={formData.diagnosis}
                       onChange={(e) => setFormData({ ...formData, diagnosis: e.target.value })}
                     />
+                    {errors.diagnosis && <p className="error">{errors.diagnosis.message}</p>}
                   </div>
 
                   <div>
@@ -90,10 +96,11 @@ const ClinicalHistoryButton = () => {
                     <textarea
                       id="history"
                       rows="4"
-                      {...register('history')}
+                      {...register('history', { required: 'La historia clínica es obligatoria.' })}
                       value={formData.history}
                       onChange={(e) => setFormData({ ...formData, history: e.target.value })}
                     ></textarea>
+                    {errors.history && <p className="error">{errors.history.message}</p>}
                   </div>
 
                   <div className="navigation-buttons">
@@ -111,10 +118,11 @@ const ClinicalHistoryButton = () => {
                     <input
                       type="text"
                       id="medications"
-                      {...register('medications')}
+                      {...register('medications', { required: 'Los medicamentos son obligatorios.' })}
                       value={formData.medications}
                       onChange={(e) => setFormData({ ...formData, medications: e.target.value })}
                     />
+                    {errors.medications && <p className="error">{errors.medications.message}</p>}
                   </div>
 
                   <div>
@@ -122,10 +130,11 @@ const ClinicalHistoryButton = () => {
                     <input
                       type="text"
                       id="treatment"
-                      {...register('treatment')}
+                      {...register('treatment', { required: 'El tratamiento es obligatorio.' })}
                       value={formData.treatment}
                       onChange={(e) => setFormData({ ...formData, treatment: e.target.value })}
                     />
+                    {errors.treatment && <p className="error">{errors.treatment.message}</p>}
                   </div>
 
                   <div className="navigation-buttons">

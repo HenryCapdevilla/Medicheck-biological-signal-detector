@@ -1,110 +1,19 @@
-/* Contenedor principal */
-.fitCard {
-    display: grid; /* Usamos Grid para la disposición principal */
-    grid-template-columns: repeat(3, 1fr); /* Tres columnas, una para cada tarjeta */
-    gap: 1.5rem; /* Espaciado entre columnas */
-    grid-row: 6;
-    background-color: #FFFACD; /* Fondo amarillo claro */
-    padding: 2rem;
-    font-family: 'MontS', sans-serif;
-    color: #B49A18; /* Color dorado para el texto */
-    justify-items: center; /* Centra los elementos dentro del grid */
-    align-items: center; /* Centra verticalmente los elementos dentro del grid */
-    grid-column: 1 / 3;
-    margin-right: 3em;
-}
-
-/* Cada tarjeta individual */
-.statCard {
-    display: grid; /* Usamos Grid para alinear ícono, texto y otros elementos */
-    grid-template-rows: auto 1fr auto; /* Tres filas: ícono, espacio y texto */
-    gap: 0.5rem;
-    align-items: center;
-    justify-items: center;
-    width: 100%; /* Se adapta automáticamente al espacio de la columna */
-    background-color: #FFF599; /* Fondo amarillo claro */
-    padding: 1rem;
-    border-radius: 1rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
-}
-
-/* Efecto hover para la tarjeta */
-.statCard:hover {
-    transform: scale(1.05);
-}
-
-/* Contenedor de cada estadística */
-.statBox {
-    display: grid; /* Grid también para la caja */
-    align-items: center;
-    justify-items: center;
-    width: 5rem;
-    height: 6rem;
-    border-radius: 1rem;
-    background-color: #FFF599; /* Fondo amarillo claro */
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-/* Efecto hover para la caja */
-.statBox:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-}
-
-/* Íconos dentro de las cajas */
-.statBox svg {
-    width: 50%;
-    height: auto;
-    fill: #B49A18; /* Color dorado */
-    transition: transform 0.3s, opacity 0.3s;
-}
-
-/* Efecto hover sobre íconos */
-.statBox:hover svg {
-    opacity: 0; /* Oculta el ícono cuando se coloca el mouse */
-    transform: scale(1.2);
-}
-
-/* Texto dentro de las cajas */
-.statText {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 1rem;
-    font-weight: bold;
-    color: #B49A18; /* Color dorado para el texto */
-    opacity: 0; /* El texto comienza oculto */
-    transition: opacity 0.3s, transform 0.3s; /* Transiciones suaves */
-}
-
-/* Hover sobre el texto */
-.statBox:hover .statText {
-    opacity: 1; /* Muestra el texto */
-    transform: translate(-50%, -50%) scale(1.1); /* Aparece con un leve efecto de escala */
-}
-
-/* Ajuste responsivo */
-@media (max-width: 768px) {
-    .fitCard {
-        grid-template-columns: 1fr; /* Una columna en pantallas pequeñas */
-        gap: 1rem;
-    }
-}
-
+/* Íconos dentro de las tarjetas */
 .icon {
-    width: 2.5rem; /* Tamaño del ícono */
+    width: 2.5rem;
     height: 2.5rem;
-    color: #B49A18; /* Color dorado */
+    color: #0077b6; /* Azul claro */
     transition: transform 0.3s, color 0.3s;
 }
 
 .statBox:hover .icon {
     transform: scale(1.2);
-    color: #E76F51; /* Color rojo terroso al hacer hover */
+    color: #e63946; /* Rojo claro al hacer hover */
 }
 
+/* Texto dentro de las tarjetas */
+.statText {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333333; /* Gris oscuro */
+}
