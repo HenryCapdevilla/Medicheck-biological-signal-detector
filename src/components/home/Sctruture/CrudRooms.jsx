@@ -2,7 +2,7 @@ import React from 'react';
 import BannerText from './BannerTextdefault.jsx';
 import { Container, Row, Col } from 'react-bootstrap';
 import "./divbanner.css"
-import DisplayButtonsdefault from "./BannerTextdefault"
+import DisplayButtonsdefault from "./displayButtonsdefault"
 
 const CrudRooms = () => {
   return (
