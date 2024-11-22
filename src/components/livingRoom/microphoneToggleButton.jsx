@@ -1,14 +1,14 @@
 import React from 'react';
 import { FaMicrophone, FaMicrophoneSlash } from 'react-icons/fa';
-import './microphoneToggleButton.css';
+import './microphoneToggleButton.css'
 
-// Usamos forwardRef para pasar el ref al botón
-const MicrophoneToggleButton = React.forwardRef(({ isMicActive, toggleMicrophone }, ref) => {
+const MicrophoneToggleButton = React.forwardRef(({ isMicActive, toggleMicrophone, ...props }, ref) => {
     return (
         <button 
             onClick={toggleMicrophone} 
             className='Button-videocall-microphone' 
-            ref={ref} // Pasamos el ref aquí
+            ref={ref} 
+            {...props} // Propaga las demás props, como el ref
         >
             {isMicActive ? <FaMicrophoneSlash size={24} color="red" /> : <FaMicrophone size={24} color="white"/>}
         </button>
