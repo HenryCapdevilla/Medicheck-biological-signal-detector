@@ -53,7 +53,7 @@ const VideoRecordButton = ({ onHeartRateUpdate, onSpo2RateUpdate }) => { // Reci
                 const formData = new FormData();
                 formData.append('video', videoFile, videoFile.name);
 
-                fetch('http://localhost:5000/upload', {
+                fetch('https://medicheck.website/api/python', {
                     method: 'POST',
                     body: formData
                 })
