@@ -13,7 +13,14 @@ const ButtonCamera = () => {
     const navigate = useNavigate(); 
     const { isCameraActive, isMicActive, toggleCamera, toggleMicrophone, videoRef, startStream, stopStream } = useContext(VideoContext);
     const { user } = useAuth();
-    const [modalVisible, setModalVisible] = useState(user.role === 'paciente'); // Solo muestra si es paciente
+    const [modalVisible, setModalVisible] = useState(false); // Inicializa como false
+
+    // Configura el modal solo si el usuario es paciente
+    useEffect(() => {
+        if (user?.role === 'paciente') {
+            setModalVisible(true);
+        }
+    }, [user]); // Se ejecuta cuando el usuario está disponible
 
     useEffect(() => {
         if (isCameraActive || isMicActive) {
@@ -29,8 +36,8 @@ const ButtonCamera = () => {
         navigate(`/videollamada/${roomID}`);
     };
 
-    const handleAccept = () => setModalVisible(false);
-    const handleReject = () => navigate(-1);
+    const handleAccept = () => setModalVisible(false); // Oculta el modal
+    const handleReject = () => navigate(-1); // Vuelve a la página anterior
 
     return (
         <div className="User-Content">
