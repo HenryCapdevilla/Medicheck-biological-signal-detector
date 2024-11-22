@@ -104,3 +104,54 @@
     display: flex;
     justify-content: center;
 }
+
+/* Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Asegura que está en la parte superior */
+}
+
+/* Contenido del modal */
+.modal-content {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Botones del modal */
+.modal-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1.5rem;
+}
+
+.accept-button, .reject-button {
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    color: white;
+}
+
+.accept-button {
+    background-color: #4caf50; /* Verde */
+}
+
+.reject-button {
+    background-color: #f44336; /* Rojo */
+}
+
+.accept-button:hover, .reject-button:hover {
+    opacity: 0.9;
+}
