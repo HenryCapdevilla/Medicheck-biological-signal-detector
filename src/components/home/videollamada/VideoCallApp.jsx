@@ -243,12 +243,10 @@ const VideoCallApp = () => {
                 isSignalActive ? "signal-active" : ""
               }`}
             >
-              <Tooltip title="Activar/Desactivar Cámara">
                 <CameraToggleButton
                   isCameraActive={isCameraActive}
                   toggleCamera={toggleCamera}
                 />
-              </Tooltip>
               <Tooltip title="Activar/Desactivar Micrófono">
                 <MicrophoneToggleButton
                   isMicActive={isMicActive}
@@ -258,19 +256,13 @@ const VideoCallApp = () => {
 
               {["medico", "admin"].includes(user.role) && (
                 <>
-                  <Tooltip title="Activar/Desactivar Grabación">
                     <RecordVideoToggleButton
                       onHeartRateUpdate={handleHeartRateUpdate}
                       onSpo2RateUpdate={handleSpo2Update}
                       userVideoRef={userVideo} // Pasa la referencia del video
-                  />
-                  </Tooltip>
-                  <Tooltip title="Activar/Desactivar Signos Vitales">
+                    />
                     <SignalToggleButton toggleSignal={toggleSignal} />
-                  </Tooltip>
-                  <Tooltip title="Activar/Desactivar Historia Clinica">
                     <ClinicalHistoryButton />
-                  </Tooltip>
                 </>
               )}
             </div>
