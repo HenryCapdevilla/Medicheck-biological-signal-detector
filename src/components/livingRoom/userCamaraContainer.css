@@ -183,7 +183,8 @@
     .video-container {
         width: 90%;
         padding: 15px;
-        height: auto;
+        height: 60vh;
+        padding-right: 1em;
     }
 
     .video-container .video-self {
@@ -193,18 +194,19 @@
     }
 
     .Display-buttons {
-        width: 80%;
-        height: 60px;
-        font-size: 24px;
-        top: 65%;
-        transform: translate(10%, 0%);
+        width: 100%;
+        font-size: 22px;
+        top: 62%;
+        transform: translate(-20%, 0%);
+        position: fixed;
     }
 
     .video-container .camera-off-text {
         font-size: 24px;
         top: 35%;
-        transform: translate(10%, 0%);
-    }
+        transform: translate(35%, 50%);
+        position: fixed;
+      }
 
     .footer-disclamer {
         font-size: 14px;
