@@ -1,57 +1,91 @@
 .Display-buttons-call {
     display: flex;
-    gap: 8px; 
+    flex-direction: column; /* Alineación vertical */
+    align-items: center;    /* Centrar contenido */
+    gap: 16px;              /* Espaciado uniforme entre elementos */
+    padding: 20px;          /* Padding general */
+    background-color: #f8f9fa; /* Fondo suave */
+    border-radius: 15px;    /* Bordes redondeados */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Sombras ligeras */
+}
+
+/* Contenedor de instrucciones */
+.role-instruction {
+    font-size: 1rem;            /* Tamaño de fuente */
+    color: #333;                /* Color oscuro para texto */
+    margin-top: 8px;            /* Espacio superior */
+    text-align: center;         /* Centrado de texto */
+    max-width: 80%;             /* Limita ancho de texto */
+    line-height: 1.4;           /* Mejora legibilidad */
+}
+
+/* Contenedor de input */
+.input-container {
+    width: 100%;                /* Ocupa todo el ancho */
+    display: flex;
+    justify-content: center;    /* Centrado horizontal */
+    margin-bottom: 8px;         /* Espaciado inferior */
 }
 
 /* Estilos generales del input */
-.input-container {
-    width: 50%; /* Para que el contenedor ocupe todo el ancho disponible */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
-}
-
 .input-field {
-    width: 60%; /* Define un ancho inicial para pantallas grandes */
-    padding: 15px; /* Padding interno */
-    background: rgb(39, 39, 39); /* Fondo oscuro */
-    color: white; /* Texto en color blanco */
+    width: 70%;                 /* Ancho base */
+    padding: 12px;              /* Padding interno */
+    background: #272727;        /* Fondo oscuro */
+    color: white;               /* Texto en blanco */
     border-radius: 10px;
-    font-size: 15px;
-    outline: none; /* Eliminar el borde de enfoque por defecto */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Sombras para darle más estilo */
-    transition: all 0.3s ease;
-    text-justify: auto;
+    font-size: 1rem;            /* Tamaño base de fuente */
+    border: 2px solid transparent;
+    transition: all 0.3s ease;  /* Transición suave */
 }
 
-/* Estilos cuando se hace foco en el input */
+/* Efecto al enfocar el input */
 .input-field:focus {
-    box-shadow: 0 0 10px rgba(3, 233, 244, 0.8); /* Brillo cian cuando está enfocado */
+    border-color: #03e9f4;      /* Color de borde al enfocar */
+    box-shadow: 0 0 12px rgba(3, 233, 244, 0.7); /* Efecto brillante */
+    outline: none;              /* Eliminar borde predeterminado */
 }
 
-@media (max-width: 1800px) {
-    .input-field {
-        width: 6rem; /* Aumenta el ancho del input */
-        height: 3rem;
-        padding: 13px; /* Ajusta el padding */
-        font-size: 0.8rem; /* Reduce el tamaño de la fuente */
-    }
+/* Estilos para botones */
+.CrearNuevoBoton {
+    width: 80%;                 /* Botón más ancho */
+    padding: 12px;
+    font-size: 1rem;
+    background-color: #0056b3;  /* Azul oscuro */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
-/* Media query para pantallas menores a 1052px */
-@media (max-width: 1052px) {
-    .input-field {
-        width: 75%; /* Aumenta el ancho del input */
-        padding: 13px; /* Ajusta el padding */
-        font-size: 0.9rem; /* Reduce el tamaño de la fuente */
+
+.CrearNuevoBoton:hover {
+    background-color: #004494;  /* Oscurecer al pasar el mouse */
+}
+
+/* Media queries para responsividad */
+@media (max-width: 768px) {
+    .input-field, .CrearNuevoBoton {
+        width: 90%;             /* Aumenta ancho en pantallas pequeñas */
+        font-size: 0.9rem;      /* Ajusta tamaño de fuente */
+    }
+    
+    .role-instruction {
+        font-size: 0.9rem;      /* Texto más pequeño */
     }
 }
 
-/* Media query para pantallas menores a 860px */
-@media (max-width: 860px) {
+@media (max-width: 480px) {
     .input-field {
-        width: 85%; /* Ocupa casi todo el ancho del contenedor */
-        padding: 10px; /* Reduce más el padding */
-        font-size: 0.8rem; /* Ajusta el tamaño de la fuente para pantallas más pequeñas */
+        width: 100%;            /* Ocupa todo el ancho */
+        padding: 10px;          /* Padding menor */
+    }
+
+    .CrearNuevoBoton {
+        padding: 10px;          /* Ajustar tamaño del botón */
+    }
+
+    .role-instruction {
+        font-size: 0.8rem;      /* Texto más pequeño para móviles */
     }
 }
