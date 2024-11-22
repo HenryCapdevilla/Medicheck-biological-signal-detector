@@ -99,6 +99,78 @@
     }
 }
 
+/* Pantallas pequeñas: móviles */
+@media (max-width: 600px) {
+    .video-container {
+        width: 100%;
+        padding: 10px;
+        height: auto;
+    }
+
+    .video-container .video-self {
+        width: 100%;
+        min-width: 100%;
+        border-radius: 5px;
+        aspect-ratio: 4/3; /* Relación más adecuada para móviles */
+        transform: scaleX(-1);
+    }
+
+    .Display-buttons {
+        width: 100%;
+        height: 50px;
+        font-size: 18px;
+        top: 70%;
+        transform: translate(0%, 0%);
+    }
+
+    .video-container .camera-off-text {
+        font-size: 20px;
+        top: 30%;
+        transform: translate(0%, 0%);
+        padding: 0 10px;
+    }
+
+    .footer-disclamer {
+        font-size: 12px;
+        padding-top: 5%;
+    }
+}
+
+/* Pantallas medianas: tabletas */
+@media (min-width: 601px) and (max-width: 1051px) {
+    .video-container {
+        width: 90%;
+        padding: 15px;
+        height: auto;
+    }
+
+    .video-container .video-self {
+        width: 100%;
+        border-radius: 6px;
+        aspect-ratio: 16/9;
+    }
+
+    .Display-buttons {
+        width: 80%;
+        height: 60px;
+        font-size: 24px;
+        top: 65%;
+        transform: translate(10%, 0%);
+    }
+
+    .video-container .camera-off-text {
+        font-size: 24px;
+        top: 35%;
+        transform: translate(10%, 0%);
+    }
+
+    .footer-disclamer {
+        font-size: 14px;
+        padding-top: 3%;
+    }
+}
+
+
 .Background-Display-Buttons{
     border-radius: 20px;
     display: flex;
