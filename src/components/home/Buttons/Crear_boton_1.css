@@ -210,8 +210,8 @@ a span{
 @media (max-width: 1800px) {
     .Button-call {
         font-size: 0.8rem; /* Reduce ligeramente el tamaño de la fuente */
-        height: 3rem;
-        width: 8rem;
+        height: 10rem;
+        width: 19rem;
         padding-top: 5px;
     }
 
@@ -223,8 +223,8 @@ a span{
 /* Media query para pantallas menores a 1052px */
 @media (max-width: 1052px) {
     .Button-call {
-        height: 3rem;
-        width: 8rem;
+        height: 7rem;
+        width: 17rem;
         padding-top: 5px;
         font-size: 0.9rem; /* Reduce ligeramente el tamaño de la fuente */
     }
@@ -237,8 +237,8 @@ a span{
 /* Media query para pantallas menores a 860px */
 @media (max-width: 860px) {
     .Button-call {
-        height: 3rem;
-        width: 8rem;
+        height: 5rem;
+        width: 15rem;
         padding-top: 5px;
         font-size: 0.8rem; /* Reduce aún más el tamaño de la fuente */
         letter-spacing: 2px; /* Reduce el espacio entre letras */

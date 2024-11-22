@@ -12,7 +12,7 @@
 /* Contenedor de instrucciones */
 .role-instruction {
     font-size: 1rem;            /* Tamaño de fuente */
-    color: #333;                /* Color oscuro para texto */
+    color: #ffffff;                /* Color oscuro para texto */
     margin-top: 8px;            /* Espacio superior */
     text-align: center;         /* Centrado de texto */
     max-width: 80%;             /* Limita ancho de texto */
