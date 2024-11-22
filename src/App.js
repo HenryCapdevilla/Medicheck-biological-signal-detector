@@ -4,9 +4,7 @@ import { BrowserRouter, Route, Routes, Navigate, useLocation } from "react-route
 import Navbar from "./components/Navbar";
 import Home from "./components/home/Home";
 import About from "./components/About/About";
-import Projects from "./components/Projects/Projects";
 import Footer from "./components/Footer/Footer";
-import Resume from "./components/Resume/ResumeNew";
 import ScrollToTop from "./components/ScrollToTop";
 import "./style.css";
 import "./App.css";
@@ -59,9 +57,6 @@ function AppContent() {
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/project" element={<Projects />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/resume" element={<Resume />} />
           <Route path="*" element={<Navigate to="/" />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />

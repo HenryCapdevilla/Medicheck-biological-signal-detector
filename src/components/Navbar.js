@@ -60,12 +60,6 @@ function NavBar() {
               </Nav.Link>
             </Nav.Item>
 
-            <Nav.Item>
-              <Nav.Link as={Link} to="/about">
-                <AiOutlineUser style={{ marginBottom: "2px" }} /> About Us
-              </Nav.Link>
-            </Nav.Item>
-
             {isAuthenticated && (
               <>
                 <Nav.Item>
