@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeartbeat} from '@fortawesome/free-solid-svg-icons'; // Íconos de señales
+import { faHeartbeat } from '@fortawesome/free-solid-svg-icons'; // Íconos de señales
 import './signalToggleButton.css';
 
-const SignalToggleButton = ({ toggleSignal }) => {
+// Envolvemos el componente en React.forwardRef para poder pasar el ref
+const SignalToggleButton = React.forwardRef(({ toggleSignal, ...props }, ref) => {
     const [isSignalActive, setIsSignalActive] = useState(false);
 
     const handleToggle = () => {
@@ -15,12 +16,16 @@ const SignalToggleButton = ({ toggleSignal }) => {
     return (
         <div className="signal-button-container">
             {/* Botón con estado dinámico */}
-            <button onClick={handleToggle} className='signal-toggle-button'>
+            <button onClick={handleToggle} className='signal-toggle-button' ref={ref} {...props}>
                 {/* Cambiar el ícono dependiendo del estado */}
-                {isSignalActive ? ( <FontAwesomeIcon icon={faHeartbeat} className="signal-icon" color="red"/>) : (<FontAwesomeIcon icon={faHeartbeat} className="signal-icon" color="white"/>)}
+                {isSignalActive ? (
+                    <FontAwesomeIcon icon={faHeartbeat} className="signal-icon" color="red" />
+                ) : (
+                    <FontAwesomeIcon icon={faHeartbeat} className="signal-icon" color="white" />
+                )}
             </button>
         </div>
     );
-};
+});
 
 export default SignalToggleButton;

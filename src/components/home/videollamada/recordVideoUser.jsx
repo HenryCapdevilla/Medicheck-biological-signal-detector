@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { FaStop } from 'react-icons/fa';
 import './recordVideoUser.css';
 
-const VideoRecordButton = ({ onHeartRateUpdate, onSpo2RateUpdate, userVideoRef }) => { // Añade userVideoRef como prop
+const VideoRecordButton = React.forwardRef(({ onHeartRateUpdate, onSpo2RateUpdate, userVideoRef, ...props }, ref) => {
     const [isRecording, setIsRecording] = useState(false);
     const mediaRecorderRef = useRef(null);
     const recordedChunks = useRef([]);
@@ -67,7 +67,13 @@ const VideoRecordButton = ({ onHeartRateUpdate, onSpo2RateUpdate, userVideoRef }
     };
 
     return (
-        <button onClick={handleRecord} disabled={isRecording} className='Button-videocall-record'>
+        <button 
+            onClick={handleRecord} 
+            disabled={isRecording} 
+            className='Button-videocall-record' 
+            ref={ref} 
+            {...props}
+        >
             {isRecording ? (
                 <FaStop size={20} color="red"/>
             ) : (
@@ -75,6 +81,6 @@ const VideoRecordButton = ({ onHeartRateUpdate, onSpo2RateUpdate, userVideoRef }
             )}
         </button>
     );
-};
+});
 
 export default VideoRecordButton;

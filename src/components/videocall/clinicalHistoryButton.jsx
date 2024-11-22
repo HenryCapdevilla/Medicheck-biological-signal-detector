@@ -4,7 +4,8 @@ import { useAuth } from '../../context/AuthContext';
 import { AiFillFolder } from "react-icons/ai";
 import './clinicalHistoryButton.css';
 
-const ClinicalHistoryButton = () => {
+// Envolvemos el componente con React.forwardRef
+const ClinicalHistoryButton = React.forwardRef((props, ref) => {
   const { handleUploadHistory, user } = useAuth();
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [isModalOpen, setModalOpen] = useState(false);
@@ -44,7 +45,7 @@ const ClinicalHistoryButton = () => {
 
   return (
     <div>
-      <button onClick={openModal} className="Button-history-clinical">
+      <button onClick={openModal} className="Button-history-clinical" ref={ref}>
         <AiFillFolder size={24} color="white" />
       </button>
 
@@ -156,6 +157,6 @@ const ClinicalHistoryButton = () => {
       )}
     </div>
   );
-};
+});
 
 export default ClinicalHistoryButton;
