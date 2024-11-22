@@ -2,8 +2,7 @@ import React, { useState, useRef } from 'react';
 import { FaStop } from 'react-icons/fa'; // Para los iconos de grabación y detener
 import './recordVideoUser.css';
 
-// Usar forwardRef para permitir que Tooltip maneje el ref
-const VideoRecordButton = React.forwardRef(({ onHeartRateUpdate, onSpo2RateUpdate }, ref) => {
+const VideoRecordButton = ({ onHeartRateUpdate, onSpo2RateUpdate }) => { // Recibe la función como prop
     const [isRecording, setIsRecording] = useState(false); // Estado de grabación
     const mediaRecorderRef = useRef(null); // Referencia para MediaRecorder
     const recordedChunks = useRef([]); // Fragmentos del video grabado
@@ -88,7 +87,7 @@ const VideoRecordButton = React.forwardRef(({ onHeartRateUpdate, onSpo2RateUpdat
     };
 
     return (
-        <button onClick={handleRecord} disabled={isRecording} ref={ref} className='Button-videocall-record'>
+        <button onClick={handleRecord} disabled={isRecording} className='Button-videocall-record'>
             {/* Cambiar el ícono según el estado de grabación */}
             {isRecording ? (
                 <FaStop size={20} color="red"/>
@@ -97,6 +96,6 @@ const VideoRecordButton = React.forwardRef(({ onHeartRateUpdate, onSpo2RateUpdat
             )}
         </button>
     );
-});
+};
 
 export default VideoRecordButton;

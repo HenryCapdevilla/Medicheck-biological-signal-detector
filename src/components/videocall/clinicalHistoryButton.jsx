@@ -4,14 +4,13 @@ import { useAuth } from '../../context/AuthContext';
 import { AiFillFolder } from "react-icons/ai";
 import './clinicalHistoryButton.css';
 
-// Envolvemos el componente con React.forwardRef
-const ClinicalHistoryButton = React.forwardRef((props, ref) => {
+const ClinicalHistoryButton = () => {
   const { handleUploadHistory, user } = useAuth();
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit } = useForm();
   const [isModalOpen, setModalOpen] = useState(false);
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
-    patientName: user.firstName + " " + user.secondName + " " + user.firstSurname + " " + user.secondSurname,
+    patientName: user.firstName + " " + user.secondName + " " + user.firstSurname + " "  + user.secondSurname,
     nip: user.nip,
     birthDate: user.birthDate,
     gender: user.gender,
@@ -26,12 +25,7 @@ const ClinicalHistoryButton = React.forwardRef((props, ref) => {
 
   const onSubmit = async (data) => {
     try {
-      const completeData = { 
-        ...formData, 
-        ...data 
-      };
-
-      await handleUploadHistory(completeData);
+      await handleUploadHistory(data);
       alert('Historia clínica subida exitosamente.');
       closeModal();
     } catch (error) {
@@ -45,7 +39,7 @@ const ClinicalHistoryButton = React.forwardRef((props, ref) => {
 
   return (
     <div>
-      <button onClick={openModal} className="Button-history-clinical" ref={ref}>
+      <button onClick={openModal} className="Button-history-clinical">
         <AiFillFolder size={24} color="white" />
       </button>
 
@@ -85,11 +79,10 @@ const ClinicalHistoryButton = React.forwardRef((props, ref) => {
                     <input
                       type="text"
                       id="diagnosis"
-                      {...register('diagnosis', { required: 'El diagnóstico es obligatorio.' })}
+                      {...register('diagnosis')}
                       value={formData.diagnosis}
                       onChange={(e) => setFormData({ ...formData, diagnosis: e.target.value })}
                     />
-                    {errors.diagnosis && <p className="error">{errors.diagnosis.message}</p>}
                   </div>
 
                   <div>
@@ -97,11 +90,10 @@ const ClinicalHistoryButton = React.forwardRef((props, ref) => {
                     <textarea
                       id="history"
                       rows="4"
-                      {...register('history', { required: 'La historia clínica es obligatoria.' })}
+                      {...register('history')}
                       value={formData.history}
                       onChange={(e) => setFormData({ ...formData, history: e.target.value })}
                     ></textarea>
-                    {errors.history && <p className="error">{errors.history.message}</p>}
                   </div>
 
                   <div className="navigation-buttons">
@@ -119,11 +111,10 @@ const ClinicalHistoryButton = React.forwardRef((props, ref) => {
                     <input
                       type="text"
                       id="medications"
-                      {...register('medications', { required: 'Los medicamentos son obligatorios.' })}
+                      {...register('medications')}
                       value={formData.medications}
                       onChange={(e) => setFormData({ ...formData, medications: e.target.value })}
                     />
-                    {errors.medications && <p className="error">{errors.medications.message}</p>}
                   </div>
 
                   <div>
@@ -131,11 +122,10 @@ const ClinicalHistoryButton = React.forwardRef((props, ref) => {
                     <input
                       type="text"
                       id="treatment"
-                      {...register('treatment', { required: 'El tratamiento es obligatorio.' })}
+                      {...register('treatment')}
                       value={formData.treatment}
                       onChange={(e) => setFormData({ ...formData, treatment: e.target.value })}
                     />
-                    {errors.treatment && <p className="error">{errors.treatment.message}</p>}
                   </div>
 
                   <div className="navigation-buttons">
@@ -157,6 +147,6 @@ const ClinicalHistoryButton = React.forwardRef((props, ref) => {
       )}
     </div>
   );
-});
+};
 
 export default ClinicalHistoryButton;
