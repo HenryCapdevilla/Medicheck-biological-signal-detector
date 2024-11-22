@@ -108,11 +108,12 @@
     }
 
     .video-container {
-        width: 100%;
+        width: 81%;
         padding: 0;
-        height: auto;
-        margin-bottom: 1em;  /* Espacio entre la cámara y el contenido inferior */
-    }
+        aspect-ratio: 16/9;
+        margin-bottom: -30em;
+        height: 40vh;
+      }
 
     .video-container .video-self {
         width: 100%;
@@ -121,27 +122,53 @@
     }
 
     .user-input-videocall {
-        width: 90%;
+        width: 100%;
         text-align: center;
+        position: relative;
+        height: 50vh;
+        padding-top: 30em;
     }
 
     .Display-buttons {
         width: 100%;
-        height: auto;
+        height: 3em;
         font-size: 18px;
-        top: auto;
-        position: relative;  /* Quita la posición absoluta */
+        top: 70%;
+        position: relative;
         transform: none;
         margin-top: 10px;
+        right: 32%;
     }
 
     .camera-off-text {
         font-size: 20px;
-        top: auto;
+        top: 25%;
         position: relative;
         transform: none;
         padding: 0 10px;
         margin-top: 1em;
+        flex-direction: column;
+        display: flex;
+        left: 30%;
+    }
+
+    .text-general{
+        color: white;
+        font-size: 20px;
+        text-align: center;
+        font-family: "Roboto", cursive;
+        font-weight: 300;
+        font-style: normal;
+        width: 50vw;
+        padding-top: 0.5em;
+    }
+
+    .join-call-button{
+        width: 30%;
+        margin-bottom: 2%;
+        position: fixed;
+        top: 47%;
+        left: 55%;
     }
 
     .footer-disclamer {
