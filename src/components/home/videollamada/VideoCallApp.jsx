@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState, useContext } from "react";
 import Button from "@mui/material/Button";
+import Tooltip from '@mui/material/Tooltip';
 import TextField from "@mui/material/TextField";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 
@@ -242,24 +243,34 @@ const VideoCallApp = () => {
                 isSignalActive ? "signal-active" : ""
               }`}
             >
-              <CameraToggleButton
-                isCameraActive={isCameraActive}
-                toggleCamera={toggleCamera}
-              />
-              <MicrophoneToggleButton
-                isMicActive={isMicActive}
-                toggleMicrophone={toggleMicrophone}
-              />
+              <Tooltip title="Activar/Desactivar Cámara">
+                <CameraToggleButton
+                  isCameraActive={isCameraActive}
+                  toggleCamera={toggleCamera}
+                />
+              </Tooltip>
+              <Tooltip title="Activar/Desactivar Micrófono">
+                <MicrophoneToggleButton
+                  isMicActive={isMicActive}
+                  toggleMicrophone={toggleMicrophone}
+                />
+              </Tooltip>
 
               {["medico", "admin"].includes(user.role) && (
                 <>
-                  <RecordVideoToggleButton
-                    onHeartRateUpdate={handleHeartRateUpdate}
-                    onSpo2RateUpdate={handleSpo2Update}
-                    userVideoRef={userVideo} // Pasa la referencia del video
+                  <Tooltip title="Activar/Desactivar Grabación">
+                    <RecordVideoToggleButton
+                      onHeartRateUpdate={handleHeartRateUpdate}
+                      onSpo2RateUpdate={handleSpo2Update}
+                      userVideoRef={userVideo} // Pasa la referencia del video
                   />
-                  <SignalToggleButton toggleSignal={toggleSignal} />
-                  <ClinicalHistoryButton />
+                  </Tooltip>
+                  <Tooltip title="Activar/Desactivar Signos Vitales">
+                    <SignalToggleButton toggleSignal={toggleSignal} />
+                  </Tooltip>
+                  <Tooltip title="Activar/Desactivar Historia Clinica">
+                    <ClinicalHistoryButton />
+                  </Tooltip>
                 </>
               )}
             </div>
