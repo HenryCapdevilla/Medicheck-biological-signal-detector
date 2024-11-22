@@ -28,12 +28,24 @@ function Home() {
                   <Type />
                 </div>
               </Col>
+              {/* Col para pantallas mayores a 767px */}
+              <Col md={5} className="d-none d-md-block home-image">
                 <img
                   src={homeLogo}
                   alt="home pic"
                   className="img-fluid"
                   style={{ maxHeight: "450px" }}
                 />
+              </Col>
+              {/* Imagen visible solo en pantallas menores a 767px */}
+              <div className="d-block d-md-none">
+                <img
+                  src={homeLogo}
+                  alt="home pic"
+                  className="img-fluid"
+                  style={{ maxHeight: "450px" }}
+                />
+              </div>
             </Row>
           </Container>
         </Container>

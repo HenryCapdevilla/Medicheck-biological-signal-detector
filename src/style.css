@@ -519,3 +519,13 @@ html, body {
     margin-bottom: 0.3em;
   }
 }
+
+.custom-hide {
+  display: none;  /* Oculto por defecto */
+}
+
+@media (min-width: 767px) {
+  .custom-hide {
+    display: block;  /* Visible solo en pantallas mayores a 768px */
+  }
+}
