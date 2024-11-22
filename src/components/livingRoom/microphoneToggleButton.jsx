@@ -4,14 +4,19 @@ import './microphoneToggleButton.css'
 
 const MicrophoneToggleButton = React.forwardRef(({ isMicActive, toggleMicrophone, ...props }, ref) => {
     return (
-        <button 
-            onClick={toggleMicrophone} 
-            className='Button-videocall-microphone' 
-            ref={ref} 
-            {...props} // Propaga las demás props, como el ref
-        >
-            {isMicActive ? <FaMicrophoneSlash size={24} color="red" /> : <FaMicrophone size={24} color="white"/>}
-        </button>
+      <button
+        onClick={toggleMicrophone}
+        className="Button-videocall-microphone"
+        ref={ref}
+        {...props}
+        aria-label={isMicActive ? "Desactivar micrófono" : "Activar micrófono"}
+      >
+        {isMicActive ? (
+          <FaMicrophoneSlash size={24} color="red" />
+        ) : (
+          <FaMicrophone size={24} color="white" />
+        )}
+      </button>
     );
 });
 
