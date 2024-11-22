@@ -4,7 +4,7 @@ import './cameraToggleButton.css';
 
 const CameraToggleButton = React.forwardRef(({ isCameraActive, toggleCamera, ...props }, ref) => {
     return (
-        <button onClick={toggleCamera} className='Button-videocall-camera' ref={ref} {...props}>
+        <button onClick={toggleCamera} className="Button-videocall-camera" ref={ref} {...props}>
             {isCameraActive ? <FaVideoSlash size={24} color="red" /> : <FaVideo size={24} color="white" />}
         </button>
     );

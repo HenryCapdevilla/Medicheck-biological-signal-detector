@@ -9,7 +9,6 @@ const MicrophoneToggleButton = React.forwardRef(({ isMicActive, toggleMicrophone
         className="Button-videocall-microphone"
         ref={ref}
         {...props}
-        aria-label={isMicActive ? "Desactivar micrófono" : "Activar micrófono"}
       >
         {isMicActive ? (
           <FaMicrophoneSlash size={24} color="red" />

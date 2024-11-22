@@ -70,7 +70,7 @@ const VideoRecordButton = React.forwardRef(({ onHeartRateUpdate, onSpo2RateUpdat
         <button 
             onClick={handleRecord} 
             disabled={isRecording} 
-            className='Button-videocall-record' 
+            className="Button-videocall-record" 
             ref={ref} 
             {...props}
         >
