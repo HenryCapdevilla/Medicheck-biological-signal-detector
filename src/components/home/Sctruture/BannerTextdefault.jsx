@@ -1,6 +1,5 @@
 import React from 'react'
 import './bannerText.css'
-import DisplayButtons from './displayButtonsdefault'
 const BannerTextdefault = ( {titulo, slogantext} ) => {
 
   return (
@@ -9,7 +8,6 @@ const BannerTextdefault = ( {titulo, slogantext} ) => {
         <p id='slogan'>
             {slogantext}
         </p>
-        <DisplayButtons/>
     </div>
   )
 }

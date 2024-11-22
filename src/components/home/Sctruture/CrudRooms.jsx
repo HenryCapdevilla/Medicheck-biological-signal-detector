@@ -2,6 +2,7 @@ import React from 'react';
 import BannerText from './BannerTextdefault.jsx';
 import { Container, Row, Col } from 'react-bootstrap';
 import "./divbanner.css"
+import DisplayButtonsdefault from "./BannerTextdefault"
 
 const CrudRooms = () => {
   return (
@@ -26,6 +27,7 @@ const CrudRooms = () => {
             className="text-center"
             style={{ flexBasis: "30%" }}
           >
+            <DisplayButtonsdefault/>
           </Col>
         </Row>
       </Container>
