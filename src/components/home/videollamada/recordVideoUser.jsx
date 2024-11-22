@@ -1,8 +1,9 @@
 import React, { useState, useRef } from 'react';
 import { FaStop } from 'react-icons/fa';
+import Tooltip from '@mui/material/Tooltip'; // Importa Tooltip
 import './recordVideoUser.css';
 
-const VideoRecordButton = ({ onHeartRateUpdate, onSpo2RateUpdate, userVideoRef }) => { // Añade userVideoRef como prop
+const VideoRecordButton = ({ onHeartRateUpdate, onSpo2RateUpdate, userVideoRef }) => {
     const [isRecording, setIsRecording] = useState(false);
     const mediaRecorderRef = useRef(null);
     const recordedChunks = useRef([]);
@@ -58,7 +59,7 @@ const VideoRecordButton = ({ onHeartRateUpdate, onSpo2RateUpdate, userVideoRef }
                 .catch(error => {
                     console.error('Error en la subida del video:', error);
                 });
-                
+
                 setIsRecording(false);
             };
         } catch (error) {
@@ -67,13 +68,17 @@ const VideoRecordButton = ({ onHeartRateUpdate, onSpo2RateUpdate, userVideoRef }
     };
 
     return (
-        <button onClick={handleRecord} disabled={isRecording} className='Button-videocall-record'>
-            {isRecording ? (
-                <FaStop size={20} color="red"/>
-            ) : (
-                <FaStop size={20} color="white"/>
-            )}
-        </button>
+        <Tooltip title={isRecording ? "Detener grabación" : "Iniciar grabación"} arrow>
+            <span> {/* Usa el span para pasar el ref correctamente */}
+                <button onClick={handleRecord} disabled={isRecording} className='Button-videocall-record'>
+                    {isRecording ? (
+                        <FaStop size={20} color="red"/>
+                    ) : (
+                        <FaStop size={20} color="white"/>
+                    )}
+                </button>
+            </span>
+        </Tooltip>
     );
 };
 

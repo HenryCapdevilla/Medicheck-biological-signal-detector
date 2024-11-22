@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useForm } from "react-hook-form";
 import { useAuth } from '../../context/AuthContext';
 import { AiFillFolder } from "react-icons/ai";
+import Tooltip from '@mui/material/Tooltip'; // Importa Tooltip
 import './clinicalHistoryButton.css';
 
 const ClinicalHistoryButton = () => {
@@ -19,6 +20,8 @@ const ClinicalHistoryButton = () => {
     medications: '',
     treatment: '',
   });
+
+  const buttonRef = useRef(null); // Referencia al botón para el Tooltip
 
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
@@ -39,9 +42,12 @@ const ClinicalHistoryButton = () => {
 
   return (
     <div>
-      <button onClick={openModal} className="Button-history-clinical">
-        <AiFillFolder size={24} color="white" />
-      </button>
+      {/* Tooltip envuelve el botón */}
+      <Tooltip title="Historia Clínica" arrow>
+        <button ref={buttonRef} onClick={openModal} className="Button-history-clinical">
+          <AiFillFolder size={24} color="white" />
+        </button>
+      </Tooltip>
 
       {isModalOpen && (
         <div className="modal-overlay">

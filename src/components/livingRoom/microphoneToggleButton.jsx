@@ -5,7 +5,7 @@ import './microphoneToggleButton.css';
 
 const MicrophoneToggleButton = ({ isMicActive, toggleMicrophone }) => {
     return (
-        <Tooltip title={isMicActive ? "Mute Mic" : "Unmute Mic"} arrow>
+        <Tooltip title={isMicActive ? "Silenciar Micrófono" : "Desmutear Micrófono"} arrow>
             {/* Se asegura que el ref se pase correctamente */}
             <span>
                 <button onClick={toggleMicrophone} className='Button-videocall-microphone'>
