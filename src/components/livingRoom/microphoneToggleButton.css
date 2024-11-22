@@ -2,19 +2,17 @@
     position: relative;
     display: inline-block;
     padding: 15px 20px;
-    color: #03e9f4;
     text-decoration: none;
     text-transform: uppercase;
     transition: 0.5s ease-in-out;
     letter-spacing: 4px;
     overflow: hidden;
-    background: none;
     border-radius: 50%;
     border: 2px solid transparent; /* Asegura que el borde esté presente inicialmente */
 }
 
 .Button-videocall-microphone:hover {
-    background: #b9b9b99f;
+    background: #1af0089e;
     color: #ffffff;
     -webkit-box-reflect:below 1px linear-gradient(transparent, #0005);
     border: 2px solid #ffffff;

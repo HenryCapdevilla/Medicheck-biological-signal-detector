@@ -98,12 +98,11 @@
   transition: 0.5s;
   letter-spacing: 4px;
   overflow: hidden;
-  background: none;
   border-radius: 50%;
 }
 
 .Button-history-clinical:hover {
-  background: #b9b9b99f;
+  background: #1af0089e;
   color: #ffffff;
   -webkit-box-reflect:below 1px linear-gradient(transparent, #0005);
   border: 2px solid #ffffff; /* Crear el borde blanco */

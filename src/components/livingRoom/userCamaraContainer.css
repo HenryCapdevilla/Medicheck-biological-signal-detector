@@ -108,15 +108,15 @@
 /* Modal Overlay */
 .modal-overlay {
     position: fixed;
-    top: 0;
+    top: 120%;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000; /* Asegura que está en la parte superior */
+    z-index: 100;
 }
 
 /* Contenido del modal */
@@ -126,6 +126,8 @@
     border-radius: 10px;
     text-align: center;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
 }
 
 /* Botones del modal */
