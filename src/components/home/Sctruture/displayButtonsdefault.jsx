@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import CrearNuevoBoton from '../Buttons/Crear_boton';
 import './displayButtons.css';
 import { useNavigate } from 'react-router-dom'; // Importa useNavigate para redireccionar
+import { useAuth } from '../../../context/AuthContext';
 
 const DisplayButtonsdefault = () => {
     const [inputText, setInputText] = useState(''); // Estado para manejar el texto ingresado
     const [roomID, setRoomID] = useState(null); // Estado para almacenar el ID de la sala
     const [redirectToRoom, setRedirectToRoom] = useState(false); // Estado para manejar la redirección
     const navigate = useNavigate(); // Hook para redirección
+    const { user } = useAuth(); // Obtiene la información del usuario desde el contexto de autenticación
 
     // Función para manejar el cambio en el campo de entrada
     const handleInputChange = (event) => {
@@ -55,31 +57,37 @@ const DisplayButtonsdefault = () => {
 
     return (
         <div className='Display-buttons-call'>
-            {/* Botón para crear una nueva sala */}
-            <CrearNuevoBoton
-                title='Crear nueva sala'
-                icon='faCamera'
-                id={roomID} // Pasar el roomID como prop al hijo
-                redirect={redirectToRoom} // Estado para permitir redirección
-                onClick={handleCreateRoomClick} // Asignar la función de clic para crear una sala
-            />
-            
-            {/* Input para ingresar el código de sala */}
-            <div className='input-container'>
-                <input
-                    type='text'
-                    value={inputText}
-                    onChange={handleInputChange}
-                    placeholder='Ingrese código de sala'
-                    className='input-field' // Agregar clase para estilos adicionales si es necesario
-                />
-            </div>
+            {user?.role === 'medico' && ( // Mostrar solo si el rol es médico
+                <>
+                    <CrearNuevoBoton
+                        title='Crear nueva sala'
+                        icon='faCamera'
+                        id={roomID}
+                        redirect={redirectToRoom}
+                        onClick={handleCreateRoomClick}
+                    />
+                    <p className='role-instruction'>Como médico, puedes crear una sala para iniciar una teleconsulta.</p>
+                </>
+            )}
 
-            {/* Botón para unirse a una sala existente */}
-            <CrearNuevoBoton
-                title='Unirse'
-                onClick={handleJoinButtonClick} // Asignar la función de clic para unirse a una sala
-            />
+            {user?.role === 'paciente' && ( // Mostrar solo si el rol es paciente
+                <>
+                    <div className='input-container'>
+                        <input
+                            type='text'
+                            value={inputText}
+                            onChange={handleInputChange}
+                            placeholder='Ingrese código de sala'
+                            className='input-field'
+                        />
+                    </div>
+                    <CrearNuevoBoton
+                        title='Unirse'
+                        onClick={handleJoinButtonClick}
+                    />
+                    <p className='role-instruction'>Como paciente, ingrese el ID de la sala proporcionado por su médico para unirse a la teleconsulta.</p>
+                </>
+            )}
         </div>
     );
 };

@@ -14,6 +14,7 @@ const ButtonCamera = () => {
     const { isCameraActive, isMicActive, toggleCamera, toggleMicrophone, videoRef, startStream, stopStream } = useContext(VideoContext);
     const { user } = useAuth();
     const [modalVisible, setModalVisible] = useState(false); // Inicializa como false
+    
 
     // Configura el modal solo si el usuario es paciente
     useEffect(() => {
