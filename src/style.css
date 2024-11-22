@@ -303,17 +303,53 @@ button:focus {
   color: #ffffff !important;
 }
 
+.type-container{
+  line-height: 1.1;
+  padding-left: 45px;
+}
+
 @media (max-width: 767px) {
   .Typewriter__wrapper {
-    font-size: 1.4em !important;
-    font-weight: 500 !important;
+    font-size: 1.2em !important;
+    font-weight: 600 !important;
     position: absolute !important;
+    padding-right: 20%;
   }
   .Typewriter__cursor {
     display: none !important;
   }
+  .type-container{
+    line-height: 1.3;
+  }
+  .heading{
+    font-size: 1.5em !important;
+  }
+  .heading-name{
+    font-size: 1.3em !important;
+  }
+  .home-image{
+    position: relative;
+    left: 10em;
+    padding-top: 1em;
+  }
 }
 
+@media (max-width: 575px) {
+  .heading {
+    font-size: 1.5em !important;
+  }
+  .heading-name {
+    font-size: 1.1em !important;
+    padding-right: 20%;
+  }
+
+  .home-image{
+    position: relative;
+    left: 15em;
+    padding-top: 1em;
+    top: -4em;
+  }
+}
 .myAvtar {
   justify-content: center !important;
   padding-top: 9em !important;

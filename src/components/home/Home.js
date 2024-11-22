@@ -1,7 +1,6 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import homeLogo from "../../Assets/home-main.png";
-import Particle from "../Particle";
 import Type from "./Type";
 
 function Home() {
@@ -9,11 +8,10 @@ function Home() {
     <>
       <section>
         <Container fluid className="home-section" id="home">
-          <Particle />
           <Container className="home-content">
             <Row>
-              <Col md={7} className="home-header">
-                <h1 style={{ paddingBottom: 15 }} className="heading">
+              <Col md={7} sm={12} className="home-header">
+                <h1 className="heading">
                   Bienvenido a MediCheck{" "}
                   <span className="wave" role="img" aria-labelledby="wave">
                     👋🏻
@@ -26,12 +24,12 @@ function Home() {
                   medir de manera remota y no invasiva los signos vitales de los
                   pacientes.
                 </h1>
-                <div style={{ paddingLeft: 45, textAlign: "left", lineHeight: 1 }}>
+                <div className="type-container">
                   <Type />
                 </div>
               </Col>
 
-              <Col md={5} style={{ paddingBottom: 20 }}>
+              <Col md={5} sm={12} className="home-image">
                 <img
                   src={homeLogo}
                   alt="home pic"
