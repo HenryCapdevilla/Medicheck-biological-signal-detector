@@ -28,15 +28,12 @@ function Home() {
                   <Type />
                 </div>
               </Col>
-
-              <div className="home-image">
                 <img
                   src={homeLogo}
                   alt="home pic"
                   className="img-fluid"
                   style={{ maxHeight: "450px" }}
                 />
-              </div>
             </Row>
           </Container>
         </Container>
