@@ -29,14 +29,14 @@ function Home() {
                 </div>
               </Col>
 
-              <Col md={5} sm={12} className="home-image">
+              <div className="home-image">
                 <img
                   src={homeLogo}
                   alt="home pic"
                   className="img-fluid"
                   style={{ maxHeight: "450px" }}
                 />
-              </Col>
+              </div>
             </Row>
           </Container>
         </Container>
