@@ -276,6 +276,7 @@ const VideoCallApp = () => {
                     maxWidth: "100%",
                     paddingLeft: "10%",
                     paddingRight: "10%",
+                    aspectRatio: 16/9,
                   }}
                 />
               )}
