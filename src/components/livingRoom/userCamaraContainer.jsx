@@ -13,7 +13,7 @@ const ButtonCamera = () => {
     const navigate = useNavigate(); 
     const { isCameraActive, isMicActive, toggleCamera, toggleMicrophone, videoRef, startStream, stopStream } = useContext(VideoContext);
     const { user } = useAuth();
-    const [modalVisible, setModalVisible] = useState(user?.role === 'paciente'); // Solo muestra si es paciente
+    const [modalVisible, setModalVisible] = useState(user.role === 'paciente'); // Solo muestra si es paciente
 
     useEffect(() => {
         if (isCameraActive || isMicActive) {
