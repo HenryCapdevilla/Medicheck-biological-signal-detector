@@ -10,31 +10,22 @@ const CrudRooms = () => {
       <Container fluid className="py-4">
         {/* Banner */}
         <Row className="align-items-center">
+          {/* Columna única que ocupa el 100% del ancho */}
           <Col
-            xs={12}
-            lg={7}
-            className="text-center text-lg-start mb-4 mb-lg-0 col-lg-6 col-8"
-            style={{ flexBasis: "50%" }}
+            xs={12}  // En pantallas pequeñas ocupará todo el espacio
+            className="text-center text-lg-start mb-4 mb-lg-0"
+            style={{ flexBasis: "100%" }}
           >
+            {/* BannerText */}
             <BannerText
               titulo="Medicheck"
               slogantext="Mejoramos tu bienestar: Acceso a consultas médicas y monitoreo remoto de signos vitales desde la comodidad de tu hogar, con precisión y confianza."
             />
-            
-            {/* DisplayButtonsdefault se muestra debajo del BannerText en pantallas pequeñas y grandes */}
-            <div className="d-block d-lg-none">
+
+            {/* DisplayButtonsdefault debajo del BannerText */}
+            <div className="mt-4">
               <DisplayButtonsdefault />
             </div>
-          </Col>
-
-          {/* DisplayButtonsdefault visible solo en pantallas grandes */}
-          <Col
-            xs={12}
-            lg={5}
-            className="text-center text-lg-start d-none d-lg-block"
-            style={{ flexBasis: "30%" }}
-          >
-            <DisplayButtonsdefault />
           </Col>
         </Row>
       </Container>
