@@ -85,7 +85,7 @@
 }
 
 .modal-content .navigation-dots .active {
-  background-color: #3f8efc;
+  background-color: #00ff08;
 }
 
 .Button-history-clinical {
@@ -99,6 +99,7 @@
   letter-spacing: 4px;
   overflow: hidden;
   border-radius: 50%;
+  background-color: #0084ff;
 }
 
 .Button-history-clinical:hover {
