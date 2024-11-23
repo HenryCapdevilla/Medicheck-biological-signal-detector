@@ -39,7 +39,7 @@ const DisplayButtonsdefault = () => {
             alert('Ingrese un código de sala válido');
             return;
         }
-        navigate(`/livingroom/${roomID}`); // Redirigir usando useNavigate
+        navigate(`/livingroom/${inputText}`); // Redirigir usando useNavigate con inputText
     };
 
     // Efecto para manejar la redirección cuando redirectToRoom es true
