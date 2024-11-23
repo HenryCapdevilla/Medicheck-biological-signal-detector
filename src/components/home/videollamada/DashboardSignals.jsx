@@ -13,8 +13,8 @@ const UserCard = ({ heartRate, spO2 }) => {
   return (
     <Container className="py-3">
       <Row className="justify-content-center">
-        {/* Card de Frecuencia Cardiaca */}
-        <Col xs={12} sm={6} md={10} className="mb-3">
+        {/* Card de Frecuencia Cardiaca y SPO2 */}
+        <Col xs={12} sm={6} md={5} lg={4} className="mb-3 d-flex justify-content-center">
           <Card className="statBox custom-card" onClick={handleClick}>
             <Card.Body>
               <HeartIcon className="icon mb-2" />
@@ -23,6 +23,9 @@ const UserCard = ({ heartRate, spO2 }) => {
               </Card.Text>
             </Card.Body>
           </Card>
+        </Col>
+
+        <Col xs={12} sm={6} md={5} lg={4} className="mb-3 d-flex justify-content-center">
           <Card className="statBox custom-card" onClick={handleClick}>
             <Card.Body>
               <GlobeAltIcon className="icon mb-2" />
