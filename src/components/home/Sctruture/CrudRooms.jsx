@@ -1,8 +1,7 @@
 import React from 'react';
 import BannerText from './BannerTextdefault.jsx';
 import { Container, Row, Col } from 'react-bootstrap';
-import "./divbanner.css"
-import DisplayButtonsdefault from "./displayButtonsdefault"
+import "./divbanner.css";
 
 const CrudRooms = () => {
   return (
@@ -21,11 +20,6 @@ const CrudRooms = () => {
               titulo="Medicheck"
               slogantext="Mejoramos tu bienestar: Acceso a consultas médicas y monitoreo remoto de signos vitales desde la comodidad de tu hogar, con precisión y confianza."
             />
-
-            {/* DisplayButtonsdefault debajo del BannerText */}
-            <div className="mt-4">
-              <DisplayButtonsdefault />
-            </div>
           </Col>
         </Row>
       </Container>

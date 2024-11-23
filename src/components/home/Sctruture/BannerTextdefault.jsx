@@ -1,5 +1,7 @@
 import React from 'react'
 import './bannerText.css'
+import { Container, Row, Col } from 'react-bootstrap';
+import DisplayButtonsdefault from './displayButtonsdefault'
 const BannerTextdefault = ( {titulo, slogantext} ) => {
 
   return (
@@ -8,6 +10,10 @@ const BannerTextdefault = ( {titulo, slogantext} ) => {
         <p id='slogan'>
             {slogantext}
         </p>
+        {/* DisplayButtonsdefault debajo del BannerText */}
+        <div className="mt-4">
+          <DisplayButtonsdefault />
+        </div>
     </div>
   )
 }

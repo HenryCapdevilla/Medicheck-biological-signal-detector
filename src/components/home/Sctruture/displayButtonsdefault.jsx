@@ -65,7 +65,6 @@ const DisplayButtonsdefault = () => {
                         redirect={redirectToRoom}
                         onClick={handleCreateRoomClick}
                     />
-                    <p className='role-instruction'>Como médico, puedes crear una sala para iniciar una teleconsulta.</p>
                 </>
             )}
 
@@ -84,7 +83,6 @@ const DisplayButtonsdefault = () => {
                         title='Unirse'
                         onClick={handleJoinButtonClick}
                     />
-                    <p className='role-instruction'>Como paciente, ingrese el ID de la sala proporcionado por su médico para unirse a la teleconsulta.</p>
                 </>
             )}
         </div>
