@@ -1,10 +1,11 @@
 /* Contenedor general para las tarjetas */
 .user-card-container {
-  display: flex;
+  display: block ruby;
   justify-content: center;
   gap: 20px;
   flex-wrap: wrap;
   padding: 20px;
+  width: 35vw;
 }
 
 /* Cada tarjeta */
