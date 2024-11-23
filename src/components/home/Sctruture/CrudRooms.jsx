@@ -20,14 +20,21 @@ const CrudRooms = () => {
               titulo="Medicheck"
               slogantext="Mejoramos tu bienestar: Acceso a consultas médicas y monitoreo remoto de signos vitales desde la comodidad de tu hogar, con precisión y confianza."
             />
+            
+            {/* DisplayButtonsdefault se muestra debajo del BannerText en pantallas pequeñas y grandes */}
+            <div className="d-block d-lg-none">
+              <DisplayButtonsdefault />
+            </div>
           </Col>
+
+          {/* DisplayButtonsdefault visible solo en pantallas grandes */}
           <Col
             xs={12}
             lg={5}
-            className="text-center"
+            className="text-center text-lg-start d-none d-lg-block"
             style={{ flexBasis: "30%" }}
           >
-            <DisplayButtonsdefault/>
+            <DisplayButtonsdefault />
           </Col>
         </Row>
       </Container>

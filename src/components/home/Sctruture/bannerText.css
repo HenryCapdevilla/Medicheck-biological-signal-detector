@@ -63,7 +63,7 @@
 /* Media query para pantallas menores a 860px */
 @media (max-width: 860px) {
     .header-txt {
-        width: 80%; /* El texto ocupa todo el ancho disponible */
+        width: 98%; /* El texto ocupa todo el ancho disponible */
         padding-left: 5px; /* Aún menos padding para pantallas pequeñas */
     }
 
@@ -75,6 +75,6 @@
     #slogan {
         font-size: 20px; /* Reduce aún más el tamaño del slogan */
         margin-bottom: 15px; /* Ajusta el margen inferior */
-        text-justify: distribute;
+        text-justify: auto;
     }
 }
