@@ -3,7 +3,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #0084ff;
 }
 
 .signal-icon{
@@ -12,7 +11,6 @@
 }
 
 .signal-toggle-button {
-    background-color: #00ff08;
     border-radius: 50%;
     cursor: pointer;
     display: flex;
@@ -23,7 +21,7 @@
     transition: 0.5s;
     letter-spacing: 4px;
     overflow: hidden;
-    background: none;
+    background-color: #0084ff;
 }
 
 /* Cuando el botón de señales está activado, reducimos el tamaño */
