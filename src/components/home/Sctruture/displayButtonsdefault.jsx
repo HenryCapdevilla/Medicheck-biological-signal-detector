@@ -39,8 +39,7 @@ const DisplayButtonsdefault = () => {
             alert('Ingrese un código de sala válido');
             return;
         }
-        console.log('El roomID ingresado es:' + inputText);
-        // Aquí puedes manejar la lógica para unirse a la sala con el código ingresado
+        navigate(`/livingroom/${roomID}`); // Redirigir usando useNavigate
     };
 
     // Efecto para manejar la redirección cuando redirectToRoom es true
