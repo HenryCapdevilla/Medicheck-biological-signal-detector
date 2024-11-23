@@ -1,15 +1,35 @@
 /* Contenedor general para las tarjetas */
-.custom-card {
-  width: 90%; /* Ocupa el 90% del espacio disponible */
-  margin: 0 auto; /* Centra las tarjetas dentro de su columna */
-  padding: 5%; /* Agrega un padding interno */
-  border-radius: 1rem; /* Bordes redondeados */
+.user-card-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+
+/* Cada tarjeta */
+.card-container {
+  width: 48%; /* Ocupa el 48% del espacio disponible */
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* Estilos generales de la tarjeta */
+.card-content {
+  width: 100%;
+  padding: 20px;
+  border-radius: 1rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  text-align: center;
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
 /* Efecto hover */
-.custom-card:hover {
+.card-container:hover .card-content {
   transform: scale(1.05);
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
 }
@@ -22,7 +42,7 @@
   transition: transform 0.3s, color 0.3s;
 }
 
-.statBox:hover .icon {
+.card-container:hover .icon {
   transform: scale(1.2);
   color: #e63946; /* Rojo claro al hacer hover */
 }
@@ -34,10 +54,14 @@
   color: #333333; /* Gris oscuro */
 }
 
-/* Ajuste responsivo para columnas */
+/* Mostrar texto cuando se hace clic */
+.statText.show {
+  color: #0077b6;
+}
+
+/* Ajuste responsivo para pantallas más pequeñas */
 @media (max-width: 768px) {
-  .custom-card {
-      width: 100%; /* Ajusta el ancho al 100% en pantallas pequeñas */
-      padding: 5%;
+  .card-container {
+    width: 100%; /* En pantallas pequeñas, ocupa el 100% del espacio */
   }
 }
